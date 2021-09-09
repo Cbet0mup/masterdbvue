@@ -1,24 +1,26 @@
 <template>
   <el-table
-      @tab-click="getData"
       :data="tableData"
-      style="width: 100%"
-      :row-class-name="tableRowClassName"
+      border style="width: 100%"
+      size="small"
+      @row-click="myEvent"
   >
-    <el-table-column prop="number" label="№" width="180"> </el-table-column>
-    <el-table-column prop="createdAt" label="Дата" width="180"> </el-table-column>
+    <el-table-column prop="id" label="№" width="70"> </el-table-column>
+    <el-table-column prop="createdAt" label="Дата" > </el-table-column>
     <el-table-column prop="customerPhone" label="Телефон"> </el-table-column>
     <el-table-column prop="customerName" label="Владелец"> </el-table-column>
     <el-table-column prop="serviceName" label="Сервис"> </el-table-column>
     <el-table-column prop="productName" label="Изделие"> </el-table-column>
     <el-table-column prop="manufacturerName" label="Фирма"> </el-table-column>
-    <el-table-column prop="service" label="Модель"> </el-table-column>
+    <el-table-column prop="modelName" label="Модель"> </el-table-column>
     <el-table-column prop="serialNumber" label="Серийный номер"> </el-table-column>
+    <el-table-column prop="receiverName" label="Приёмщик"> </el-table-column>
   </el-table>
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
+import {HTTP} from "../axios/httpCommon.js";
 
 export default {
   name: "tabsEndRepair",
@@ -30,8 +32,8 @@ export default {
     }
   },
   methods: {
-    getData(){
-      axios.get('http://localhost:8080/workorder/findworkorder/all')
+    async getData(){
+      HTTP.get('http://localhost:8080/workorder/findworkorder/all')
       .then(response => {
         this.tableData = response.data;
       })
@@ -39,7 +41,13 @@ export default {
         this.errors.push(e);
       })
       this.lengthData = this.tableData.length;
+    },
+    myEvent(row, column, event) {
+      console.log(row.id)
     }
+  },
+  mounted() {
+    this.getData()
   }
 }
 </script>
