@@ -1,7 +1,10 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header class="myHeader"><strong>Журнал - приёмка</strong></el-header>
+      <el-header class="myHeader">
+        <strong>Журнал - приёмка</strong>
+        <top-menu-priemka/>
+      </el-header>
       <el-main class="myMain">
         <el-row>
           <el-col :span="24">
@@ -9,9 +12,8 @@
               <el-tabs type="border-card"
 
               >
-                <el-tab-pane lazy label="Связь с клиентом">Связь с клиентом</el-tab-pane>
-                <el-tab-pane lazy name="dfg" label="Готовые"><tabs-end-repair/>
-                </el-tab-pane>
+                <el-tab-pane lazy label="Связь с клиентом"><tabs-is-need-call/></el-tab-pane>
+                <el-tab-pane lazy name="EndOfRepair" label="Готовые"><tabs-end-repair/></el-tab-pane>
                 <el-tab-pane label="Role">Role</el-tab-pane>
                 <el-tab-pane label="Task">Task</el-tab-pane>
               </el-tabs>
@@ -24,7 +26,9 @@
 </template>
 
 <script>
-import TabsEndRepair from "./components/tabsEndRepair.vue";
+import TabsEndRepair from "./components/TabsEndRepairPriemka.vue";
+import TabsIsNeedCall from "./components/TabsIsNeedCallPriemka.vue";
+import TopMenuPriemka from "./components/TopMenuPriemka.vue";
 
 export default {
   name: 'App',
@@ -32,7 +36,7 @@ export default {
     return {
     }
   },
-  components: {TabsEndRepair},
+  components: {TopMenuPriemka, TabsIsNeedCall, TabsEndRepair},
   methods: {
     handleClick(tab, event) {
       console.log(tab, event)
