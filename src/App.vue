@@ -63,4 +63,7 @@ export default {
   background-color: rgba(208, 224, 193, 0.99);
 
 }
+.myHeader{
+  display: contents;
+}
 </style>
