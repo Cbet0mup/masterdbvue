@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {HTTP} from "../axios/httpCommon.js";
+import {HTTP} from "../axios/instance.js";
 
 export default {
   name: "tabsIsNeedCall",
@@ -31,8 +31,8 @@ export default {
     }
   },
   methods: {
-    async getData(){
-      HTTP.get('http://localhost:8080/workorder/findworkorder/isneedcall/true')
+    async getData() {
+      await HTTP.get('/workorder/findworkorder/isneedcall/true')
           .then(response => {
             this.tableData = response.data;
           })

@@ -5,22 +5,22 @@
       size="small"
       @row-click="myEvent"
   >
-    <el-table-column prop="id" label="№" width="70"> </el-table-column>
-    <el-table-column prop="createdAt" label="Дата" > </el-table-column>
-    <el-table-column prop="customerPhone" label="Телефон"> </el-table-column>
-    <el-table-column prop="customerName" label="Владелец"> </el-table-column>
-    <el-table-column prop="serviceName" label="Сервис"> </el-table-column>
-    <el-table-column prop="productName" label="Изделие"> </el-table-column>
-    <el-table-column prop="manufacturerName" label="Фирма"> </el-table-column>
-    <el-table-column prop="modelName" label="Модель"> </el-table-column>
-    <el-table-column prop="serialNumber" label="Серийный номер"> </el-table-column>
-    <el-table-column prop="receiverName" label="Приёмщик"> </el-table-column>
+    <el-table-column prop="id" label="№" width="70"></el-table-column>
+    <el-table-column prop="createdAt" label="Дата"></el-table-column>
+    <el-table-column prop="customerPhone" label="Телефон"></el-table-column>
+    <el-table-column prop="customerName" label="Владелец"></el-table-column>
+    <el-table-column prop="serviceName" label="Сервис"></el-table-column>
+    <el-table-column prop="productName" label="Изделие"></el-table-column>
+    <el-table-column prop="manufacturerName" label="Фирма"></el-table-column>
+    <el-table-column prop="modelName" label="Модель"></el-table-column>
+    <el-table-column prop="serialNumber" label="Серийный номер"></el-table-column>
+    <el-table-column prop="receiverName" label="Приёмщик"></el-table-column>
   </el-table>
 </template>
 
 <script>
 //import axios from "axios";
-import {HTTP} from "../axios/httpCommon.js";
+import {HTTP} from "../axios/instance.js";
 
 export default {
   name: "tabsEndRepair",
@@ -32,14 +32,14 @@ export default {
     }
   },
   methods: {
-    async getData(){
-      HTTP.get('http://localhost:8080/workorder/findworkorder/all')
-      .then(response => {
-        this.tableData = response.data;
-      })
-      .catch(e => {
-        this.errors.push(e);
-      })
+    async getData() {
+      await HTTP.get('/workorder/findworkorder/all')
+          .then(response => {
+            this.tableData = response.data;
+          })
+          .catch(e => {
+            this.errors.push(e);
+          })
       this.lengthData = this.tableData.length;
     },
     myEvent(row, column, event) {
