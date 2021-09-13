@@ -19,8 +19,8 @@
 </template>
 
 <script>
-//import axios from "axios";
-import {HTTP} from "../axios/instance.js";
+//import api from "api";
+import {HTTP} from "../api/instance.js";
 
 export default {
   name: "tabsEndRepair",

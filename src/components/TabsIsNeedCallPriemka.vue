@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {HTTP} from "../axios/instance.js";
+import {HTTP} from "../api/instance.js";
 
 export default {
   name: "tabsIsNeedCall",
