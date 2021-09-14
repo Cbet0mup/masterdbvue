@@ -1,18 +1,10 @@
 <template>
-  <el-dialog title="Shipping address" v-model="dialogFormVisible">
+  <el-dialog title="Новый заказ" v-model="isVisible">
     <el-form :label-position="labelPosition"
              label-width="100px"
              :model="formLabelAlign"
     >
-      <el-form-item label="Name">
-        <el-input v-model="formLabelAlign.name"></el-input>
-      </el-form-item>
-      <el-form-item label="Activity zone">
-        <el-input v-model="formLabelAlign.region"></el-input>
-      </el-form-item>
-      <el-form-item label="Activity form">
-        <el-input v-model="formLabelAlign.type"></el-input>
-      </el-form-item>
+      <strong>FUCK</strong>
     </el-form>
 
     <template #footer>
@@ -29,12 +21,11 @@
 <script>
 export default {
   name: "NewWorkOrderForm",
-  // props: {
-  //   dialogFormVisible: Boolean,
-  // },
+  props:['isVisible'],
+  emits: ['cancelForm'],
   data() {
     return {
-      dialogFormVisible: true,
+      myVisible: this.isVisible,
       activeIndex: '1',
       form: {
         name: '',
@@ -51,8 +42,8 @@ export default {
   },
   methods: {
     cancel(){
-      this.dialogFormVisible = false
-      this.$emit('cancelForm', this.dialogFormVisible)
+      this.myVisible = false;
+      this.$emit('cancelForm', this.myVisible)
     },
     save(){
       this.cancel();
@@ -63,5 +54,18 @@ export default {
 </script>
 
 <style scoped>
+
+:last-child {
+   margin-bottom: 0;
+ }
+
+.bg-purple {
+  background: #d3dce6;
+}
+
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
 
 </style>

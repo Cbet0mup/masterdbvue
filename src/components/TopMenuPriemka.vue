@@ -20,11 +20,11 @@
   </el-menu>
 
   <new-work-order-form
-      :dialogFormVisible="dialogFormVisible"
-      @cancelForm="closeForm"
+      :isVisible="dialogFormVisible"
+      @cancel-form="closeForm"
   />
 </template>
-
+// @cancel-form="closeForm"
 <script>
 import NewWorkOrderForm from "./NewWorkOrderForm.vue";
 export default {
@@ -37,8 +37,8 @@ export default {
     }
   },
   methods: {
-    closeForm(data) {
-      this.dialogFormVisible = data;
+    closeForm(isVisible) {
+      this.dialogFormVisible = isVisible;
     }
   }
 }
