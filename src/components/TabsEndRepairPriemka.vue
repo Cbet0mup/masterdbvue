@@ -1,4 +1,5 @@
 <template>
+  <div>
   <el-table
       :data="tableData"
       border style="width: 100%"
@@ -16,6 +17,7 @@
     <el-table-column prop="serialNumber" label="Серийный номер"></el-table-column>
     <el-table-column prop="receiverName" label="Приёмщик"></el-table-column>
   </el-table>
+  </div>
 </template>
 
 <script>

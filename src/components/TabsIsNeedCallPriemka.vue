@@ -1,4 +1,5 @@
 <template>
+  <div>
   <el-table
       :data="tableData"
       border style="width: 100%"
@@ -16,6 +17,7 @@
     <el-table-column prop="serialNumber" label="Серийный номер" header-align="center"></el-table-column>
     <el-table-column prop="receiverName" label="Приёмщик" header-align="center"></el-table-column>
   </el-table>
+  </div>
 </template>
 
 <script>
@@ -32,7 +34,7 @@ export default {
   },
   methods: {
     async getData() {
-      await HTTP.get('/workorder/findworkorder/isneedcall/true')
+        await HTTP.get('/workorder/findworkorder/isneedcall/true')
           .then(response => {
             this.tableData = response.data;
           })
