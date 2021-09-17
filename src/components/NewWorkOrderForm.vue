@@ -33,28 +33,28 @@
           <el-col :span="4">
             <div class="grid-content, product">
               <el-form-item label="Тип изделия">
-                <el-input v-model="form.productName"></el-input>
+                <el-input v-model="form.productId"></el-input>
               </el-form-item>
             </div>
           </el-col>
           <el-col :span="4">
             <div class="grid-content, product">
               <el-form-item label="Марка">
-                <el-input v-model="form.manufacturerName"></el-input>
+                <el-input v-model="form.manufacturerId"></el-input>
               </el-form-item>
             </div>
           </el-col>
           <el-col :span="4">
             <div class="grid-content, product">
               <el-form-item label="Модель">
-                <el-input v-model="form.model"></el-input>
+                <el-input v-model="form.modelId"></el-input>
               </el-form-item>
             </div>
           </el-col>
           <el-col :span="4">
             <div class="grid-content, product">
               <el-form-item label="Серийный номер">
-                <el-input v-model="form.serial"></el-input>
+                <el-input v-model="form.serialNumber"></el-input>
               </el-form-item>
             </div>
           </el-col>
@@ -95,28 +95,28 @@
           <el-col :span="4">
             <div class="grid-content, repair">
               <el-form-item label="Вид услуги">
-                <el-input v-model="form.serviceName"></el-input>
+                <el-input v-model="form.serviceId"></el-input>
               </el-form-item>
             </div>
           </el-col>
           <el-col :span="4">
             <div class="grid-content, repair">
               <el-form-item label="Мастер">
-                <el-input v-model="form.engineerName"></el-input>
+                <el-input v-model="form.engineerId"></el-input>
               </el-form-item>
             </div>
           </el-col>
           <el-col :span="4">
             <div class="grid-content, repair">
               <el-form-item label="Наименование услуги">
-                <el-input v-model="form.productName"></el-input>
+                <el-input v-model="form.productId"></el-input>
               </el-form-item>
             </div>
           </el-col>
           <el-col :span="2">
             <div class="grid-content, repair">
               <el-form-item label="Прайс">
-                <el-input v-model="form.price"></el-input>
+                <el-input v-model="form.priceId"></el-input>
               </el-form-item>
             </div>
           </el-col>
@@ -150,18 +150,20 @@ export default {
       form: {
         customerName: '',      //имя заказчика /
         customerPhone: '',      //телефон
-        productName: '',      //тип: телек, кондёр, наушники
-        manufacturerName: '', //производитель
+        productId: '',      //тип: телек, кондёр, наушники
+        manufacturerId: '', //производитель
         serialNumber: '',     //серийник
         imei: '',             //имей
         view: '',             // внешний вид
         complection: '',        //комплектация
         trouble: '',          // неисправность
-        modelName: '',              //модель
-        serviceName: '',      //услуга платный, гарантийный, повторный
-        engineerName: '',     // мастер
-        price: '',           //  стоимосто по прейскуранту
-        priceName: '',      //наименование услуги
+        modelId: '',              //модель
+        serviceId: '',      //услуга платный, гарантийный, повторный
+        engineerId: '',     // мастер
+        priceId: '',           //  стоимосто по прейскуранту
+
+        receiverId: 1,
+        statusId: 1,
       },
       labelPosition: 'top',
     }
@@ -172,29 +174,14 @@ export default {
       this.$emit('cancelForm', this.myVisible)
     },
     async save() {
-      const json = JSON.stringify(
-          {
-            customerName: this.customerName,
-            customerPhone: this.customerPhone,
-            serialNumber: this.serialNumber,
-            imei: this.imei,
-            serviceName: this.serviceName,
-            productName: this.productName,
-            manufacturerName: this.manufacturerName,
-            engineerName: this.engineerName,
-            modelName: this.modelName,
-            price: this.price,
-            priceName: this.priceName,
-            look: this.look,
-            complection: this.complection,
-            trouble: this.trouble,
-            receiverName: '1'});
-      let res = await HTTP.post('/workorder', json)
+      const json = JSON.stringify(this.form);
+
+      await HTTP.post('/workorder', json)
           .then(function (response) {
-            console.log(response);
+            console.log("OK   " + response);
           })
           .catch(function (error) {
-            console.log(error);
+            console.log("ERRRR" + error);
           });
       //this.cancel();
 
