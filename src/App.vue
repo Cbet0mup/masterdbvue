@@ -1,10 +1,12 @@
 <template>
   <div class="common-layout">
     <el-container>
+
       <el-header class="myHeader">
         <strong>Журнал - приёмка</strong>
         <top-menu-priemka/>
       </el-header>
+
       <el-main class="myMain">
         <el-row>
           <el-col :span="24">
@@ -12,8 +14,7 @@
               <el-tabs type="border-card">
                 <el-tab-pane lazy label="Связь с клиентом"><tabs-is-need-call/></el-tab-pane>
                 <el-tab-pane lazy name="EndOfRepair" label="Готовые"><tabs-end-repair/></el-tab-pane>
-                <el-tab-pane label="Role">Role</el-tab-pane>
-                <el-tab-pane label="Task">Task</el-tab-pane>
+
               </el-tabs>
             </div>
           </el-col>
@@ -24,8 +25,8 @@
 </template>
 
 <script>
-import TabsEndRepair from "./components/TabsEndRepairPriemka.vue";
-import TabsIsNeedCall from "./components/TabsIsNeedCallPriemka.vue";
+import TabsEndRepair from "./components/tables/TabsEndRepairPriemka.vue";
+import TabsIsNeedCall from "./components/tables/TabsIsNeedCallPriemka.vue";
 import TopMenuPriemka from "./components/TopMenuPriemka.vue";
 
 export default {

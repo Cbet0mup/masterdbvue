@@ -33,7 +33,8 @@
           <el-col :span="4">
             <div class="grid-content, product">
               <el-form-item label="Тип изделия">
-                <el-input v-model="form.productId"></el-input>
+<!--                <el-input v-model="form.productId"></el-input>-->
+                <search-product-name/>
               </el-form-item>
             </div>
           </el-col>
@@ -109,7 +110,7 @@
           <el-col :span="4">
             <div class="grid-content, repair">
               <el-form-item label="Наименование услуги">
-                <el-input v-model="form.productId"></el-input>
+                <el-input v-model="form.priceId"></el-input>
               </el-form-item>
             </div>
           </el-col>
@@ -138,9 +139,11 @@
 
 <script>
 import {HTTP} from "../api/instance.js";
+import SearchProductName from "./FormComponent/SearchProductName.vue";
 
 export default {
   name: "NewWorkOrderForm",
+  components: {SearchProductName},
   props: ['isVisible'],
   emits: ['cancelForm'],
   data() {

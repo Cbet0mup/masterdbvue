@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import {HTTP} from "../api/instance.js";
+import {HTTP} from "../../api/instance.js";
 
 export default {
   name: "tabsIsNeedCall",

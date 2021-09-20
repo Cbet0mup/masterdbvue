@@ -24,7 +24,7 @@
       @cancel-form="closeForm"
   />
 </template>
-// @cancel-form="closeForm"
+
 <script>
 import NewWorkOrderForm from "./NewWorkOrderForm.vue";
 export default {
