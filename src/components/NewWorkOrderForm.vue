@@ -1,14 +1,14 @@
 <template>
   <div>
-  <el-dialog title="Новый заказ"
-             v-model="isVisible"
-             :before-close="cancel"
-             :close-on-click-modal="false"
-             :close-on-press-escape="false"
-             width="75%"
-             :center="true"
-             class="bg-purple"
-  >
+    <el-dialog title="Новый заказ"
+               v-model="isVisible"
+               :before-close="cancel"
+               :close-on-click-modal="false"
+               :close-on-press-escape="false"
+               width="75%"
+               :center="true"
+               class="bg-purple"
+    >
       <el-form :label-position="labelPosition" size="mini">
         <!-- заказчик -->
         <el-row :gutter="20">
@@ -29,12 +29,14 @@
         </el-row>
 
         <!-- изделие -->
-        <el-row :gutter="20">
-          <el-col :span="4">
+        <el-row :gutter="24">
+          <el-col :span="5">
             <div class="grid-content, product">
               <el-form-item label="Тип изделия">
-<!--                <el-input v-model="form.productId"></el-input>-->
-                <search-product-name/>
+                <!--                <el-input v-model="form.productId"></el-input>-->
+                <search-product-name
+                          @get-product="getProduct"
+                />
               </el-form-item>
             </div>
           </el-col>
@@ -125,15 +127,15 @@
 
       </el-form>
 
-    <template #footer>
+      <template #footer>
     <span class="dialog-footer">
       <el-button @click="cancel">Закрыть</el-button>
       <el-button type="primary" @click="save"
       >Сохранить</el-button
       >
     </span>
-    </template>
-  </el-dialog>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -171,8 +173,14 @@ export default {
       labelPosition: 'top',
     }
   },
+
+  mounted() {
+    //this.$root.$on('getproduct', this.methods.getProduct(id));
+    },
+
   methods: {
     cancel() {
+      console.log(this.form.productId)
       this.myVisible = false;
       this.$emit('cancelForm', this.myVisible)
     },
@@ -186,8 +194,10 @@ export default {
           .catch(function (error) {
             console.log("ERRRR" + error);
           });
-      //this.cancel();
-
+    },
+    getProduct(id){
+      this.productId = id;
+      //console.log("форма  " + this.productId);
     }
   }
 }
