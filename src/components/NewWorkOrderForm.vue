@@ -14,81 +14,66 @@
         <el-row :gutter="20">
           <el-col :span="5">
             <div class="grid-content, customer">
-              <el-form-item label="ФИО/Наименование">
-                <el-input v-model="form.customerName"></el-input>
+              <el-form-item >
+                <el-button style="margin: 2px" icon="el-icon-circle-plus" size="mini" circle></el-button>
+              <el-input v-model="form.customerName" placeholder="ФИО/Наименование"></el-input>
               </el-form-item>
             </div>
           </el-col>
           <el-col :span="5">
             <div class="grid-content, customer">
-              <el-form-item label="Телефон">
-                <el-input v-model="form.customerPhone"></el-input>
-              </el-form-item>
+              <el-input v-model="form.customerPhone" placeholder="Телефон"></el-input>
             </div>
           </el-col>
         </el-row>
 
         <!-- изделие -->
         <el-row :gutter="24">
-          <el-col :span="5">
+
+          <el-col :span="5" class="row-bg">
             <div class="grid-content, product">
-              <el-form-item label="Тип изделия">
-                <!--                <el-input v-model="form.productId"></el-input>-->
-                <search-product-name
-                          @get-product="getProduct"
+              <el-button style="margin: 2px" icon="el-icon-circle-plus" size="mini" circle></el-button>
+
+              <search-product-name
+                    @get-product="getProduct"
                 />
-              </el-form-item>
             </div>
           </el-col>
           <el-col :span="4">
             <div class="grid-content, product">
-              <el-form-item label="Марка">
-                <el-input v-model="form.manufacturerId"></el-input>
-              </el-form-item>
+                <el-input v-model="form.manufacturerId" placeholder="Марка"></el-input>
             </div>
           </el-col>
           <el-col :span="4">
             <div class="grid-content, product">
-              <el-form-item label="Модель">
-                <el-input v-model="form.modelId"></el-input>
-              </el-form-item>
+                <el-input v-model="form.modelId" placeholder="Модель"></el-input>
             </div>
           </el-col>
           <el-col :span="4">
             <div class="grid-content, product">
-              <el-form-item label="Серийный номер">
-                <el-input v-model="form.serialNumber"></el-input>
-              </el-form-item>
+                <el-input v-model="form.serialNumber" placeholder="Серийный номер"></el-input>
             </div>
           </el-col>
           <el-col :span="4">
             <div class="grid-content, product">
-              <el-form-item label="IMEI">
-                <el-input v-model="form.imei"></el-input>
-              </el-form-item>
+                <el-input v-model="form.imei" placeholder="IMEI"></el-input>
             </div>
           </el-col>
         </el-row>
         <el-row :gutter="24">
           <el-col :span="8">
             <div class="grid-content, product">
-              <el-form-item label="Внешний вид">
-                <el-input v-model="form.view"></el-input>
-              </el-form-item>
+                <el-input v-model="form.view" placeholder="Внешний вид"></el-input>
             </div>
           </el-col>
           <el-col :span="8">
             <div class="grid-content, product">
-              <el-form-item label="Комплектация">
-                <el-input v-model="form.complection"></el-input>
-              </el-form-item>
+                <el-input v-model="form.complection" placeholder="Комплектация"></el-input>
             </div>
           </el-col>
           <el-col :span="8">
             <div class="grid-content, product">
-              <el-form-item label="Заявленная неисправность">
-                <el-input v-model="form.trouble"></el-input>
-              </el-form-item>
+                <el-input v-model="form.trouble" placeholder="Заявленная неисправность"></el-input>
             </div>
           </el-col>
         </el-row>
@@ -97,30 +82,22 @@
         <el-row :gutter="24">
           <el-col :span="4">
             <div class="grid-content, repair">
-              <el-form-item label="Вид услуги">
-                <el-input v-model="form.serviceId"></el-input>
-              </el-form-item>
+                <el-input v-model="form.serviceId" placeholder="Вид услуги"></el-input>
             </div>
           </el-col>
           <el-col :span="4">
             <div class="grid-content, repair">
-              <el-form-item label="Мастер">
-                <el-input v-model="form.engineerId"></el-input>
-              </el-form-item>
+                <el-input v-model="form.engineerId" placeholder="Инженер"></el-input>
             </div>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="5">
             <div class="grid-content, repair">
-              <el-form-item label="Наименование услуги">
-                <el-input v-model="form.priceId"></el-input>
-              </el-form-item>
+                <el-input v-model="form.priceId" placeholder="Наименование услуги"></el-input>
             </div>
           </el-col>
-          <el-col :span="2">
+          <el-col :span="3">
             <div class="grid-content, repair">
-              <el-form-item label="Прайс">
-                <el-input v-model="form.priceId"></el-input>
-              </el-form-item>
+                <el-input v-model="form.priceId" placeholder="Прайс"></el-input>
             </div>
           </el-col>
         </el-row>
@@ -170,17 +147,13 @@ export default {
         receiverId: 1,
         statusId: 1,
       },
-      labelPosition: 'top',
+      labelPosition: 'left',
     }
   },
 
-  mounted() {
-    //this.$root.$on('getproduct', this.methods.getProduct(id));
-    },
-
   methods: {
     cancel() {
-      console.log(this.form.productId)
+      //console.log(this.productId)
       this.myVisible = false;
       this.$emit('cancelForm', this.myVisible)
     },
@@ -195,7 +168,7 @@ export default {
             console.log("ERRRR" + error);
           });
     },
-    getProduct(id){
+    getProduct(id) {
       this.productId = id;
       //console.log("форма  " + this.productId);
     }
@@ -205,18 +178,10 @@ export default {
 
 <style scoped>
 
-:last-child {
-  margin-bottom: 0;
-}
-
-.grid-content {
-  border-radius: 4px;
-  min-height: 24px;
-}
-
 .product {
   background-color: #efffff;
   margin: 10px;
+
 }
 
 .repair {
@@ -228,5 +193,13 @@ export default {
   background-color: #efefff;
   margin: 10px;
 
+}
+.row-bg {
+  padding: 1px 0;
+  background-color: #6be775;
+}
+.row-pg {
+  padding: 10px 0;
+  background-color: #f9fafc;
 }
 </style>

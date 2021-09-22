@@ -5,7 +5,7 @@
       filterable
       remote
       reserve-keyword
-      placeholder="Введите название"
+      placeholder="Тип изделия"
       :remote-method="remoteMethod"
       :loading="loading"
       @change="getSelect"
