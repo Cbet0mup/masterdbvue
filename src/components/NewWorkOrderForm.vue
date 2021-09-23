@@ -5,102 +5,103 @@
                :before-close="cancel"
                :close-on-click-modal="false"
                :close-on-press-escape="false"
-               width="75%"
+               width="50%"
                :center="true"
                class="bg-purple"
     >
       <el-form :label-position="labelPosition" size="mini">
         <!-- заказчик -->
-        <el-row :gutter="20">
-          <el-col :span="5">
-            <div class="grid-content, customer">
-              <el-form-item >
-                <el-button style="margin: 2px" icon="el-icon-circle-plus" size="mini" circle></el-button>
-              <el-input v-model="form.customerName" placeholder="ФИО/Наименование"></el-input>
-              </el-form-item>
-            </div>
-          </el-col>
-          <el-col :span="5">
-            <div class="grid-content, customer">
-              <el-input v-model="form.customerPhone" placeholder="Телефон"></el-input>
-            </div>
-          </el-col>
+        <el-row style="background-color: #6be775">
+          <el-form-item class="form-item">
+            <el-input class="input-form" v-model="form.customerName" placeholder="ФИО/Наименование"></el-input>
+          </el-form-item>
+
+          <el-form-item class="form-item">
+            <el-input class="input-form" v-model="form.customerPhone" placeholder="Телефон"></el-input>
+          </el-form-item>
+
         </el-row>
 
         <!-- изделие -->
-        <el-row :gutter="24">
-
-          <el-col :span="5" class="row-bg">
-            <div class="grid-content, product">
-              <el-button style="margin: 2px" icon="el-icon-circle-plus" size="mini" circle></el-button>
-
+        <el-row style="background-color: #7ca13e">
+          <el-form-item class="form-item">
               <search-product-name
-                    @get-product="getProduct"
-                />
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content, product">
-                <el-input v-model="form.manufacturerId" placeholder="Марка"></el-input>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content, product">
-                <el-input v-model="form.modelId" placeholder="Модель"></el-input>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content, product">
-                <el-input v-model="form.serialNumber" placeholder="Серийный номер"></el-input>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content, product">
-                <el-input v-model="form.imei" placeholder="IMEI"></el-input>
-            </div>
-          </el-col>
+                  class="input-form"
+                  @get-product="getProduct"
+              />
+          </el-form-item >
+          <el-button class="button-add"  icon="el-icon-circle-plus" size="mini" circle></el-button>
+
+          <el-form-item class="form-item">
+              <el-input class="input-form" v-model="form.manufacturerId" placeholder="Марка"></el-input>
+          </el-form-item>
+          <el-button class="button-add"  icon="el-icon-circle-plus" size="mini" circle></el-button>
+
         </el-row>
-        <el-row :gutter="24">
-          <el-col :span="8">
-            <div class="grid-content, product">
-                <el-input v-model="form.view" placeholder="Внешний вид"></el-input>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="grid-content, product">
-                <el-input v-model="form.complection" placeholder="Комплектация"></el-input>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="grid-content, product">
-                <el-input v-model="form.trouble" placeholder="Заявленная неисправность"></el-input>
-            </div>
-          </el-col>
+
+        <el-row style="background-color: #8f3ea1">
+          <el-form-item class="form-item">
+            <el-input class="input-form" v-model="form.modelId" placeholder="Модель"></el-input>
+          </el-form-item>
+          <el-button class="button-add"  icon="el-icon-circle-plus" size="mini" circle></el-button>
+
+
+          <el-form-item class="form-item">
+            <el-input class="input-form" v-model="form.serialNumber" placeholder="Серийный номер"></el-input>
+          </el-form-item>
+
+
+          <el-form-item class="form-item">
+            <el-input class="input-form" v-model="form.imei" placeholder="IMEI"></el-input>
+          </el-form-item>
+        </el-row>
+
+
+
+
+
+        <el-row style="background-color: #c03164">
+
+          <el-form-item class="form-item">
+              <el-input class="input-form"  v-model="form.view" placeholder="Внешний вид"></el-input>
+          </el-form-item>
+
+
+          <el-form-item class="form-item">
+              <el-input class="input-form"  v-model="form.complection" placeholder="Комплектация"></el-input>
+          </el-form-item>
+
+
+          <el-form-item class="form-item">
+              <el-input class="input-form"  v-model="form.trouble" placeholder="Заявленная неисправность"></el-input>
+          </el-form-item>
+
         </el-row>
 
         <!-- ремонт -->
-        <el-row :gutter="24">
-          <el-col :span="4">
-            <div class="grid-content, repair">
-                <el-input v-model="form.serviceId" placeholder="Вид услуги"></el-input>
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content, repair">
-                <el-input v-model="form.engineerId" placeholder="Инженер"></el-input>
-            </div>
-          </el-col>
-          <el-col :span="5">
-            <div class="grid-content, repair">
-                <el-input v-model="form.priceId" placeholder="Наименование услуги"></el-input>
-            </div>
-          </el-col>
-          <el-col :span="3">
-            <div class="grid-content, repair">
-                <el-input v-model="form.priceId" placeholder="Прайс"></el-input>
-            </div>
-          </el-col>
+        <el-row style="background-color: #e7820d">
+          <el-form-item class="form-item">
+              <el-input class="input-form"  v-model="form.serviceId" placeholder="Вид услуги"></el-input>
+          </el-form-item>
+          <el-button class="button-add"  icon="el-icon-circle-plus" size="mini" circle></el-button>
+
+          <el-form-item class="form-item">
+              <el-input class="input-form"  v-model="form.engineerId" placeholder="Инженер"></el-input>
+          </el-form-item>
+          <el-button class="button-add"  icon="el-icon-circle-plus" size="mini" circle></el-button>
+
+
+          <!--                                          ?                                    -->
+          <el-form-item class="form-item">
+              <el-input class="input-form"  v-model="form.priceId" placeholder="Наименование услуги"></el-input>
+          </el-form-item>
+
+          <el-form-item class="form-item">
+              <el-input class="input-form"  v-model="form.priceId" placeholder="Прайс"></el-input>
+          </el-form-item>
+
         </el-row>
+        <!--                                                                              -->
 
       </el-form>
 
@@ -189,17 +190,16 @@ export default {
   margin: 10px;
 }
 
-.customer {
-  background-color: #efefff;
-  margin: 10px;
+.button-add {
+  margin: 20px;
+}
 
+.input-form {
+  margin-top: 20px;
+  position: inherit;
 }
-.row-bg {
-  padding: 1px 0;
-  background-color: #6be775;
-}
-.row-pg {
-  padding: 10px 0;
-  background-color: #f9fafc;
+
+.form-item{
+  margin-left: 20px;
 }
 </style>
