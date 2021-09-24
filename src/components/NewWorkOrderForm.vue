@@ -25,12 +25,12 @@
         <!-- изделие -->
         <el-row style="background-color: #7ca13e">
           <el-form-item class="form-item">
+
               <search-product-name
                   class="input-form"
                   @get-product="getProduct"
               />
           </el-form-item >
-          <el-button class="button-add"  icon="el-icon-circle-plus" size="mini" circle></el-button>
 
           <el-form-item class="form-item">
               <el-input class="input-form" v-model="form.manufacturerId" placeholder="Марка"></el-input>

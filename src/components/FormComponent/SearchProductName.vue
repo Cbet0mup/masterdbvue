@@ -20,6 +20,9 @@
     >
     </el-option>
   </el-select>
+<!--  <el-button @:click.prevent="openMb" class="button-add"  icon="el-icon-circle-plus" size="mini" circle ></el-button>-->
+  <button @click.prevent="openMb">Поприветствовать</button>
+
 </template>
 
 <script>
@@ -44,6 +47,7 @@ export default {
 
   },
   methods: {
+    //обработка введённых данных относительно полученного массива
     remoteMethod(query) {
       if (query !== '') {
         this.loading = true
@@ -57,6 +61,7 @@ export default {
         this.options = []
       }
     },
+    //полученный массив из БД
     async getData() {
       await HTTP.get('/workorder/apiform/productname')
           .then(response => {
@@ -72,15 +77,46 @@ export default {
           })
       this.lengthData = this.states.length;
     },
+    //выбранный элемент улетает в родительский компонент формы
     getSelect() {
       //console.log(this.value)
       this.$emit('getProduct', this.value)
+    },
+    openMb(){
+      console.log("open!!")
+      // this.$prompt('Please input your e-mail', 'Tip', {
+      //   confirmButtonText: 'OK',
+      //   cancelButtonText: 'Cancel',
+      // })
+      //     .then(({ value }) => {
+      //       this.$message({
+      //         type: 'success',
+      //         message: 'Your email is:' + value,
+      //       })
+      //     })
+      //     .catch(() => {
+      //       this.$message({
+      //         type: 'info',
+      //         message: 'Input canceled',
+      //       })
+      //     })
     }
 
-  },
+  }
 }
 </script>
 
 <style scoped>
-
+.button-add {
+  margin-top: 20px;
+  margin-left: 5px;
+}
 </style>
+<!--<el-tooltip-->
+<!--    class="item"-->
+<!--    effect="dark"-->
+<!--    content="Добавить новый тип изделия"-->
+<!--    placement="top"-->
+<!--&gt;-->
+<!--<el-button @:click.prevent="openMb" class="button-add"  icon="el-icon-circle-plus" size="mini" circle ></el-button>-->
+<!--</el-tooltip>-->

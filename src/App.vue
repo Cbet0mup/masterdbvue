@@ -37,9 +37,7 @@ export default {
   },
   components: {TopMenuPriemka, TabsIsNeedCall, TabsEndRepair},
   methods: {
-    handleClick(tab, event) {
-      console.log(tab, event)
-    },
+
   }
 }
 </script>
