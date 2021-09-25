@@ -3,6 +3,7 @@
       v-model="value"
       value-key="productIds"
       filterable
+      multiple
       remote
       reserve-keyword
       placeholder="Тип изделия"
@@ -19,10 +20,16 @@
 
     >
     </el-option>
-  </el-select>
-<!--  <el-button @:click.prevent="openMb" class="button-add"  icon="el-icon-circle-plus" size="mini" circle ></el-button>-->
-  <button @click.prevent="openMb">Поприветствовать</button>
 
+  </el-select>
+  <el-tooltip
+      class="item"
+      effect="dark"
+      content="Добавить новый тип изделия"
+      placement="top"
+  >
+    <el-button @click.prevent="openMb" class="button-add"  icon="el-icon-circle-plus" size="mini" circle ></el-button>
+  </el-tooltip>
 </template>
 
 <script>
@@ -40,6 +47,9 @@ export default {
       list: [],
       loading: false,
       states: [],
+      newProductName: {
+        productName: String
+      },
     }
   },
   mounted() {
@@ -61,6 +71,7 @@ export default {
         this.options = []
       }
     },
+
     //полученный массив из БД
     async getData() {
       await HTTP.get('/workorder/apiform/productname')
@@ -77,29 +88,51 @@ export default {
           })
       this.lengthData = this.states.length;
     },
-    //выбранный элемент улетает в родительский компонент формы
+
+                            //   сохраняем
+    async save() {
+      const json = JSON.stringify(this.newProductName);
+
+      console.log(json)
+
+      await HTTP.post('/workorder/apiform/productname', json)
+          .then(function (response) {
+            console.log("OK   " + response);
+          })
+          .catch(function (error) {
+            console.log("ERRRR" + error);
+          })
+      await this.getData()
+    },
+
+                //выбранный элемент улетает в родительский компонент формы
     getSelect() {
-      //console.log(this.value)
       this.$emit('getProduct', this.value)
     },
-    openMb(){
-      console.log("open!!")
-      // this.$prompt('Please input your e-mail', 'Tip', {
-      //   confirmButtonText: 'OK',
-      //   cancelButtonText: 'Cancel',
-      // })
-      //     .then(({ value }) => {
-      //       this.$message({
-      //         type: 'success',
-      //         message: 'Your email is:' + value,
-      //       })
-      //     })
-      //     .catch(() => {
-      //       this.$message({
-      //         type: 'info',
-      //         message: 'Input canceled',
-      //       })
-      //     })
+             //  открываем message box
+    openMb() {
+      this.$prompt('Телевизор, утюг, и.т.д', 'Добавить тип', {
+        confirmButtonText: 'Сохранить',
+        cancelButtonText: 'Отмена',
+      })
+          .then(({value}) => {
+            this.newProductName.productName = value;
+
+            console.log(value)
+
+            this.save();
+            this.$message({
+              type: 'success',
+              message: 'Вы внесли новый тип устройства: ' + value,
+            })
+            this.productName = '';
+          })
+          .catch(() => {
+            this.$message({
+              type: 'info',
+              message: 'Ввод отменён.',
+            })
+          })
     }
 
   }
@@ -112,11 +145,4 @@ export default {
   margin-left: 5px;
 }
 </style>
-<!--<el-tooltip-->
-<!--    class="item"-->
-<!--    effect="dark"-->
-<!--    content="Добавить новый тип изделия"-->
-<!--    placement="top"-->
-<!--&gt;-->
-<!--<el-button @:click.prevent="openMb" class="button-add"  icon="el-icon-circle-plus" size="mini" circle ></el-button>-->
-<!--</el-tooltip>-->
+
