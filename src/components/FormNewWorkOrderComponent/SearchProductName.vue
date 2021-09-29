@@ -3,9 +3,7 @@
       v-model="value"
       value-key="productIds"
       filterable
-      multiple
       remote
-      reserve-keyword
       placeholder="Тип изделия"
       :remote-method="remoteMethod"
       :loading="loading"
@@ -46,14 +44,14 @@ export default {
       value: [],
       list: [],
       loading: false,
-      states: [],
+      items: [],
       newProductName: {
         productName: String
       },
     }
   },
   mounted() {
-    this.getData()
+    this.getData();
 
   },
   methods: {
@@ -66,6 +64,7 @@ export default {
           this.options = this.list.filter((item) => {
             return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1
           })
+          console.log(this.options)
         }, 200)
       } else {
         this.options = []
@@ -76,17 +75,17 @@ export default {
     async getData() {
       await HTTP.get('/workorder/apiform/productname')
           .then(response => {
-            this.states = response.data;
+            this.items = response.data;
 
-            this.list = this.states.map((item) => {
-              return {value: `${item.id}`, label: `${item.productName}`}
+            this.list = this.items.map((item) => {
+              return { value: `${item.productName}`, label: `${item.productName}` }
             })
+
 
           })
           .catch(e => {
             this.errors.push(e);
           })
-      this.lengthData = this.states.length;
     },
 
                             //   сохраняем
