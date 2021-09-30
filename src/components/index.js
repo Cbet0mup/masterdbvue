@@ -3,7 +3,7 @@ import NewWorkOrderForm from "./NewWorkOrderForm.vue";
 import tabsIsNeedCall from "./tables/TabsIsNeedCallPriemka.vue";
 import TopMenuPriemka from "./TopMenuPriemka.vue";
 import SearchProductName from "./FormNewWorkOrderComponent/SearchProductName.vue";
-import SearchModel from "./FormNewWorkOrderComponent/SearchModel.vue";
+import SearchModel from "./FormNewWorkOrderComponent/SearchManufacturer.vue";
 
 export default [
     tabsEndRepair, NewWorkOrderForm, tabsIsNeedCall, TopMenuPriemka, SearchProductName, SearchModel,

@@ -33,21 +33,19 @@
           </el-form-item >
 
           <el-form-item class="form-item">
-              <el-input class="input-form" v-model="form.manufacturerId" placeholder="Марка"></el-input>
+<!--              <el-input class="input-form" v-model="form.manufacturerId" placeholder="Марка"></el-input>-->
+            <search-manufacturer
+                class="input-form"
+                @get-manufacturer="getManufacturer"
+            />
           </el-form-item>
-          <el-button class="button-add"  icon="el-icon-circle-plus" size="mini" circle></el-button>
-
         </el-row>
 
         <el-row style="background-color: #8f3ea1">
           <el-form-item class="form-item">
-<!--            <el-input class="input-form" v-model="form.modelId" placeholder="Модель"></el-input>-->
-            <search-model
-                class="input-form"
-            />
-          </el-form-item>
-          <el-button class="button-add"  icon="el-icon-circle-plus" size="mini" circle></el-button>
+            <el-input class="input-form" v-model="form.modelId" placeholder="Модель"></el-input>
 
+          </el-form-item>
 
           <el-form-item class="form-item">
             <el-input class="input-form" v-model="form.serialNumber" placeholder="Серийный номер"></el-input>
@@ -123,11 +121,11 @@
 <script>
 import {HTTP} from "../api/instance.js";
 import SearchProductName from "./FormNewWorkOrderComponent/SearchProductName.vue";
-import SearchModel from "./FormNewWorkOrderComponent/SearchModel.vue";
+import SearchManufacturer from "./FormNewWorkOrderComponent/SearchManufacturer.vue";
 
 export default {
   name: "NewWorkOrderForm",
-  components: {SearchProductName, SearchModel},
+  components: {SearchProductName, SearchManufacturer},
   props: ['isVisible'],
   emits: ['cancelForm'],
   data() {
@@ -173,9 +171,14 @@ export default {
             console.log("ERRRR" + error);
           });
     },
+                                        //getters
     getProduct(id) {
       this.productId = id;
-      //console.log("форма  " + this.productId);
+      console.log("форма prod  " + this.productId);
+    },
+    getManufacturer(id){
+      this.manufacturerId = id;
+      console.log("форма manufac " + this.manufacturerId);
     }
   }
 }

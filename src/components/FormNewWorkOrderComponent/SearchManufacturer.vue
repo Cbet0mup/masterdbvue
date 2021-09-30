@@ -3,7 +3,7 @@
       v-model="value"
       filterable
       remote
-      placeholder="Тип изделия"
+      placeholder="Производитель"
       :remote-method="remoteMethod"
       :loading="loading"
       @change="getSelect"
@@ -22,7 +22,7 @@
   <el-tooltip
       class="item"
       effect="dark"
-      content="Добавить новый тип изделия"
+      content="Добавить нового производителя"
       placement="top"
   >
     <el-button @click.prevent="openMessageBox" class="button-add"  icon="el-icon-circle-plus" size="mini" circle ></el-button>
@@ -33,8 +33,8 @@
 import {HTTP} from "../../api/instance";
 
 export default {
-  name: "SearchProductName",
-  emits: ['getProduct'],                  //переменная
+  name: "SearchManufacturer",
+  emits: ['getManufacturer'],
 
   data() {
     return {
@@ -44,11 +44,11 @@ export default {
       loading: false,
       items: [],
       newItem: {
-        productName: String               //переменная
+        manufacturer: String
       },
-      textOpenMbPromptInfo: 'Телевизор, утюг, и.т.д',
-      textOpenMbPromptHeader: 'Добавить тип',
-      textOpenMbPromptMessageSuccess: 'Вы внесли новый тип устройства: ',
+      textOpenMbPromptInfo: 'Samsung, Huawei, и.т.д',
+      textOpenMbPromptHeader: 'Добавить производителя',
+      textOpenMbPromptMessageSuccess: 'Вы внесли нового производителя: ',
       textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.'
 
     }
@@ -58,7 +58,7 @@ export default {
 
   },
   methods: {
-              //обработка введённых данных относительно полученного массива
+    //обработка введённых данных относительно полученного массива
     remoteMethod(query) {
       if (query !== '') {
         this.loading = true
@@ -67,21 +67,21 @@ export default {
           this.options = this.list.filter((item) => {
             return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1
           })
-         // console.log('remoteMethod: ' + this.options)
+           console.log('remoteMethod: ' + this.options)
         }, 200)
       } else {
         this.options = []
       }
     },
 
-                      //полученный массив из БД
-
+    //полученный массив из БД
+    //переменная productName
     async getData() {
-      await HTTP.get('/workorder/apiform/productname')  //переменная
+      await HTTP.get('/workorder/apiform/manufacturer')
           .then(response => {
             this.items = response.data;
             this.list = this.items.map((item) => {
-              return { value: `${item.id}`, label: `${item.productName}` }
+              return { value: `${item.id}`, label: `${item.manufacturer}` }
             })
           })
           .catch(e => {
@@ -89,13 +89,13 @@ export default {
           })
     },
 
-                            //   сохраняем
+    //   сохраняем
     async save() {
       const json = JSON.stringify(this.newItem);
 
       console.log('searchprodname: save: ' + json)
 
-      await HTTP.post('/workorder/apiform/productname', json)   //переменная
+      await HTTP.post('/workorder/apiform/manufacturer', json)
           .then(function (response) {
             console.log("OK   " + response);
           })
@@ -105,12 +105,12 @@ export default {
       await this.getData()
     },
 
-                //выбранный элемент улетает в родительский компонент формы
+    //выбранный элемент улетает в родительский компонент формы
     getSelect() {
-      this.$emit('getProduct', this.value)          //переменная
-      console.log('searchprodname: getselect  ' + this.value)
+      this.$emit('getManufacturer', this.value)
+      console.log('searchmanname: getselect  ' + this.value)
     },
-             //  открываем message box
+    //  открываем message box
     openMessageBox() {
       this.$prompt(this.textOpenMbPromptInfo, this.textOpenMbPromptHeader, {
         confirmButtonText: 'Сохранить',
@@ -118,14 +118,14 @@ export default {
       })
           .then(({value}) => {
             if (value !== null){
-              this.newItem.productName = value;
-              // console.log('searchprodname: openMB: ' + value)
+              this.newItem.manufacturer = value;
+               console.log('searchprodname: openMB: ' + value)
               this.save();
               this.$message({
                 type: 'success',
                 message: this.textOpenMbPromptMessageSuccess
               })
-              this.productName = '';
+              this.manufacturer = '';
             } else {
               this.$message({
                 type: 'success',
