@@ -26,26 +26,30 @@
         <el-row style="background-color: #7ca13e">
           <el-form-item class="form-item">
 
-              <search-product-name
-                  class="input-form"
-                  @get-product="getProduct"
-              />
-          </el-form-item >
+            <search-product-name
+                class="input-form"
+                @get-product="getProduct"
+            />
+          </el-form-item>
 
           <el-form-item class="form-item">
-<!--              <el-input class="input-form" v-model="form.manufacturerId" placeholder="Марка"></el-input>-->
             <search-manufacturer
                 class="input-form"
                 @get-manufacturer="getManufacturer"
             />
           </el-form-item>
+
+          <el-form-item class="form-item">
+            <search-model
+                class="input-form"
+                @get-model="getModelName"
+                :manufacturer-id="this.manufacturerId"
+            />
+
+          </el-form-item>
         </el-row>
 
         <el-row style="background-color: #8f3ea1">
-          <el-form-item class="form-item">
-            <el-input class="input-form" v-model="form.modelId" placeholder="Модель"></el-input>
-
-          </el-form-item>
 
           <el-form-item class="form-item">
             <el-input class="input-form" v-model="form.serialNumber" placeholder="Серийный номер"></el-input>
@@ -58,23 +62,20 @@
         </el-row>
 
 
-
-
-
         <el-row style="background-color: #c03164">
 
           <el-form-item class="form-item">
-              <el-input class="input-form"  v-model="form.view" placeholder="Внешний вид"></el-input>
+            <el-input class="input-form" v-model="form.view" placeholder="Внешний вид"></el-input>
           </el-form-item>
 
 
           <el-form-item class="form-item">
-              <el-input class="input-form"  v-model="form.complection" placeholder="Комплектация"></el-input>
+            <el-input class="input-form" v-model="form.complection" placeholder="Комплектация"></el-input>
           </el-form-item>
 
 
           <el-form-item class="form-item">
-              <el-input class="input-form"  v-model="form.trouble" placeholder="Заявленная неисправность"></el-input>
+            <el-input class="input-form" v-model="form.trouble" placeholder="Заявленная неисправность"></el-input>
           </el-form-item>
 
         </el-row>
@@ -82,23 +83,23 @@
         <!-- ремонт -->
         <el-row style="background-color: #e7820d">
           <el-form-item class="form-item">
-              <el-input class="input-form"  v-model="form.serviceId" placeholder="Вид услуги"></el-input>
+            <el-input class="input-form" v-model="form.serviceId" placeholder="Вид услуги"></el-input>
           </el-form-item>
-          <el-button class="button-add"  icon="el-icon-circle-plus" size="mini" circle></el-button>
+          <el-button class="button-add" icon="el-icon-circle-plus" size="mini" circle></el-button>
 
           <el-form-item class="form-item">
-              <el-input class="input-form"  v-model="form.engineerId" placeholder="Инженер"></el-input>
+            <el-input class="input-form" v-model="form.engineerId" placeholder="Инженер"></el-input>
           </el-form-item>
-          <el-button class="button-add"  icon="el-icon-circle-plus" size="mini" circle></el-button>
+          <el-button class="button-add" icon="el-icon-circle-plus" size="mini" circle></el-button>
 
 
           <!--                                          ?                                    -->
           <el-form-item class="form-item">
-              <el-input class="input-form"  v-model="form.priceId" placeholder="Наименование услуги"></el-input>
+            <el-input class="input-form" v-model="form.priceId" placeholder="Наименование услуги"></el-input>
           </el-form-item>
 
           <el-form-item class="form-item">
-              <el-input class="input-form"  v-model="form.priceId" placeholder="Прайс"></el-input>
+            <el-input class="input-form" v-model="form.priceId" placeholder="Прайс"></el-input>
           </el-form-item>
 
         </el-row>
@@ -122,10 +123,11 @@
 import {HTTP} from "../api/instance.js";
 import SearchProductName from "./FormNewWorkOrderComponent/SearchProductName.vue";
 import SearchManufacturer from "./FormNewWorkOrderComponent/SearchManufacturer.vue";
+import SearchModel from "./FormNewWorkOrderComponent/SearchModel.vue";
 
 export default {
   name: "NewWorkOrderForm",
-  components: {SearchProductName, SearchManufacturer},
+  components: {SearchProductName, SearchManufacturer, SearchModel},
   props: ['isVisible'],
   emits: ['cancelForm'],
   data() {
@@ -171,31 +173,24 @@ export default {
             console.log("ERRRR" + error);
           });
     },
-                                        //getters
+    //getters
     getProduct(id) {
       this.productId = id;
       console.log("форма prod  " + this.productId);
     },
-    getManufacturer(id){
+    getManufacturer(id) {
       this.manufacturerId = id;
       console.log("форма manufac " + this.manufacturerId);
-    }
+    },
+    getModelName(id) {
+      this.modelId = id;
+      console.log("форма model " + this.modelId);
+    },
   }
 }
 </script>
 
 <style scoped>
-
-.product {
-  background-color: #efffff;
-  margin: 10px;
-
-}
-
-.repair {
-  background-color: #efefff;
-  margin: 10px;
-}
 
 .button-add {
   margin: 20px;
@@ -206,7 +201,7 @@ export default {
   position: inherit;
 }
 
-.form-item{
+.form-item {
   margin-left: 20px;
 }
 </style>

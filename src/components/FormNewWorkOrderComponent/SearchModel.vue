@@ -1,9 +1,10 @@
 <template>
   <el-select
       v-model="value"
+      @focus="getData"
       filterable
       remote
-      placeholder="Тип изделия"
+      placeholder="Модель"
       :remote-method="remoteMethod"
       :loading="loading"
       @change="getSelect"
@@ -22,7 +23,7 @@
   <el-tooltip
       class="item"
       effect="dark"
-      content="Добавить новый тип изделия"
+      content="Добавить новую модель"
       placement="top"
   >
     <el-button @click.prevent="openMessageBox" class="button-add"  icon="el-icon-circle-plus" size="mini" circle ></el-button>
@@ -33,8 +34,9 @@
 import {HTTP} from "../../api/instance";
 
 export default {
-  name: "SearchProductName",
-  emits: ['getProduct'],                  //переменная
+  name: "SearchModel",
+  emits: ['getModel'],                  //переменная
+  props: ['manufacturerId'],
 
   data() {
     return {
@@ -44,21 +46,22 @@ export default {
       loading: false,
       items: [],
       newItem: {
-        productName: String               //переменная
+        modelName: String               //переменная
       },
-      textOpenMbPromptInfo: 'Телевизор, утюг, и.т.д',
-      textOpenMbPromptHeader: 'Добавить тип',
-      textOpenMbPromptMessageSuccess: 'Вы внесли новый тип устройства: ',
+      manufacturerIds: '5',
+      textOpenMbPromptInfo: 'SM-A305, EOS 1D,...и.т.п.',
+      textOpenMbPromptHeader: 'Добавить модель',
+      textOpenMbPromptMessageSuccess: 'Вы внесли новую модель: ',
       textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.'
 
     }
   },
-  mounted() {
-    this.getData();
-
-  },
+  // mounted() {
+  //   this.getData();
+  //
+  // },
   methods: {
-              //обработка введённых данных относительно полученного массива
+    //обработка введённых данных относительно полученного массива
     remoteMethod(query) {
       if (query !== '') {
         this.loading = true
@@ -67,35 +70,43 @@ export default {
           this.options = this.list.filter((item) => {
             return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1
           })
-         // console.log('remoteMethod: ' + this.options)
+          // console.log('remoteMethod: ' + this.options)
         }, 200)
       } else {
         this.options = []
       }
     },
 
-                      //полученный массив из БД
+    //полученный массив из БД
 
     async getData() {
-      await HTTP.get('/workorder/apiform/productname')  //переменная
-          .then(response => {
-            this.items = response.data;
-            this.list = this.items.map((item) => {
-              return { value: `${item.id}`, label: `${item.productName}` }        ///переменная
+      //this.manufacturerIds = this.manufacturerId;
+      console.log('searchmodelname: getdata: manufacturerIds: ' + this.manufacturerIds);
+
+      if (this.manufacturerIds !== 'undefined' || this.manufacturerIds !== '') {
+
+        await HTTP.get('/workorder/apiform/modelname/' + this.manufacturerIds)  //переменная
+            .then(response => {
+              console.log(HTTP.getUri() + 'axios get')
+              this.items = response.data;
+              this.list = this.items.map((item) => {
+                return { value: `${item.id}`, label: `${item.modelName()}` }        ///переменная
+              })
             })
-          })
-          .catch(e => {
-            this.errors.push(e);
-          })
+            .catch(e => {
+              this.errors.push(e);
+            })
+      }
+
     },
 
-                            //   сохраняем
+    //   сохраняем
     async save() {
       const json = JSON.stringify(this.newItem);
 
-      console.log('searchprodname: save: ' + json)
+      console.log('searchmodelname: save: ' + json)
 
-      await HTTP.post('/workorder/apiform/productname', json)   //переменная
+      await HTTP.post('/workorder/apiform/modelname', json)   //переменная
           .then(function (response) {
             console.log("OK   " + response);
           })
@@ -105,12 +116,12 @@ export default {
       await this.getData()
     },
 
-                //выбранный элемент улетает в родительский компонент формы
+    //выбранный элемент улетает в родительский компонент формы
     getSelect() {
-      this.$emit('getProduct', this.value)                          //переменная
-      console.log('searchprodname: getselect  ' + this.value)
+      this.$emit('getModel', this.value)          //переменная
+      console.log('searchmodelname: getselect  ' + this.value)
     },
-             //  открываем message box
+    //  открываем message box
     openMessageBox() {
       this.$prompt(this.textOpenMbPromptInfo, this.textOpenMbPromptHeader, {
         confirmButtonText: 'Сохранить',
@@ -118,14 +129,14 @@ export default {
       })
           .then(({value}) => {
             if (value !== null){
-              this.newItem.productName = value;                 ///переменная
+              this.newItem.modelName = value;       ///переменная
               // console.log('searchprodname: openMB: ' + value)
               this.save();
               this.$message({
                 type: 'success',
                 message: this.textOpenMbPromptMessageSuccess
               })
-              this.productName = '';                            ///переменная
+              this.modelName = '';
             } else {
               this.$message({
                 type: 'success',
@@ -152,4 +163,5 @@ export default {
   margin-left: 5px;
 }
 </style>
+
 

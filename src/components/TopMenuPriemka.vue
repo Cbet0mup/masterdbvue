@@ -42,9 +42,6 @@ export default {
     closeForm(isVisible) {
       this.dialogFormVisible = isVisible;
     },
-    openMb() {
-      console.log("sdfsldkjflskdf")
-    }
   }
 }
 </script>
