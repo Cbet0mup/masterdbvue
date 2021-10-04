@@ -75,13 +75,13 @@ export default {
     },
 
     //полученный массив из БД
-    //переменная productName
+
     async getData() {
       await HTTP.get('/workorder/apiform/manufacturer')
           .then(response => {
             this.items = response.data;
             this.list = this.items.map((item) => {
-              return { value: `${item.id}`, label: `${item.manufacturer}` }
+              return { value: `${item.id}`, label: `${item.manufacturer}` }  //переменная
             })
           })
           .catch(e => {

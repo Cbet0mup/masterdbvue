@@ -26,12 +26,15 @@
       content="Добавить новую модель"
       placement="top"
   >
-    <el-button @click.prevent="openMessageBox" class="button-add"  icon="el-icon-circle-plus" size="mini" circle ></el-button>
+    <el-button @click.prevent="openMessageBox" class="button-add" icon="el-icon-circle-plus" size="mini"
+               circle></el-button>
   </el-tooltip>
 </template>
 
 <script>
-import {HTTP} from "../../api/instance";
+import {HTTP} from "../../api/instance.js";
+import {store} from "../../store";
+
 
 export default {
   name: "SearchModel",
@@ -48,11 +51,11 @@ export default {
       newItem: {
         modelName: String               //переменная
       },
-      manufacturerIds: '5',
+      manufacturerIds: '',
       textOpenMbPromptInfo: 'SM-A305, EOS 1D,...и.т.п.',
       textOpenMbPromptHeader: 'Добавить модель',
       textOpenMbPromptMessageSuccess: 'Вы внесли новую модель: ',
-      textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.'
+      textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.',
 
     }
   },
@@ -80,25 +83,45 @@ export default {
     //полученный массив из БД
 
     async getData() {
-      //this.manufacturerIds = this.manufacturerId;
-      console.log('searchmodelname: getdata: manufacturerIds: ' + this.manufacturerIds);
+      this.manufacturerIds = this.manufacturerId;
+      console.log('searchmodelname: getdata: manufacturerId: ' + this.manufacturerId);
+
+      console.log('searchmodelname: store : ' + store.state.password);            ///STORE
 
       if (this.manufacturerIds !== 'undefined' || this.manufacturerIds !== '') {
-
-        await HTTP.get('/workorder/apiform/modelname/' + this.manufacturerIds)  //переменная
+        await HTTP.get('/workorder/apiform/modelname/' + this.manufacturerId)  //переменная
             .then(response => {
-              console.log(HTTP.getUri() + 'axios get')
               this.items = response.data;
               this.list = this.items.map((item) => {
-                return { value: `${item.id}`, label: `${item.modelName()}` }        ///переменная
+                return {value: `${item.id}`, label: `${item.modelName}`}        ///переменная
               })
             })
             .catch(e => {
               this.errors.push(e);
             })
-      }
-
+      }               //if
     },
+
+    // async getData() {
+    //   //this.manufacturerIds = this.manufacturerId;
+    //   console.log('searchmodelname: getdata: manufacturerIds: ' + this.manufacturerIds);
+    //
+    //   if (this.manufacturerIds !== 'undefined' || this.manufacturerIds !== '') {
+    //
+    //     await HTTP.get('/workorder/apiform/modelname/' + this.manufacturerIds)  //переменная
+    //         .then(response => {
+    //           console.log(response.data.toString() + '    axios get')
+    //           this.items = response.data;
+    //           this.list = this.items.map((item) => {
+    //             return { value: `${item.id}`, label: `${item.modelName()}` }        ///переменная
+    //           })
+    //         })
+    //         .catch(e => {
+    //           this.errors.push(e);
+    //         })
+    //   }
+    //
+    // },
 
     //   сохраняем
     async save() {
@@ -128,7 +151,7 @@ export default {
         cancelButtonText: 'Отмена',
       })
           .then(({value}) => {
-            if (value !== null){
+            if (value !== null) {
               this.newItem.modelName = value;       ///переменная
               // console.log('searchprodname: openMB: ' + value)
               this.save();

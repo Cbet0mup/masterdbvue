@@ -7,6 +7,7 @@
       :remote-method="remoteMethod"
       :loading="loading"
       @change="getSelect"
+      @focus="getData"
 
   >
     <el-option
@@ -53,10 +54,10 @@ export default {
 
     }
   },
-  mounted() {
-    this.getData();
-
-  },
+  // mounted() {
+  //   this.getData();
+  //
+  // },
   methods: {
               //обработка введённых данных относительно полученного массива
     remoteMethod(query) {
