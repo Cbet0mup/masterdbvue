@@ -33,13 +33,17 @@
 
 <script>
 import {HTTP} from "../../api/instance.js";
-import {store} from "../../store";
-
 
 export default {
   name: "SearchModel",
-  emits: ['getModel'],                  //переменная
-  props: ['manufacturerId'],
+  //emits: ['getModel'],                  //переменная
+  //props: ['manufacturerId'],
+
+  computed: {
+    form() {
+      return this.$store.getters.getForm;
+    }
+  },
 
   data() {
     return {
@@ -49,9 +53,9 @@ export default {
       loading: false,
       items: [],
       newItem: {
-        modelName: String               //переменная
+        modelName: String  ,             //переменная
+        manufacturerId: Number
       },
-      manufacturerIds: '',
       textOpenMbPromptInfo: 'SM-A305, EOS 1D,...и.т.п.',
       textOpenMbPromptHeader: 'Добавить модель',
       textOpenMbPromptMessageSuccess: 'Вы внесли новую модель: ',
@@ -59,10 +63,7 @@ export default {
 
     }
   },
-  // mounted() {
-  //   this.getData();
-  //
-  // },
+
   methods: {
     //обработка введённых данных относительно полученного массива
     remoteMethod(query) {
@@ -83,13 +84,11 @@ export default {
     //полученный массив из БД
 
     async getData() {
-      this.manufacturerIds = this.manufacturerId;
-      console.log('searchmodelname: getdata: manufacturerId: ' + this.manufacturerId);
+      //this.manufacturerIds = this.form.manufacturerId;
+      console.log('searchmodelname: getdata: manufacturerId: ' + this.form.manufacturerId);
 
-      console.log('searchmodelname: store : ' + store.state.password);            ///STORE
-
-      if (this.manufacturerIds !== 'undefined' || this.manufacturerIds !== '') {
-        await HTTP.get('/workorder/apiform/modelname/' + this.manufacturerId)  //переменная
+      if (this.form.manufacturerId !== 'undefined' || this.form.manufacturerId !== '') {
+        await HTTP.get('/workorder/apiform/modelname/' + this.form.manufacturerId)  //переменная
             .then(response => {
               this.items = response.data;
               this.list = this.items.map((item) => {
@@ -102,32 +101,12 @@ export default {
       }               //if
     },
 
-    // async getData() {
-    //   //this.manufacturerIds = this.manufacturerId;
-    //   console.log('searchmodelname: getdata: manufacturerIds: ' + this.manufacturerIds);
-    //
-    //   if (this.manufacturerIds !== 'undefined' || this.manufacturerIds !== '') {
-    //
-    //     await HTTP.get('/workorder/apiform/modelname/' + this.manufacturerIds)  //переменная
-    //         .then(response => {
-    //           console.log(response.data.toString() + '    axios get')
-    //           this.items = response.data;
-    //           this.list = this.items.map((item) => {
-    //             return { value: `${item.id}`, label: `${item.modelName()}` }        ///переменная
-    //           })
-    //         })
-    //         .catch(e => {
-    //           this.errors.push(e);
-    //         })
-    //   }
-    //
-    // },
-
     //   сохраняем
     async save() {
+      this.newItem.manufacturerId = this.form.manufacturerId;
       const json = JSON.stringify(this.newItem);
 
-      console.log('searchmodelname: save: ' + json)
+      console.log('searchmodelname: save: ' + json);
 
       await HTTP.post('/workorder/apiform/modelname', json)   //переменная
           .then(function (response) {

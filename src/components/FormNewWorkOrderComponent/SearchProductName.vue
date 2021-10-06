@@ -35,7 +35,13 @@ import {HTTP} from "../../api/instance";
 
 export default {
   name: "SearchProductName",
-  emits: ['getProduct'],                  //переменная
+  // emits: ['getProduct'],                  //переменная
+
+  computed: {
+    form() {
+      return this.$store.getters.getForm;
+    }
+  },
 
   data() {
     return {
@@ -108,8 +114,8 @@ export default {
 
                 //выбранный элемент улетает в родительский компонент формы
     getSelect() {
-      this.$emit('getProduct', this.value)                          //переменная
-      console.log('searchprodname: getselect  ' + this.value)
+      this.$store.commit('setProductId', this.value)                          //переменная
+      console.log('searchprodname: getselect  ' + this.form.productId)
     },
              //  открываем message box
     openMessageBox() {

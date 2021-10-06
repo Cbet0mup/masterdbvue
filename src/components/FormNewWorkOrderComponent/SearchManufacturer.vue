@@ -34,7 +34,7 @@ import {HTTP} from "../../api/instance";
 
 export default {
   name: "SearchManufacturer",
-  emits: ['getManufacturer'],
+  //emits: ['getManufacturer'],
 
   data() {
     return {
@@ -107,7 +107,7 @@ export default {
 
     //выбранный элемент улетает в родительский компонент формы
     getSelect() {
-      this.$emit('getManufacturer', this.value)
+      this.$store.commit('setManufacturerId', this.value)
       console.log('searchmanname: getselect  ' + this.value)
     },
     //  открываем message box

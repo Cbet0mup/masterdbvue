@@ -23,33 +23,30 @@
         </el-row>
 
         <!-- изделие -->
-        <el-row style="background-color: #7ca13e">
+        <el-row style="background-color: #4e9d54">
           <el-form-item class="form-item">
 
             <search-product-name
                 class="input-form"
-                @get-product="getProduct"
             />
+
           </el-form-item>
 
           <el-form-item class="form-item">
             <search-manufacturer
                 class="input-form"
-                @get-manufacturer="getManufacturer"
             />
           </el-form-item>
 
           <el-form-item class="form-item">
             <search-model
                 class="input-form"
-                @get-model="getModelName"
-                :manufacturer-id="this.manufacturerId"
             />
 
           </el-form-item>
         </el-row>
 
-        <el-row style="background-color: #8f3ea1">
+        <el-row style="background-color: #6be775">
 
           <el-form-item class="form-item">
             <el-input class="input-form" v-model="form.serialNumber" placeholder="Серийный номер"></el-input>
@@ -62,7 +59,7 @@
         </el-row>
 
 
-        <el-row style="background-color: #c03164">
+        <el-row style="background-color: #4e9d54">
 
           <el-form-item class="form-item">
             <el-input class="input-form" v-model="form.view" placeholder="Внешний вид"></el-input>
@@ -81,7 +78,7 @@
         </el-row>
 
         <!-- ремонт -->
-        <el-row style="background-color: #e7820d">
+        <el-row style="background-color: #6be775">
           <el-form-item class="form-item">
             <el-input class="input-form" v-model="form.serviceId" placeholder="Вид услуги"></el-input>
           </el-form-item>
@@ -134,25 +131,14 @@ export default {
     return {
       myVisible: this.isVisible,
       activeIndex: '1',
-      form: {
-        customerName: '',      //имя заказчика /
-        customerPhone: '',      //телефон
-        productId: '',      //тип: телек, кондёр, наушники
-        manufacturerId: '', //производитель
-        serialNumber: '',     //серийник
-        imei: '',             //имей
-        view: '',             // внешний вид
-        complection: '',        //комплектация
-        trouble: '',          // неисправность
-        modelId: '',              //модель
-        serviceId: '',      //услуга платный, гарантийный, повторный
-        engineerId: '',     // мастер
-        priceId: '',           //  стоимосто по прейскуранту
 
-        receiverId: 1,
-        statusId: 1,
-      },
       labelPosition: 'left',
+    }
+  },
+
+  computed: {
+    form() {
+      return this.$store.getters.getForm;
     }
   },
 
@@ -174,18 +160,18 @@ export default {
           });
     },
     //getters
-    getProduct(id) {
-      this.productId = id;
-      console.log("форма prod  " + this.productId);
-    },
-    getManufacturer(id) {
-      this.manufacturerId = id;
-      console.log("форма manufac " + this.manufacturerId);
-    },
-    getModelName(id) {
-      this.modelId = id;
-      console.log("форма model " + this.modelId);
-    },
+    // getProduct(id) {
+    //   this.productId = id;
+    //   console.log("форма prod  " + this.form.productId);
+    // },
+    // getManufacturer(id) {
+    //   this.manufacturerId = id;
+    //   console.log("форма manufac " + this.manufacturerId);
+    // },
+    // getModelName(id) {
+    //   this.modelId = id;
+    //   console.log("форма model " + this.modelId);
+    // },
   }
 }
 </script>
