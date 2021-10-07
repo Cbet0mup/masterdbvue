@@ -13,11 +13,11 @@
         <!-- заказчик -->
         <el-row style="background-color: #6be775">
           <el-form-item class="form-item">
-            <el-input class="input-form" v-model="form.customerName" placeholder="ФИО/Наименование"></el-input>
+            <input-customer-name class="input-form"/>
           </el-form-item>
 
           <el-form-item class="form-item">
-            <el-input class="input-form" v-model="form.customerPhone" placeholder="Телефон"></el-input>
+            <input-customer-phone class="input-form"/>
           </el-form-item>
 
         </el-row>
@@ -121,10 +121,12 @@ import {HTTP} from "../api/instance.js";
 import SearchProductName from "./FormNewWorkOrderComponent/SearchProductName.vue";
 import SearchManufacturer from "./FormNewWorkOrderComponent/SearchManufacturer.vue";
 import SearchModel from "./FormNewWorkOrderComponent/SearchModel.vue";
+import InputCustomerName from "./FormNewWorkOrderComponent/InputCustomerName.vue";
+import InputCustomerPhone from "./FormNewWorkOrderComponent/InputCustomerPhone.vue";
 
 export default {
   name: "NewWorkOrderForm",
-  components: {SearchProductName, SearchManufacturer, SearchModel},
+  components: {SearchProductName, SearchManufacturer, SearchModel, InputCustomerName, InputCustomerPhone},
   props: ['isVisible'],
   emits: ['cancelForm'],
   data() {
@@ -154,24 +156,32 @@ export default {
       await HTTP.post('/workorder', json)
           .then(function (response) {
             console.log("OK   " + response);
+            this.clearForm();
           })
           .catch(function (error) {
             console.log("ERRRR" + error);
           });
     },
-    //getters
-    // getProduct(id) {
-    //   this.productId = id;
-    //   console.log("форма prod  " + this.form.productId);
-    // },
-    // getManufacturer(id) {
-    //   this.manufacturerId = id;
-    //   console.log("форма manufac " + this.manufacturerId);
-    // },
-    // getModelName(id) {
-    //   this.modelId = id;
-    //   console.log("форма model " + this.modelId);
-    // },
+    clearForm(){
+      this.$store.commit('setClearForm', {
+        customerName: '',      //имя заказчика /
+        customerPhone: '',      //телефон
+        productId: '',      //тип: телек, кондёр, наушники
+        manufacturerId: 0, //производитель
+        serialNumber: '',     //серийник
+        imei: '',             //имей
+        view: '',             // внешний вид
+        complection: '',        //комплектация
+        trouble: '',          // неисправность
+        modelId: '',              //модель
+        serviceId: '',      //услуга платный, гарантийный, повторный
+        engineerId: '',     // мастер
+        priceId: '',           //  стоимосто по прейскуранту
+
+        receiverId: 1,
+        statusId: 1,
+      })
+    }
   }
 }
 </script>

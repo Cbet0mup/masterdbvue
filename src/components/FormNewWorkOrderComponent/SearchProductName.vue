@@ -1,6 +1,6 @@
 <template>
   <el-select
-      v-model="value"
+      v-model.trim="value"
       filterable
       remote
       placeholder="Тип изделия"
@@ -56,14 +56,11 @@ export default {
       textOpenMbPromptInfo: 'Телевизор, утюг, и.т.д',
       textOpenMbPromptHeader: 'Добавить тип',
       textOpenMbPromptMessageSuccess: 'Вы внесли новый тип устройства: ',
-      textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.'
-
+      textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.',
+      url: '/workorder/apiform/productname'
     }
   },
-  // mounted() {
-  //   this.getData();
-  //
-  // },
+
   methods: {
               //обработка введённых данных относительно полученного массива
     remoteMethod(query) {
@@ -74,7 +71,6 @@ export default {
           this.options = this.list.filter((item) => {
             return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1
           })
-         // console.log('remoteMethod: ' + this.options)
         }, 200)
       } else {
         this.options = []
@@ -84,7 +80,7 @@ export default {
                       //полученный массив из БД
 
     async getData() {
-      await HTTP.get('/workorder/apiform/productname')  //переменная
+      await HTTP.get(this.url)  //переменная
           .then(response => {
             this.items = response.data;
             this.list = this.items.map((item) => {
@@ -102,7 +98,7 @@ export default {
 
       console.log('searchprodname: save: ' + json)
 
-      await HTTP.post('/workorder/apiform/productname', json)   //переменная
+      await HTTP.post(this.url, json)   //переменная
           .then(function (response) {
             console.log("OK   " + response);
           })

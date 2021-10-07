@@ -1,6 +1,7 @@
 <template>
+  <el-alert @close="alertVisible = false" v-if="alertVisible" title="Выберите производителя" type="error"> </el-alert>
   <el-select
-      v-model="value"
+      v-model.trim="value"
       @focus="getData"
       filterable
       remote
@@ -36,8 +37,6 @@ import {HTTP} from "../../api/instance.js";
 
 export default {
   name: "SearchModel",
-  //emits: ['getModel'],                  //переменная
-  //props: ['manufacturerId'],
 
   computed: {
     form() {
@@ -47,24 +46,28 @@ export default {
 
   data() {
     return {
+      alertVisible: false,
       options: [],
       value: [],
       list: [],
       loading: false,
       items: [],
       newItem: {
-        modelName: String  ,             //переменная
+        modelName: String,             //переменная
         manufacturerId: Number
       },
       textOpenMbPromptInfo: 'SM-A305, EOS 1D,...и.т.п.',
       textOpenMbPromptHeader: 'Добавить модель',
       textOpenMbPromptMessageSuccess: 'Вы внесли новую модель: ',
       textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.',
-
+      urlApi: '/workorder/apiform/modelname/'
     }
   },
 
   methods: {
+    showAlert: () => {
+      alert('test')
+    },
     //обработка введённых данных относительно полученного массива
     remoteMethod(query) {
       if (query !== '') {
@@ -74,7 +77,6 @@ export default {
           this.options = this.list.filter((item) => {
             return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1
           })
-          // console.log('remoteMethod: ' + this.options)
         }, 200)
       } else {
         this.options = []
@@ -84,11 +86,11 @@ export default {
     //полученный массив из БД
 
     async getData() {
-      //this.manufacturerIds = this.form.manufacturerId;
-      console.log('searchmodelname: getdata: manufacturerId: ' + this.form.manufacturerId);
+      console.log('searchmodelname: getdata: manufacturerId: ' + this.form.manufacturerId)
+      //alert('Модель не найдена, выберите производителя')
 
-      if (this.form.manufacturerId !== 'undefined' || this.form.manufacturerId !== '') {
-        await HTTP.get('/workorder/apiform/modelname/' + this.form.manufacturerId)  //переменная
+      if (!parseInt(this.form.manufacturerId) < 1) {
+        await HTTP.get(this.urlApi + this.form.manufacturerId)  //переменная
             .then(response => {
               this.items = response.data;
               this.list = this.items.map((item) => {
@@ -98,7 +100,9 @@ export default {
             .catch(e => {
               this.errors.push(e);
             })
-      }               //if
+      } else {
+        this.alertVisible = true;
+      }
     },
 
     //   сохраняем
@@ -108,7 +112,7 @@ export default {
 
       console.log('searchmodelname: save: ' + json);
 
-      await HTTP.post('/workorder/apiform/modelname', json)   //переменная
+      await HTTP.post(this.urlApi, json)   //переменная
           .then(function (response) {
             console.log("OK   " + response);
           })
@@ -120,8 +124,8 @@ export default {
 
     //выбранный элемент улетает в родительский компонент формы
     getSelect() {
-      this.$emit('getModel', this.value)          //переменная
-      console.log('searchmodelname: getselect  ' + this.value)
+      this.$store.commit('setModelId', this.value)
+      console.log('searchmodelname: getselect  ' + this.form.modelId);
     },
     //  открываем message box
     openMessageBox() {
@@ -132,7 +136,6 @@ export default {
           .then(({value}) => {
             if (value !== null) {
               this.newItem.modelName = value;       ///переменная
-              // console.log('searchprodname: openMB: ' + value)
               this.save();
               this.$message({
                 type: 'success',

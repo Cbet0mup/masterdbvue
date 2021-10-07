@@ -4,7 +4,7 @@ export default {
             customerName: '',      //имя заказчика /
             customerPhone: '',      //телефон
             productId: '',      //тип: телек, кондёр, наушники
-            manufacturerId: '', //производитель
+            manufacturerId: 0, //производитель
             serialNumber: '',     //серийник
             imei: '',             //имей
             view: '',             // внешний вид
@@ -69,6 +69,9 @@ export default {
         },
         setStatusId(state, data) {
             state.form.statusId = data;
+        },
+        setClearForm(state, data) {
+            state.form = data;
         },
 
     },

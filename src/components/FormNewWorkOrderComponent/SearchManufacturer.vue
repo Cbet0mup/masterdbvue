@@ -1,6 +1,6 @@
 <template>
   <el-select
-      v-model="value"
+      v-model.trim="value"
       filterable
       remote
       placeholder="Производитель"
@@ -49,7 +49,8 @@ export default {
       textOpenMbPromptInfo: 'Samsung, Huawei, и.т.д',
       textOpenMbPromptHeader: 'Добавить производителя',
       textOpenMbPromptMessageSuccess: 'Вы внесли нового производителя: ',
-      textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.'
+      textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.',
+      url: '/workorder/apiform/manufacturer'
 
     }
   },
@@ -77,7 +78,7 @@ export default {
     //полученный массив из БД
 
     async getData() {
-      await HTTP.get('/workorder/apiform/manufacturer')
+      await HTTP.get(this.url)
           .then(response => {
             this.items = response.data;
             this.list = this.items.map((item) => {
@@ -95,7 +96,7 @@ export default {
 
       console.log('searchprodname: save: ' + json)
 
-      await HTTP.post('/workorder/apiform/manufacturer', json)
+      await HTTP.post(this.url, json)
           .then(function (response) {
             console.log("OK   " + response);
           })
