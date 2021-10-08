@@ -49,12 +49,12 @@
         <el-row style="background-color: #6be775">
 
           <el-form-item class="form-item">
-            <el-input class="input-form" v-model="form.serialNumber" placeholder="Серийный номер"></el-input>
+            <input-serial-number class="input-form"/>
           </el-form-item>
 
 
           <el-form-item class="form-item">
-            <el-input class="input-form" v-model="form.imei" placeholder="IMEI"></el-input>
+            <input-i-m-e-i class="input-form"/>
           </el-form-item>
         </el-row>
 
@@ -62,17 +62,17 @@
         <el-row style="background-color: #4e9d54">
 
           <el-form-item class="form-item">
-            <el-input class="input-form" v-model="form.view" placeholder="Внешний вид"></el-input>
+            <input-view class="input-form"/>
           </el-form-item>
 
 
           <el-form-item class="form-item">
-            <el-input class="input-form" v-model="form.complection" placeholder="Комплектация"></el-input>
+              <input-complection class="input-form"/>
           </el-form-item>
 
 
           <el-form-item class="form-item">
-            <el-input class="input-form" v-model="form.trouble" placeholder="Заявленная неисправность"></el-input>
+            <input-trouble class="input-form"/>
           </el-form-item>
 
         </el-row>
@@ -118,15 +118,21 @@
 
 <script>
 import {HTTP} from "../api/instance.js";
-import SearchProductName from "./FormNewWorkOrderComponent/SearchProductName.vue";
-import SearchManufacturer from "./FormNewWorkOrderComponent/SearchManufacturer.vue";
-import SearchModel from "./FormNewWorkOrderComponent/SearchModel.vue";
-import InputCustomerName from "./FormNewWorkOrderComponent/InputCustomerName.vue";
-import InputCustomerPhone from "./FormNewWorkOrderComponent/InputCustomerPhone.vue";
+import SearchProductName from "./formNewWorkOrderComponent/SearchProductName.vue";
+import SearchManufacturer from "./formNewWorkOrderComponent/SearchManufacturer.vue";
+import SearchModel from "./formNewWorkOrderComponent/SearchModel.vue";
+import InputCustomerName from "./formNewWorkOrderComponent/InputCustomerName.vue";
+import InputCustomerPhone from "./formNewWorkOrderComponent/InputCustomerPhone.vue";
+import InputSerialNumber from "./formNewWorkOrderComponent/InputSerialNumber.vue";
+import InputIMEI from "./formNewWorkOrderComponent/InputIMEI.vue";
+import InputView from "./formNewWorkOrderComponent/InputView.vue";
+import InputComplection from "./formNewWorkOrderComponent/InputComplection.vue";
+import InputTrouble from "./formNewWorkOrderComponent/InputTrouble.vue";
 
 export default {
   name: "NewWorkOrderForm",
-  components: {SearchProductName, SearchManufacturer, SearchModel, InputCustomerName, InputCustomerPhone},
+  components: {SearchProductName, SearchManufacturer, SearchModel, InputCustomerName, InputCustomerPhone,
+    InputSerialNumber, InputIMEI, InputView, InputComplection, InputTrouble, },
   props: ['isVisible'],
   emits: ['cancelForm'],
   data() {
