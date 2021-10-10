@@ -35,7 +35,6 @@ import {HTTP} from "../../api/instance";
 
 export default {
   name: "SearchProductName",
-  // emits: ['getProduct'],                  //переменная
 
   computed: {
     form() {
@@ -57,7 +56,7 @@ export default {
       textOpenMbPromptHeader: 'Добавить тип',
       textOpenMbPromptMessageSuccess: 'Вы внесли новый тип устройства: ',
       textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.',
-      url: '/workorder/apiform/productname'
+      urlApi: '/workorder/apiform/productname'
     }
   },
 
@@ -80,7 +79,7 @@ export default {
                       //полученный массив из БД
 
     async getData() {
-      await HTTP.get(this.url)  //переменная
+      await HTTP.get(this.urlApi)  //переменная
           .then(response => {
             this.items = response.data;
             this.list = this.items.map((item) => {
@@ -98,7 +97,7 @@ export default {
 
       console.log('searchprodname: save: ' + json)
 
-      await HTTP.post(this.url, json)   //переменная
+      await HTTP.post(this.urlApi, json)   //переменная
           .then(function (response) {
             console.log("OK   " + response);
           })

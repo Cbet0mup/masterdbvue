@@ -18,7 +18,7 @@ export default {
 
   methods: {
     changeInput(){
-      this.$store.commit('setCustomerName', this.input)
+      this.$store.commit('setTrouble', this.input)
     }
   }
 }

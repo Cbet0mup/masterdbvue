@@ -12,9 +12,11 @@ import InputIMEI from "./formNewWorkOrderComponent/InputIMEI.vue";
 import InputView from "./formNewWorkOrderComponent/InputView.vue";
 import InputComplection from "./formNewWorkOrderComponent/InputComplection.vue";
 import InputTrouble from "./formNewWorkOrderComponent/InputTrouble.vue";
+import SearchServiceOrder from "./formNewWorkOrderComponent/SearchServiceOrder.vue";
 
 export default [
     tabsEndRepair, NewWorkOrderForm, tabsIsNeedCall, TopMenuPriemka, SearchProductName, SearchModel, SearchManufacturer,
     InputCustomerName,InputCustomerPhone, InputSerialNumber, InputIMEI, InputView, InputComplection, InputTrouble,
+    SearchServiceOrder,
 
 ]

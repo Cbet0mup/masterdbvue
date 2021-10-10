@@ -65,9 +65,6 @@ export default {
   },
 
   methods: {
-    showAlert: () => {
-      alert('test')
-    },
     //обработка введённых данных относительно полученного массива
     remoteMethod(query) {
       if (query !== '') {

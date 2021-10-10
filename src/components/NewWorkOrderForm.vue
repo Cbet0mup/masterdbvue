@@ -25,24 +25,15 @@
         <!-- изделие -->
         <el-row style="background-color: #4e9d54">
           <el-form-item class="form-item">
-
-            <search-product-name
-                class="input-form"
-            />
-
+            <search-product-name class="input-form"/>
           </el-form-item>
 
           <el-form-item class="form-item">
-            <search-manufacturer
-                class="input-form"
-            />
+            <search-manufacturer class="input-form"/>
           </el-form-item>
 
           <el-form-item class="form-item">
-            <search-model
-                class="input-form"
-            />
-
+            <search-model class="input-form"/>
           </el-form-item>
         </el-row>
 
@@ -74,7 +65,6 @@
           <el-form-item class="form-item">
             <input-trouble class="input-form"/>
           </el-form-item>
-
         </el-row>
 
         <!-- ремонт -->
@@ -92,7 +82,7 @@
 
           <!--                                          ?                                    -->
           <el-form-item class="form-item">
-            <el-input class="input-form" v-model="form.priceId" placeholder="Наименование услуги"></el-input>
+            <search-service-order class="input-form"/>
           </el-form-item>
 
           <el-form-item class="form-item">
@@ -128,11 +118,12 @@ import InputIMEI from "./formNewWorkOrderComponent/InputIMEI.vue";
 import InputView from "./formNewWorkOrderComponent/InputView.vue";
 import InputComplection from "./formNewWorkOrderComponent/InputComplection.vue";
 import InputTrouble from "./formNewWorkOrderComponent/InputTrouble.vue";
+import SearchServiceOrder from "./formNewWorkOrderComponent/SearchServiceOrder.vue";
 
 export default {
   name: "NewWorkOrderForm",
   components: {SearchProductName, SearchManufacturer, SearchModel, InputCustomerName, InputCustomerPhone,
-    InputSerialNumber, InputIMEI, InputView, InputComplection, InputTrouble, },
+    InputSerialNumber, InputIMEI, InputView, InputComplection, InputTrouble, SearchServiceOrder,},
   props: ['isVisible'],
   emits: ['cancelForm'],
   data() {
