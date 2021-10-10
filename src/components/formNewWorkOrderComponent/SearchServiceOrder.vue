@@ -77,7 +77,6 @@ export default {
     //выбранный элемент улетает в родительский компонент формы
     getSelect() {
       this.$store.commit('setServiceId', this.value)                          //переменная
-      console.log('searchprodname: getselect  ' + this.form.serviceId)
     },
     //  открываем message box
     openMessageBox() {
