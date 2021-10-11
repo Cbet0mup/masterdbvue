@@ -69,28 +69,30 @@
 
         <!-- ремонт -->
         <el-row style="background-color: #6be775">
-          <el-form-item class="form-item">
-            <el-input class="input-form" v-model="form.serviceId" placeholder="Вид услуги"></el-input>
-          </el-form-item>
-          <el-button class="button-add" icon="el-icon-circle-plus" size="mini" circle></el-button>
+<!--          <el-form-item class="form-item">-->
+<!--            <el-input class="input-form" v-model="form.serviceId" placeholder="Вид услуги"></el-input>-->
+<!--          </el-form-item>-->
+<!--          <el-button class="button-add" icon="el-icon-circle-plus" size="mini" circle></el-button>-->
 
           <el-form-item class="form-item">
-            <el-input class="input-form" v-model="form.engineerId" placeholder="Инженер"></el-input>
+              <search-engineer class="input-form"/>
           </el-form-item>
-          <el-button class="button-add" icon="el-icon-circle-plus" size="mini" circle></el-button>
-
 
           <!--                                          ?                                    -->
           <el-form-item class="form-item">
             <search-service-order class="input-form"/>
           </el-form-item>
 
-          <el-form-item class="form-item">
-            <el-input class="input-form" v-model="form.priceId" placeholder="Прайс"></el-input>
-          </el-form-item>
+
 
         </el-row>
         <!--                                                                              -->
+
+        <el-row style="background-color: #4e9d54">
+          <el-form-item class="form-item">
+            <el-input class="input-form" v-model="form.priceId" placeholder="Прайс"></el-input>
+          </el-form-item>
+        </el-row>
 
       </el-form>
 
@@ -119,11 +121,12 @@ import InputView from "./formNewWorkOrderComponent/InputView.vue";
 import InputComplection from "./formNewWorkOrderComponent/InputComplection.vue";
 import InputTrouble from "./formNewWorkOrderComponent/InputTrouble.vue";
 import SearchServiceOrder from "./formNewWorkOrderComponent/SearchServiceOrder.vue";
+import SearchEngineer from "./formNewWorkOrderComponent/SearchEngineer.vue";
 
 export default {
   name: "NewWorkOrderForm",
   components: {SearchProductName, SearchManufacturer, SearchModel, InputCustomerName, InputCustomerPhone,
-    InputSerialNumber, InputIMEI, InputView, InputComplection, InputTrouble, SearchServiceOrder,},
+    InputSerialNumber, InputIMEI, InputView, InputComplection, InputTrouble, SearchServiceOrder, SearchEngineer},
   props: ['isVisible'],
   emits: ['cancelForm'],
   data() {

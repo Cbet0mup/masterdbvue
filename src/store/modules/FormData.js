@@ -15,8 +15,8 @@ export default {
             engineerId: '',     // мастер
             priceId: '',           //  стоимосто по прейскуранту
 
-            receiverId: 1,
-            statusId: 1,
+            receiverId: 1,          //приёмщик
+            statusId: 1,            //статус - принят, выдан итд
         },
     }),
     getters: {

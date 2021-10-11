@@ -1,11 +1,14 @@
 <template>
-  <el-select v-model="value" placeholder="Наименование услуги">
+  <el-select v-model="value"
+             placeholder="Наименование услуги"
+             @change="getSelect"
+  >
     <el-option
         v-for="item in options"
         :key="item.value"
         :label="item.label"
         :value="item.value"
-        @change="getSelect"
+
     >
     </el-option>
   </el-select>
@@ -76,7 +79,7 @@ export default {
 
     //выбранный элемент улетает в родительский компонент формы
     getSelect() {
-      this.$store.commit('setServiceId', this.value)                          //переменная
+      this.$store.commit('setServiceId', this.value)        //переменная
     },
     //  открываем message box
     openMessageBox() {

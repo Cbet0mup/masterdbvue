@@ -4,7 +4,6 @@
       :data="tableData"
       border style="width: 100%"
       size="small"
-      @row-click="myEvent"
   >
     <el-table-column prop="id" label="№" width="70" header-align="center"></el-table-column>
     <el-table-column prop="createdAt" label="Дата" header-align="center"></el-table-column>
@@ -35,7 +34,7 @@ export default {
   },
   methods: {
     async getData() {
-      await HTTP.get('/workorder/findworkorder/all')
+      await HTTP.get('/workorder/findworkorder/isdone/true')
           .then(response => {
             this.tableData = response.data;
           })
@@ -44,9 +43,7 @@ export default {
           })
       this.lengthData = this.tableData.length;
     },
-    myEvent(row, column, event) {
-      console.log(row.id)
-    }
+
   },
   mounted() {
     this.getData()
