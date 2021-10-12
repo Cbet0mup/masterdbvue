@@ -13,7 +13,8 @@ export default {
             modelId: '',              //модель
             serviceId: '',      //услуга платный, гарантийный, повторный
             engineerId: '',     // мастер
-            priceId: '',           //  стоимосто по прейскуранту
+            priceId: '',           //  прейскурант
+            newPrice: '',           // стоимость работ
 
             receiverId: 1,          //приёмщик
             statusId: 1,            //статус - принят, выдан итд
@@ -27,6 +28,9 @@ export default {
     mutations: {
         setCustomerName(state, data) {
             state.form.customerName = data;
+        },
+        setNewPrice(state, data) {
+            state.form.newPrice = data;
         },
         setCustomerPhone(state, data) {
             state.form.customerPhone = data;
