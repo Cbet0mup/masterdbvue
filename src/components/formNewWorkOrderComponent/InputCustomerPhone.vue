@@ -1,7 +1,8 @@
 <template>
   <el-input
       placeholder="Телефон"
-      v-model.trim="input"
+      v-model="input"
+      @focus="clear"
       @change="changeInput"
   ></el-input>
 </template>
@@ -14,10 +15,18 @@ export default {
       input: '',
     }
   },
+  computed: {
+    form() {
+      return this.$store.getters.getForm;
+    }
+  },
 
   methods: {
     changeInput(){
       this.$store.commit('setCustomerPhone', this.input)
+    },
+    clear(){
+      this.input = this.form.customerPhone;
     }
   }
 }

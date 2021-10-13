@@ -1,8 +1,9 @@
 <template>
   <el-input
       placeholder="ФИО/название"
-      v-model.trim="input"
-      @change="changeInput"
+      v-model="input"
+      @focus="clear"
+      @input="changeInput"
   ></el-input>
 
 </template>
@@ -16,8 +17,16 @@ export default {
       input: '',
     }
   },
+  computed: {
+    form() {
+      return this.$store.getters.getForm;
+    }
+  },
 
   methods: {
+    clear(){
+      this.input = this.form.customerName;
+    },
     changeInput(){
       this.$store.commit('setCustomerName', this.input)
     }

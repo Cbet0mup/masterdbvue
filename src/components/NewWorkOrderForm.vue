@@ -51,14 +51,13 @@
 
 
         <el-row style="background-color: #4e9d54">
-
           <el-form-item class="form-item">
             <input-view class="input-form"/>
           </el-form-item>
 
 
           <el-form-item class="form-item">
-              <input-complection class="input-form"/>
+            <input-complection class="input-form"/>
           </el-form-item>
 
 
@@ -69,25 +68,18 @@
 
         <!-- ремонт -->
         <el-row style="background-color: #6be775">
-<!--          <el-form-item class="form-item">-->
-<!--            <el-input class="input-form" v-model="form.serviceId" placeholder="Вид услуги"></el-input>-->
-<!--          </el-form-item>-->
-<!--          <el-button class="button-add" icon="el-icon-circle-plus" size="mini" circle></el-button>-->
           <el-form-item class="form-item">
             <search-service-order class="input-form"/>
           </el-form-item>
 
           <el-form-item class="form-item">
-              <search-engineer class="input-form"/>
+            <search-engineer class="input-form"/>
           </el-form-item>
-
-          <!--                                          ?                                    -->
         </el-row>
-        <!--                                                                              -->
 
         <el-row style="background-color: #4e9d54">
           <el-form-item class="form-item">
-              <search-price class="input-form"/>
+            <search-price class="input-form"/>
           </el-form-item>
         </el-row>
 
@@ -123,15 +115,26 @@ import SearchPrice from "./formNewWorkOrderComponent/SearchPrice.vue";
 
 export default {
   name: "NewWorkOrderForm",
-  components: {SearchProductName, SearchManufacturer, SearchModel, InputCustomerName, InputCustomerPhone,
-    InputSerialNumber, InputIMEI, InputView, InputComplection, InputTrouble, SearchServiceOrder, SearchEngineer, SearchPrice},
+  components: {
+    SearchProductName,
+    SearchManufacturer,
+    SearchModel,
+    InputCustomerName,
+    InputCustomerPhone,
+    InputSerialNumber,
+    InputIMEI,
+    InputView,
+    InputComplection,
+    InputTrouble,
+    SearchServiceOrder,
+    SearchEngineer,
+    SearchPrice
+  },
   props: ['isVisible'],
-  emits: ['cancelForm'],
   data() {
     return {
       myVisible: this.isVisible,
       activeIndex: '1',
-
       labelPosition: 'left',
     }
   },
@@ -144,28 +147,38 @@ export default {
 
   methods: {
     cancel() {
-      //console.log(this.productId)
+      this.clearForm();
       this.myVisible = false;
       this.$emit('cancelForm', this.myVisible)
     },
-    async save() {
-      const json = JSON.stringify(this.form);
 
-      await HTTP.post('/workorder', json)
-          .then(function (response) {
-            console.log("OK   " + response);
-            this.clearForm();
-          })
-          .catch(function (error) {
-            console.log("ERRRR" + error);
-          });
+    async save() {
+      if (this.validateForm()) {
+        const json = JSON.stringify(this.form);
+
+        await HTTP.post('/workorder', json)
+            .then(function (response) {
+              console.log("OK   " + response);
+            })
+            .catch(function (error) {
+              console.log("ERRRR" + error);
+            });
+        this.cancel()
+      } else {
+        this.$message({
+          type: 'error',
+          message: "Ошибка: Форма не заполнена!",
+        })
+      }
+
     },
-    clearForm(){
+
+    clearForm() {
       this.$store.commit('setClearForm', {
         customerName: '',      //имя заказчика /
         customerPhone: '',      //телефон
         productId: '',      //тип: телек, кондёр, наушники
-        manufacturerId: 0, //производитель
+        manufacturerId: '', //производитель
         serialNumber: '',     //серийник
         imei: '',             //имей
         view: '',             // внешний вид
@@ -175,11 +188,21 @@ export default {
         serviceId: '',      //услуга платный, гарантийный, повторный
         engineerId: '',     // мастер
         priceId: '',           //  стоимосто по прейскуранту
-
+        finalPrice: '',           // стоимость работ
         receiverId: 1,
         statusId: 1,
       })
-    }
+    },
+
+    validateForm() {
+      return this.form.customerName !== '' &
+          this.form.customerPhone !== '' &
+          this.form.productId !== '' &
+          this.form.manufacturerId !== '' &
+          this.form.modelId !== '' &
+          this.form.serviceId !== '' &
+          this.form.engineerId !== '';
+    },
   }
 }
 </script>

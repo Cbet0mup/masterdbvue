@@ -4,17 +4,17 @@ export default {
             customerName: '',      //имя заказчика /
             customerPhone: '',      //телефон
             productId: '',      //тип: телек, кондёр, наушники
-            manufacturerId: 0, //производитель
+            manufacturerId: '', //производитель
             serialNumber: '',     //серийник
             imei: '',             //имей
-            view: '',             // внешний вид
+            look: '',             // внешний вид
             complection: '',        //комплектация
             trouble: '',          // неисправность
             modelId: '',              //модель
             serviceId: '',      //услуга платный, гарантийный, повторный
             engineerId: '',     // мастер
             priceId: '',           //  прейскурант
-            newPrice: '',           // стоимость работ
+            finalPrice: '',           // стоимость работ
 
             receiverId: 1,          //приёмщик
             statusId: 1,            //статус - принят, выдан итд
@@ -30,7 +30,7 @@ export default {
             state.form.customerName = data;
         },
         setNewPrice(state, data) {
-            state.form.newPrice = data;
+            state.form.finalPrice = data;
         },
         setCustomerPhone(state, data) {
             state.form.customerPhone = data;
@@ -48,7 +48,7 @@ export default {
             state.form.imei = data;
         },
         setView(state, data) {
-            state.form.view = data;
+            state.form.look = data;
         },
         setComplection(state, data) {
             state.form.complection = data;

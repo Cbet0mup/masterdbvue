@@ -116,7 +116,7 @@ export default {
             })
       } else {
         this.$message({
-          type: 'success',
+          type: 'error',
           message: "Ошибка: тип изделия не выбран!",
         })
       }
@@ -191,5 +191,6 @@ export default {
 
 .input-price {
   margin-left: 2rem;
+  width: 6rem;
 }
 </style>

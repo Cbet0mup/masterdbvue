@@ -10,15 +10,8 @@
   >
     <el-menu-item @click="dialogFormVisible = true" index="1"><i class="el-icon-cpu"></i>Новый заказ</el-menu-item>
 
-    <el-sub-menu index="2">
-      <template #title>Workspace</template>
-      <el-menu-item index="2-1">item one
 
-      </el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
-      <el-menu-item index="2-3">item three</el-menu-item>
-    </el-sub-menu>
-    <el-menu-item index="4">Orders</el-menu-item>
+    <el-menu-item index="2">Ремонты</el-menu-item>
   </el-menu>
 
   <new-work-order-form

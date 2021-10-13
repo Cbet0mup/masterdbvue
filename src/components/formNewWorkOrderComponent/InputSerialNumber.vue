@@ -1,7 +1,7 @@
 <template>
   <el-input
       placeholder="Серийный номер"
-      v-model.trim="input"
+      v-model="input"
       @change="changeInput"
   ></el-input>
 </template>

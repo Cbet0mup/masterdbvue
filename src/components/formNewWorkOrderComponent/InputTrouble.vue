@@ -1,7 +1,7 @@
 <template>
   <el-input
       placeholder="Заявленная неисправность"
-      v-model.trim="input"
+      v-model="input"
       @change="changeInput"
   ></el-input>
 </template>
