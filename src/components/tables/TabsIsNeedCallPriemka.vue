@@ -44,7 +44,9 @@ export default {
       this.lengthData = this.tableData.length;
     },
     myEvent(row, column, event) {
-      console.log(row.id)
+      console.log(row.createdAt)
+      let data = Date.parse(row.createdAt)
+      console.log("date: " + data)
     }
   },
   mounted() {

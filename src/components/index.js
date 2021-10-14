@@ -1,7 +1,7 @@
 import tabsEndRepair from "./tables/TabsEndRepairPriemka.vue";
-import NewWorkOrderForm from "./NewWorkOrderForm.vue";
+import NewWorkOrderForm from "./newWorkOrderForm.vue";
 import tabsIsNeedCall from "./tables/TabsIsNeedCallPriemka.vue";
-import TopMenuPriemka from "./TopMenuPriemka.vue";
+import TopMenuPriemka from "./receivingMenu.vue";
 import SearchProductName from "./formNewWorkOrderComponent/SearchProductName.vue";
 import SearchManufacturer from "./formNewWorkOrderComponent/SearchManufacturer.vue";
 import SearchModel from "./formNewWorkOrderComponent/SearchModel.vue";
@@ -15,9 +15,10 @@ import InputTrouble from "./formNewWorkOrderComponent/InputTrouble.vue";
 import SearchServiceOrder from "./formNewWorkOrderComponent/SearchServiceOrder.vue";
 import SearchEngineer from "./formNewWorkOrderComponent/SearchEngineer.vue"
 import SearchPrice from "./formNewWorkOrderComponent/SearchPrice.vue";
+import NavBar from "./NavBar.vue";
 
 export default [
     tabsEndRepair, NewWorkOrderForm, tabsIsNeedCall, TopMenuPriemka, SearchProductName, SearchModel, SearchManufacturer,
     InputCustomerName,InputCustomerPhone, InputSerialNumber, InputIMEI, InputView, InputComplection, InputTrouble,
-    SearchServiceOrder, SearchEngineer, SearchPrice,
+    SearchServiceOrder, SearchEngineer, SearchPrice, NavBar,
 ]
