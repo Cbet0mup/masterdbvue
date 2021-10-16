@@ -1,13 +1,14 @@
 <template>
-<div>
-  <el-container>
-    <el-header class="myHeader">
-      <strong>Главная</strong>
-
-    </el-header>
-
-  </el-container>
+  <div>
+    <el-container>
+      <el-header class="myHeader">
+        <strong>Главная</strong>
+      </el-header>
+<div class="image">
+  <img src="@/assets/moon.jpg" width="1200" alt="moon">
 </div>
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -23,11 +24,10 @@ export default {
   max-height: content-box;
   text-align: center;
   display: contents;
-
 }
-
-.myMain {
-  background-color: rgba(208, 224, 193, 0.99);
-
+.image{
+display: block;
+  margin-left: auto;
+  margin-right: auto
 }
 </style>

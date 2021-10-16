@@ -17,7 +17,9 @@
                 <el-tab-pane lazy name="EndOfRepair" label="Готовые">
                   <tabs-end-repair/>
                 </el-tab-pane>
-
+                <el-tab-pane lazy name="NowReceiving" label="Принятые сегодня">
+                  <tabs-now-receiving/>
+                </el-tab-pane>
               </el-tabs>
             </div>
           </el-col>
@@ -30,12 +32,13 @@
 <script>
 
 import TopMenuPriemka from "../components/receivingMenu.vue";
-import TabsIsNeedCall from "../components/tables/TabsIsNeedCallPriemka.vue";
-import TabsEndRepair from "../components/tables/TabsEndRepairPriemka.vue";
+import TabsIsNeedCall from "../components/tables/TabsIsNeedCallReceiving.vue";
+import TabsEndRepair from "../components/tables/TabsEndRepairReceiving.vue";
+import TabsNowReceiving from "../components/tables/TabsNowReceiving.vue";
 
 export default {
   name: "receiving",
-  components: {TopMenuPriemka, TabsIsNeedCall, TabsEndRepair},
+  components: {TopMenuPriemka, TabsIsNeedCall, TabsEndRepair, TabsNowReceiving},
 }
 </script>
 

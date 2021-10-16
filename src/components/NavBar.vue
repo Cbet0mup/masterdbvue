@@ -10,7 +10,7 @@
   >
     <el-menu-item @click="$router.push('/')" index="1">Главная</el-menu-item>
     <el-menu-item @click="$router.push('/receiving')"  index="2">Приёмка</el-menu-item>
-    <el-menu-item index="3">Заказы</el-menu-item>
+    <el-menu-item @click="$router.push('/workorders')" index="3">Заказы</el-menu-item>
     <el-menu-item index="4">Управление</el-menu-item>
   </el-menu>
 </div>
