@@ -1,9 +1,8 @@
 <template>
   <el-table
       :data="tableData"
-      border style="width: 100%"
       size="mini"
-      @row-click="myEvent"
+      @row-click="getThisWorkOrder"
   >
     <el-table-column prop="id" label="№" width="60" header-align="center"></el-table-column>
     <el-table-column prop="createdAt" label="Дата" header-align="center"></el-table-column>
@@ -19,14 +18,19 @@ export default {
   mounted() {
     this.getData()
   },
+  computed: {
+    selectWorkOrder() {
+      return this.$store.getters.getSelectWorkOrderTabsRepair;
+    }
+  },
 
   data() {
     return {
       tableData: [],
-      lengthData: 0,
       errors: [],
-      urlApi: '/workorder/findworkorder/allNow',
-      searchData: ''
+      urlApi: '/workorder/findworkorder/allNeedRepair/3',
+      searchData: '',
+
 
     }
   },
@@ -39,10 +43,20 @@ export default {
           .catch(e => {
             this.errors.push(e);
           })
-      this.lengthData = this.tableData.length;
+      // первый по умолчанию
+      this.$store.commit('setSelectWorkOrderTabsRepair', this.tableData[0]);
     },
-    myEvent(row) {
+
+    getThisWorkOrder(row) {
     console.log("click " + row.id)
+
+      this.tableData.forEach(workOrder => {
+        if (workOrder.id === row.id) {
+          this.$store.commit('setSelectWorkOrderTabsRepair', workOrder);
+        }
+      })
+
+    console.log(this.selectWorkOrder.customerPhone)
     }
   }
 }

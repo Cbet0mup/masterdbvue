@@ -19,11 +19,15 @@ export default {
             receiverId: 1,          //приёмщик
             statusId: 1,            //статус - принят, выдан итд
         },
+        selectWorkOrderTabsRepair:{},
     }),
     getters: {
         getForm(state) {
             return state.form;
-        }
+        },
+        getSelectWorkOrderTabsRepair(state) {
+            return state.selectWorkOrderTabsRepair;
+        },
     },
     mutations: {
         setCustomerName(state, data) {
@@ -76,6 +80,9 @@ export default {
         },
         setClearForm(state, data) {
             state.form = data;
+        },
+        setSelectWorkOrderTabsRepair(state, data) {
+            state.selectWorkOrderTabsRepair = data;
         },
 
     },
