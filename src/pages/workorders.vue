@@ -6,10 +6,10 @@
     <!--    панель управления-->
     <div class="line">
       <el-row>
-        <el-button class="button-menu" @click="dialogFormVisible = true" type="primary" plain icon="el-icon-cpu">
-          кнопка
+        <el-button class="button-menu" @click="updateThisWorkOrder" type="primary" plain icon="el-icon-document-add">
+          Сохранить
         </el-button>
-        <el-input class="input-search-workorder" placeholder="Поиск заказа" v-model="input"></el-input>
+        <el-input class="input-search-workorder" placeholder="Поиск заказа" v-model="searchInput"></el-input>
       </el-row>
     </div>
 
@@ -41,14 +41,14 @@
                     <!-- заказчик -->
                     <el-row>
                       <el-form-item class="grid-content">
-                        <div class="bg-purple-light">ФИО:</div>
-                        <div><strong>{{ selectWorkOrder.customerName }}</strong></div>
+                        <div >ФИО:</div>
+                        <div class="bg-purple-light"><strong>{{ selectWorkOrder.customerName }}</strong></div>
 
                       </el-form-item>
 
                       <el-form-item class="grid-content">
-                        <div class="bg-purple">Телефон:</div>
-                        <div><strong><strong>{{ selectWorkOrder.customerPhone }}</strong></strong></div>
+                        <div>Телефон:</div>
+                        <div class="bg-purple"><strong><strong>{{ selectWorkOrder.customerPhone }}</strong></strong></div>
 
                       </el-form-item>
 
@@ -57,68 +57,97 @@
                     <!-- изделие -->
                     <el-row>
                       <el-form-item class="grid-content">
-                        <div class="bg-purple">Изделие:</div>
-                        <div><strong>{{ selectWorkOrder.productName }}</strong></div>
+                        <div>Изделие:</div>
+                        <div class="bg-purple"><strong>{{ selectWorkOrder.productName }}</strong></div>
                       </el-form-item>
 
                       <el-form-item class="grid-content">
-                        <div class="bg-purple-light">Фирма:</div>
-                        <div><strong>{{ selectWorkOrder.manufacturerName }}</strong></div>
+                        <div>Фирма:</div>
+                        <div class="bg-purple-light"><strong>{{ selectWorkOrder.manufacturerName }}</strong></div>
                       </el-form-item>
 
                       <el-form-item class="grid-content">
-                        <div class="bg-purple">Модель:</div>
-                        <div><strong>{{ selectWorkOrder.modelName }}</strong></div>
-                      </el-form-item>
-                    </el-row>
-
-                    <el-row>
-                      <el-form-item class="grid-content">
-                        <div class="bg-purple-light">Серийный номер:</div>
-                        <div><strong>{{ selectWorkOrder.serialNumber }}</strong></div>
-                      </el-form-item>
-
-
-                      <el-form-item class="grid-content">
-                        <div class="bg-purple">IMEI:</div>
-                        <div><strong>{{ selectWorkOrder.imei }}</strong></div>
-                      </el-form-item>
-                    </el-row>
-
-
-                    <el-row>
-                      <el-form-item class="grid-content">
-                        <div class="bg-purple">Внешний вид:</div>
-                        <div><strong>{{ selectWorkOrder.look }}</strong></div>
-                      </el-form-item>
-
-
-                      <el-form-item class="grid-content">
-                        <div class="bg-purple-light">Комплектация:</div>
-                        <div><strong>{{ selectWorkOrder.complection }}</strong></div>
-                      </el-form-item>
-
-
-                      <el-form-item class="grid-content">
-                        <div class="bg-purple">Заявленная неисправность:</div>
-                        <div><strong>{{ selectWorkOrder.trouble }}</strong></div>
-                      </el-form-item>
-                    </el-row>
-
-                    <!-- ремонт -->
-                    <el-row>
-                      <el-form-item class="grid-content">
-                        <search-service-order class="input-form"/>
-                      </el-form-item>
-
-                      <el-form-item class="grid-content">
-                        <search-engineer class="input-form"/>
+                        <div>Модель:</div>
+                        <div class="bg-purple"><strong>{{ selectWorkOrder.modelName }}</strong></div>
                       </el-form-item>
                     </el-row>
 
                     <el-row>
                       <el-form-item class="grid-content">
-                        <search-price class="input-form"/>
+                        <div>Серийный номер:</div>
+                        <div class="bg-purple-light"><strong>{{ selectWorkOrder.serialNumber }}</strong></div>
+                      </el-form-item>
+
+
+                      <el-form-item class="grid-content">
+                        <div>IMEI:</div>
+                        <div class="bg-purple"><strong>{{ selectWorkOrder.imei }}</strong></div>
+                      </el-form-item>
+                    </el-row>
+
+
+                    <el-row>
+                      <el-form-item class="grid-content">
+                        <div>Внешний вид:</div>
+                        <div class="bg-purple"><strong style="margin: 5px">{{ selectWorkOrder.look }}</strong></div>
+                      </el-form-item>
+
+
+                      <el-form-item class="grid-content">
+                        <div>Комплектация:</div>
+                        <div class="bg-purple-light"><strong style="margin: 5px">{{ selectWorkOrder.complection }}</strong></div>
+                      </el-form-item>
+
+
+                      <el-form-item class="grid-content">
+                        <div>Заявленная неисправность:</div>
+                        <div class="bg-purple"><strong style="margin: 5px">{{ selectWorkOrder.trouble }}</strong></div>
+                      </el-form-item>
+                    </el-row>
+
+                    <!-- бабки -->
+                    <el-row>
+                      <el-form-item class="grid-content">
+                        <div>Стоимость ремонта:</div>
+                        <div class="bg-purple-light"><strong>{{ selectWorkOrder.price }}</strong></div>
+                      </el-form-item>
+
+                      <el-form-item class="grid-content">
+                        <div>Предоплата:</div>
+                        <div class="bg-purple"><strong>{{ selectWorkOrder.prepayment }}</strong></div>
+                      </el-form-item>
+
+                      <el-form-item class="grid-content">
+
+                      </el-form-item>
+                    </el-row>
+
+<!--                    работы        -->
+                    <el-row>
+                      <el-form-item class="grid-content">
+                        <div>Описание выявленных дефектов:</div>
+                        <div>
+                          <el-input
+                              type="textarea"
+                              autosize
+                              placeholder="Please input"
+                              v-model="selectWorkOrder.troubleDetected"
+                              @input="troubleDetectedSave"
+                          ></el-input>
+                          </div>
+                      </el-form-item>
+
+                      <el-form-item class="grid-content">
+                        <div>Описание выполненых работ:</div>
+                        <div>
+                          <el-input
+                              type="textarea"
+                              autosize
+                              placeholder="Please input"
+                              v-model="selectWorkOrder.troubleSolving"
+                              @input="troubleSolvingSave"
+                          ></el-input>
+                        </div>
                       </el-form-item>
                     </el-row>
 
@@ -141,12 +170,27 @@ export default {
   computed: {
     selectWorkOrder() {
       return this.$store.getters.getSelectWorkOrderTabsRepair;
+    },
+    form() {
+      return this.$store.getters.getForm;
     }
   },
 
   data() {
     return {
-      input: ''
+      searchInput: '',
+      troubleDetected: ''
+    }
+  },
+  methods: {
+    troubleDetectedSave(data){
+        this.$store.commit('setTroubleDetected', data);
+    },
+    troubleSolvingSave(data){
+      this.$store.commit('setTroubleSolving', data);
+    },
+    updateThisWorkOrder(){
+      console.log("OK   " + this.form.troubleDetected);
     }
   }
 }

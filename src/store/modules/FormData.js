@@ -1,6 +1,10 @@
 export default {
     state: () =>({
         form: {
+            createdAt: '',      //дата приёмки
+            givenOut: '',       //дата выдачи  клиенту на руки
+            dateOfIssue: '',        //дата выдачи инженером
+
             customerName: '',      //имя заказчика /
             customerPhone: '',      //телефон
             productId: '',      //тип: телек, кондёр, наушники
@@ -9,12 +13,18 @@ export default {
             imei: '',             //имей
             look: '',             // внешний вид
             complection: '',        //комплектация
-            trouble: '',          // неисправность
             modelId: '',              //модель
             serviceId: '',      //услуга платный, гарантийный, повторный
             engineerId: '',     // мастер
+
+            trouble: '',          // неисправность
+            troubleDetected: '',    //выявленная неисправность
+            troubleSolving: '',     //описание работ
+
             priceId: '',           //  прейскурант
-            finalPrice: '',           // стоимость работ
+            prepayment: '',           //  предоплата
+            finalPrice: '',           /// окончательная стоимость ремонта
+            additionalPrice: '',           ///стоимость доп работ и деталей
 
             receiverId: 1,          //приёмщик
             statusId: 1,            //статус - принят, выдан итд
@@ -35,6 +45,15 @@ export default {
         },
         setNewPrice(state, data) {
             state.form.finalPrice = data;
+        },
+        setAdditionalPrice(state, data) {
+            state.form.additionalPrice = data;
+        },
+        setPrepayment(state, data) {
+            state.form.prepayment = data;
+        },
+        setPriceId(state, data) {
+            state.form.priceId = data;
         },
         setCustomerPhone(state, data) {
             state.form.customerPhone = data;
@@ -60,6 +79,12 @@ export default {
         setTrouble(state, data) {
             state.form.trouble = data;
         },
+        setTroubleDetected(state, data) {
+            state.form.troubleDetected = data;
+        },
+        setTroubleSolving(state, data) {
+            state.form.troubleSolving = data;
+        },
         setModelId(state, data) {
             state.form.modelId = data;
         },
@@ -68,9 +93,6 @@ export default {
         },
         setEngineerId(state, data) {
             state.form.engineerId = data;
-        },
-        setPriceId(state, data) {
-            state.form.priceId = data;
         },
         setReceiverId(state, data) {
             state.form.receiverId = data;
