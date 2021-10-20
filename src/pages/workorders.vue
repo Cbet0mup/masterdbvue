@@ -37,7 +37,7 @@
 
         </el-row>
 
-                  <el-form :label-position="labelPosition" size="mini">
+                  <el-form size="mini">
                     <!-- заказчик -->
                     <el-row>
                       <el-form-item class="grid-content">
@@ -89,19 +89,41 @@
                     <el-row>
                       <el-form-item class="grid-content">
                         <div>Внешний вид:</div>
-                        <div class="bg-purple"><strong style="margin: 5px">{{ selectWorkOrder.look }}</strong></div>
+                        <div class="bg-purple">
+                          <el-input
+                              readonly
+                              type="textarea"
+                              autosize
+                              placeholder="Please input"
+                              v-model="selectWorkOrder.look"
+                          ></el-input>
+                        </div>
                       </el-form-item>
 
 
                       <el-form-item class="grid-content">
                         <div>Комплектация:</div>
-                        <div class="bg-purple-light"><strong style="margin: 5px">{{ selectWorkOrder.complection }}</strong></div>
+                        <div class="bg-purple-light">
+                          <el-input
+                              readonly
+                              type="textarea"
+                              autosize
+                              v-model="selectWorkOrder.complection"
+                          ></el-input>
+                        </div>
                       </el-form-item>
 
 
                       <el-form-item class="grid-content">
                         <div>Заявленная неисправность:</div>
-                        <div class="bg-purple"><strong style="margin: 5px">{{ selectWorkOrder.trouble }}</strong></div>
+                        <div class="bg-purple">
+                          <el-input
+                              readonly
+                              type="textarea"
+                              autosize
+                              v-model="selectWorkOrder.trouble"
+                          ></el-input>
+                        </div>
                       </el-form-item>
                     </el-row>
 
@@ -179,7 +201,8 @@ export default {
   data() {
     return {
       searchInput: '',
-      troubleDetected: ''
+      troubleDetected: '',
+      message: {},
     }
   },
   methods: {
@@ -243,11 +266,11 @@ export default {
 
 .grid-content {
   min-width: 190px;
-  text-align: center;
+  /*text-align: center;*/
   margin: 5px;
   padding: 5px;
   display: block;
-  /*border: 1px dashed #c1fa76;*/
+  border: 1px dashed #c1fa76;
 
 }
 .row-container {

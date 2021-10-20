@@ -5,9 +5,8 @@ import 'element-plus/dist/index.css'
 import components from './components/index.js'
 import {store} from './store'
 import router from "./router";
-
-
 const app = createApp(App);
+
 
 components.forEach(comp => {
     app.component(comp.name, comp)

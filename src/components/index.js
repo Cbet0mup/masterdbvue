@@ -23,5 +23,5 @@ import TabsWorkOrdersRepair from "./tables/TabsWorkOrdersRepair.vue";
 export default [
     tabsEndRepair, NewWorkOrderForm, tabsIsNeedCall, TopMenuPriemka, SearchProductName, SearchModel, SearchManufacturer,
     InputCustomerName,InputCustomerPhone, InputSerialNumber, InputIMEI, InputView, InputComplection, InputTrouble,
-    SearchServiceOrder, SearchEngineer, SearchPrice, NavBar, TabsNowReceiving, workorders, TabsWorkOrdersRepair
+    SearchServiceOrder, SearchEngineer, SearchPrice, NavBar, TabsNowReceiving, workorders, TabsWorkOrdersRepair,
 ]
