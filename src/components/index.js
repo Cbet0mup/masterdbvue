@@ -19,9 +19,10 @@ import NavBar from "./NavBar.vue";
 import TabsNowReceiving from "./tables/TabsNowReceiving.vue";
 import workorders from "../pages/workorders.vue";
 import TabsWorkOrdersRepair from "./tables/TabsWorkOrdersRepair.vue";
+import chatWorkOrdersNote from "./tables/chatWorkOrdersNote.vue";
 
 export default [
     tabsEndRepair, NewWorkOrderForm, tabsIsNeedCall, TopMenuPriemka, SearchProductName, SearchModel, SearchManufacturer,
     InputCustomerName,InputCustomerPhone, InputSerialNumber, InputIMEI, InputView, InputComplection, InputTrouble,
-    SearchServiceOrder, SearchEngineer, SearchPrice, NavBar, TabsNowReceiving, workorders, TabsWorkOrdersRepair,
+    SearchServiceOrder, SearchEngineer, SearchPrice, NavBar, TabsNowReceiving, workorders, TabsWorkOrdersRepair, chatWorkOrdersNote,
 ]

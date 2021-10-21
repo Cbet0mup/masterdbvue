@@ -22,8 +22,8 @@
 
       <!--      центральная панель с инфой по заказу-->
 
-
       <el-main class="form">
+        <el-col :span="16">
 
         <el-row class="row-container">
 
@@ -174,8 +174,13 @@
                     </el-row>
 
                   </el-form>
+      </el-col>
+        <el-col :span="7">
+          <chat-work-orders-note/>
 
+        </el-col>
       </el-main>
+
     </el-container>
   </el-container>
 
@@ -184,10 +189,11 @@
 
 <script>
 import TabsWorkOrdersRepair from "../components/tables/TabsWorkOrdersRepair.vue";
+import chatWorkOrdersNote from "../components/tables/chatWorkOrdersNote.vue";
 
 export default {
   name: "workorders",
-  components: {TabsWorkOrdersRepair},
+  components: {TabsWorkOrdersRepair, chatWorkOrdersNote},
 
   computed: {
     selectWorkOrder() {
@@ -203,6 +209,7 @@ export default {
       searchInput: '',
       troubleDetected: '',
       message: {},
+      messages: ["всем привет", "", "И тебе не хворать", "сами вы такие сучары", "все кто выше - долбоёбы"]
     }
   },
   methods: {
@@ -215,6 +222,8 @@ export default {
     updateThisWorkOrder(){
       console.log("OK   " + this.form.troubleDetected);
     }
+  },
+  mounted() {
   }
 }
 </script>
