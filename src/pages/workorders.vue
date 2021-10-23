@@ -9,7 +9,6 @@
         <el-button class="button-menu" @click="updateThisWorkOrder" type="primary" plain icon="el-icon-document-add">
           Сохранить
         </el-button>
-        <el-input class="input-search-workorder" placeholder="Поиск заказа" v-model="searchInput"></el-input>
       </el-row>
     </div>
 
@@ -251,12 +250,6 @@ export default {
 
 .button-menu {
   margin-left: 20px;
-}
-
-.input-search-workorder {
-  width: 130px;
-  margin-left: auto;
-  margin-right: 20px;
 }
 
 .form {

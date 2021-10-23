@@ -12,13 +12,17 @@
     <el-menu-item @click="$router.push('/receiving')"  index="2">Приёмка</el-menu-item>
     <el-menu-item @click="$router.push('/workorders')" index="3">Заказы</el-menu-item>
     <el-menu-item index="4">Управление</el-menu-item>
+    <input-search-work-orders/>
   </el-menu>
 </div>
 </template>
 
 <script>
+import inputSearchWorkOrders from "./inputSearchWorkOrders.vue";
+
 export default {
   name: "NavBar",
+  components: {inputSearchWorkOrders},
   data() {
     return {
       activeIndex: '1',

@@ -2,6 +2,7 @@
   <div class="line">
     <el-row>
       <el-button class="button-menu" @click="dialogFormVisible = true" type="primary" plain icon="el-icon-cpu">Новый заказ</el-button>
+      <el-button class="button-menu" type="primary" plain icon="el-icon-pie-chart">Что-то ещё</el-button>
     </el-row>
   </div>
 
@@ -14,7 +15,7 @@
 <script>
 import NewWorkOrderForm from "./newWorkOrderForm.vue";
 export default {
-  name: "TopMenuPriemka",
+  name: "receivingMenu",
   components: {NewWorkOrderForm},
   data() {
     return {

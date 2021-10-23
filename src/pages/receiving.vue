@@ -3,7 +3,7 @@
     <el-container>
       <el-header class="myHeader">
         <strong>Приёмка</strong>
-        <top-menu-priemka/>
+        <receiving-menu/>
       </el-header>
       <a style="text-align: center; margin-top: 10px">Журнал</a>
       <el-main class="myMain">
@@ -31,14 +31,14 @@
 
 <script>
 
-import TopMenuPriemka from "../components/receivingMenu.vue";
+import receivingMenu from "../components/common/receivingMenu.vue";
 import TabsIsNeedCall from "../components/tables/TabsIsNeedCallReceiving.vue";
 import TabsEndRepair from "../components/tables/TabsEndRepairReceiving.vue";
 import TabsNowReceiving from "../components/tables/TabsNowReceiving.vue";
 
 export default {
   name: "receiving",
-  components: {TopMenuPriemka, TabsIsNeedCall, TabsEndRepair, TabsNowReceiving},
+  components: {receivingMenu, TabsIsNeedCall, TabsEndRepair, TabsNowReceiving},
 }
 </script>
 
