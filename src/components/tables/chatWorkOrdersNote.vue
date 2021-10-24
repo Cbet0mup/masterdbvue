@@ -4,9 +4,7 @@
 
     <ul>
       <li class="row"
-          v-for="message in messages"
-          key="date"
-
+          v-for="message in getMessagesData"
       >
         {{ message }}
         <br>
@@ -25,25 +23,36 @@
 </template>
 
 <script>
+
 export default {
   name: "chatWorkOrdersNote",
   data() {
     return {
       msg: '',
-      messages: [],
+      messages: '',
+      urlApi: '/workorder/apiform/notes/',
     }
+  },
+  computed: {
+    selectWorkOrder() {
+      return this.$store.getters.getSelectWorkOrderTabsRepair;
+    },
+    getMessagesData() {
+      return this.$store.getters.getMessages;
+    },
+    messageServerData() { return this.$store.getters.getMessageServerData;}
   },
   methods: {
     saveMessage(){
-      let date = new Date().toLocaleString() + '\n';
-      let user = "Current User\n" + date;
+      let date = new Date().toLocaleString();
+      let user = "Current User " + date;
       let msg = this.msg;
-      this.messages.push(" ")
-      this.messages.push(user)
-      this.messages.push(msg)
       this.msg = ''
-      console.log()
-    }
+      this.$store.commit('pushMessageData', user)
+      this.$store.commit('pushMessageData', msg)
+      this.$store.commit('pushMessageData', '')
+
+    },
   }
 }
 </script>

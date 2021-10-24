@@ -3,7 +3,7 @@
     <el-header class="myHeader">
       <a style="text-align: center; margin-top: 10px; margin-bottom: 10px">Журнал</a>
     </el-header>
-    <!--    панель управления-->
+                                     <!--    панель управления-->
     <div class="line">
       <el-row>
         <el-button class="button-menu" @click="updateThisWorkOrder" type="primary" plain icon="el-icon-document-add">
@@ -14,12 +14,12 @@
 
     <el-container class="container">
 
-      <!--     левая боковая панель со списком-->
+                                    <!--     левая боковая панель со списком-->
       <el-aside class="aside">
         <tabs-work-orders-repair/>
       </el-aside>
 
-      <!--      центральная панель с инфой по заказу-->
+                              <!--      центральная панель с инфой по заказу-->
 
       <el-main class="form">
         <el-col :span="16">
@@ -37,7 +37,7 @@
         </el-row>
 
                   <el-form size="mini">
-                    <!-- заказчик -->
+                                                                  <!-- заказчик -->
                     <el-row>
                       <el-form-item class="grid-content">
                         <div >ФИО:</div>
@@ -53,7 +53,7 @@
 
                     </el-row>
 
-                    <!-- изделие -->
+                                                                     <!-- изделие -->
                     <el-row>
                       <el-form-item class="grid-content">
                         <div>Изделие:</div>
@@ -126,7 +126,7 @@
                       </el-form-item>
                     </el-row>
 
-                    <!-- бабки -->
+                                                         <!-- бабки -->
                     <el-row>
                       <el-form-item class="grid-content">
                         <div>Стоимость ремонта:</div>
@@ -143,7 +143,7 @@
                       </el-form-item>
                     </el-row>
 
-<!--                    работы        -->
+<!--                                         работы        -->
                     <el-row>
                       <el-form-item class="grid-content">
                         <div>Описание выявленных дефектов:</div>
@@ -174,6 +174,7 @@
 
                   </el-form>
       </el-col>
+<!--                                                                       chat         -->
         <el-col :span="7">
           <chat-work-orders-note/>
 
@@ -207,8 +208,6 @@ export default {
     return {
       searchInput: '',
       troubleDetected: '',
-      message: {},
-      messages: ["всем привет", "", "И тебе не хворать", "сами вы такие сучары", "все кто выше - долбоёбы"]
     }
   },
   methods: {
@@ -229,7 +228,6 @@ export default {
 
 <style scoped>
 .container {
-  /*height: 500px;*/
   margin: 10px;
 }
 
