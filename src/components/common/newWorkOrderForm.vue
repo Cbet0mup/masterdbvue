@@ -75,6 +75,10 @@
           <el-form-item class="form-item">
             <search-engineer class="input-form"/>
           </el-form-item>
+
+          <el-form-item class="form-item">
+            <input-chat class="input-form"/>
+          </el-form-item>
         </el-row>
 
         <el-row style="background-color: #4e9d54">
@@ -112,10 +116,12 @@ import InputTrouble from "../formNewWorkOrderComponent/InputTrouble.vue";
 import SearchServiceOrder from "../formNewWorkOrderComponent/SearchServiceOrder.vue";
 import SearchEngineer from "../formNewWorkOrderComponent/SearchEngineer.vue";
 import SearchPrice from "../formNewWorkOrderComponent/SearchPrice.vue";
+import InputChat from "../formNewWorkOrderComponent/inputChat.vue";
 
 export default {
   name: "NewWorkOrderForm",
   components: {
+    InputChat,
     SearchProductName,
     SearchManufacturer,
     SearchModel,
@@ -189,6 +195,7 @@ export default {
         engineerId: '',     // мастер
         priceId: '',           //  стоимосто по прейскуранту
         finalPrice: '',           // стоимость работ
+        chatLog: '',
         receiverId: 1,
         statusId: 1,
       })

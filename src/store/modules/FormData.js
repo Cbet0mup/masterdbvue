@@ -1,21 +1,24 @@
 export default {
     state: () =>({
         form: {
+            id: '',
             createdAt: '',      //дата приёмки
             givenOut: '',       //дата выдачи  клиенту на руки
             dateOfIssue: '',        //дата выдачи инженером
 
             customerName: '',      //имя заказчика /
             customerPhone: '',      //телефон
-            productId: '',      //тип: телек, кондёр, наушники
-            manufacturerId: '', //производитель
+
             serialNumber: '',     //серийник
             imei: '',             //имей
             look: '',             // внешний вид
             complection: '',        //комплектация
+
             modelId: '',              //модель
             serviceId: '',      //услуга платный, гарантийный, повторный
             engineerId: '',     // мастер
+            productId: '',      //тип: телек, кондёр, наушники
+            manufacturerId: '', //производитель
 
             trouble: '',          // неисправность
             troubleDetected: '',    //выявленная неисправность
@@ -25,6 +28,15 @@ export default {
             prepayment: '',           //  предоплата
             finalPrice: '',           /// окончательная стоимость ремонта
             additionalPrice: '',           ///стоимость доп работ и деталей
+            chatLog: '',                 //примечания
+
+            isAccepted: 'true',             //принят
+            isNeedCall: '',
+            isDone: '',
+            isDoneIsCalled: '',
+            isGivenOut: '',
+
+
 
             receiverId: 1,          //приёмщик
             statusId: 1,            //статус - принят, выдан итд
@@ -38,6 +50,9 @@ export default {
     mutations: {
         setCustomerName(state, data) {
             state.form.customerName = data;
+        },
+        setId(state, data){
+          state.form.id = data;
         },
         setNewPrice(state, data) {
             state.form.finalPrice = data;
@@ -99,6 +114,9 @@ export default {
         setClearForm(state, data) {
             state.form = data;
         },
+        setChatLog(state, data) {
+            state.form.chatLog += data;
+        }
 
     },
     actions: {

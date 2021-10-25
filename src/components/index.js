@@ -21,10 +21,11 @@ import workorders from "../pages/workorders.vue";
 import TabsWorkOrdersRepair from "./tables/TabsWorkOrdersRepair.vue";
 import chatWorkOrdersNote from "./tables/chatWorkOrdersNote.vue";
 import inputSearchWorkOrders from "./common/inputSearchWorkOrders.vue";
+import inputChat from "./formNewWorkOrderComponent/inputChat.vue";
 
 export default [
     tabsEndRepair, NewWorkOrderForm, tabsIsNeedCall, receivingMenu, SearchProductName, SearchModel, SearchManufacturer,
     InputCustomerName,InputCustomerPhone, InputSerialNumber, InputIMEI, InputView, InputComplection, InputTrouble,
     SearchServiceOrder, SearchEngineer, SearchPrice, NavBar, TabsNowReceiving, workorders, TabsWorkOrdersRepair, chatWorkOrdersNote,
-    inputSearchWorkOrders,
+    inputSearchWorkOrders, inputChat,
 ]

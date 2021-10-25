@@ -26,15 +26,16 @@ export default {
 
   data() {
     return {
+      engineerId: '3',
       tableData: [],
-      urlApi: '/workorder/findworkorder/allNeedRepair/3',
+      urlApi: '/workorder/findworkorder/allNeedRepair/',
       urlApiNone: '/workorder/apiform/notes/',
       oldRowId: '',
     }
   },
   methods: {
     async getData() {
-      await HTTP.get(this.urlApi)
+      await HTTP.get(this.urlApi + this.engineerId)
           .then(response => {
             this.tableData = response.data;
           })
@@ -43,33 +44,23 @@ export default {
           })
       // первый по умолчанию
       this.$store.commit('setSelectWorkOrderTabsRepair', this.tableData[0]);
-      await this.getMessages();
-    },
-    async getMessages() {
-      let idWorkOrder = this.selectWorkOrder.id;
-      await HTTP.get(this.urlApiNone + idWorkOrder)
-          .then(response => {
-            this.$store.commit('setMessages', response.data.messages);
-            this.$store.commit('setMessageServerData', response.data);
-            console.log("ERRRR" );
-
-
-          })
-          .catch(e => {
-            console.log("ERRRR" + e);
-          })
+      this.getMessages();
     },
 
     getThisWorkOrder(row) {
+      this.$store.commit('clearMessageData', '');
       this.tableData.forEach(workOrder => {
         if (workOrder.id === row.id) {
           this.$store.commit('setSelectWorkOrderTabsRepair', workOrder);
         }
       })
-      if (this.oldRowId !== this.selectWorkOrder.id){
-        this.getMessages();
-        this.oldRowId = row.id;
-      }
+      this.$store.commit('setId', row.id)
+      this.getMessages();
+      //console.log(this.selectWorkOrder.chatLog)
+    },
+    getMessages(){
+      let messArr = this.selectWorkOrder.chatLog.split('*');
+      messArr.forEach(el => this.$store.commit('pushMessageData', el))
 
     }
   }

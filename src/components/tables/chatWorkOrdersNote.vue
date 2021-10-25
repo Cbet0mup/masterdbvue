@@ -15,7 +15,7 @@
           style="margin-top: 15px"
           type="textarea"
           placeholder="Введите сообщение"
-          v-model="msg"
+          v-model="input"
       ></el-input>
       <el-button @click.prevent="saveMessage" class="button-chat" type="success" plain>Success</el-button>
     </div>
@@ -28,7 +28,7 @@ export default {
   name: "chatWorkOrdersNote",
   data() {
     return {
-      msg: '',
+      input: '',
       messages: '',
       urlApi: '/workorder/apiform/notes/',
     }
@@ -39,15 +39,14 @@ export default {
     },
     getMessagesData() {
       return this.$store.getters.getMessages;
-    },
-    messageServerData() { return this.$store.getters.getMessageServerData;}
+    }
   },
   methods: {
     saveMessage(){
       let date = new Date().toLocaleString();
       let user = "Current User " + date;
-      let msg = this.msg;
-      this.msg = ''
+      let msg = this.input;
+      this.input = ''
       this.$store.commit('pushMessageData', user)
       this.$store.commit('pushMessageData', msg)
       this.$store.commit('pushMessageData', '')
