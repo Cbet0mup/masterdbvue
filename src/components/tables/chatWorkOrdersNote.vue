@@ -4,7 +4,7 @@
 
     <ul>
       <li class="row"
-          v-for="message in getMessagesData"
+          v-for="message in messagesData"
       >
         {{ message }}
         <br>
@@ -24,52 +24,85 @@
 
 <script>
 
+import {HTTP} from "../../api/instance";
+
 export default {
   name: "chatWorkOrdersNote",
   data() {
     return {
       input: '',
       messages: '',
-      urlApi: '/workorder/apiform/notes/',
+      urlApi: '/workorder/chatlog',
+      newChatLog: {
+        id: '',
+        chatLog: ''
+      }
     }
   },
   computed: {
     selectWorkOrder() {
       return this.$store.getters.getSelectWorkOrderTabsRepair;
     },
-    getMessagesData() {
+    messagesData() {
       return this.$store.getters.getMessages;
+    },
+    tableDataWorkOrders() {
+      return this.$store.getters.getTableDataWorkOrders;
+    },
+    numTableDataWorkOrders() {
+      return this.$store.getters.getNumTableDataWorkOrders;
     }
   },
   methods: {
-    saveMessage(){
+    async saveMessage() {
+      let tableWorkOrders = this.tableDataWorkOrders;
+      let num = this.numTableDataWorkOrders;
+
       let date = new Date().toLocaleString();
       let user = "Current User " + date;
       let msg = this.input;
       this.input = ''
       this.$store.commit('pushMessageData', user)
       this.$store.commit('pushMessageData', msg)
-      this.$store.commit('pushMessageData', '')
+      this.$store.commit('pushMessageData', '-')
 
+      let newChatLogs = user + '*' + msg + '*' + '-' + '*'
+      tableWorkOrders[num].chatLog += newChatLogs;
+      this.$store.commit('setTableDataWorkOrders', tableWorkOrders)
+//post
+      this.newChatLog.id = this.selectWorkOrder.id;
+      this.newChatLog.chatLog = newChatLogs;
+
+      await HTTP.post(this.urlApi, JSON.stringify(this.newChatLog))
+          .then(function (response) {
+            console.log("chat - OK " + response);
+          })
+          .catch(function (error) {
+            console.log("chat save ERRRR" + error);
+          });
+      this.newChatLog.id = '';
+      this.newChatLog.chatLog = '';
     },
   }
 }
 </script>
 
 <style scoped>
-.chat{
+.chat {
   margin-left: 40px;
   padding: 10px;
   border: 1px dashed #c1fa76;
   border-radius: 20px;
 
 }
-.row{
+
+.row {
   margin-bottom: 10px;
   list-style-type: none;
   font-weight: 500;
 }
-.button-chat{
+
+.button-chat {
   margin-top: 10px;
 }
 </style>

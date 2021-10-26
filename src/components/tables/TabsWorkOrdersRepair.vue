@@ -1,6 +1,6 @@
 <template>
   <el-table
-      :data="tableData"
+      :data="tableDataWorkOrders"
       size="mini"
       @row-click="getThisWorkOrder"
   >
@@ -21,13 +21,15 @@ export default {
   computed: {
     selectWorkOrder() {
       return this.$store.getters.getSelectWorkOrderTabsRepair;
+    },
+    tableDataWorkOrders() {
+      return this.$store.getters.getTableDataWorkOrders;
     }
   },
 
   data() {
     return {
       engineerId: '3',
-      tableData: [],
       urlApi: '/workorder/findworkorder/allNeedRepair/',
       urlApiNone: '/workorder/apiform/notes/',
       oldRowId: '',
@@ -37,23 +39,27 @@ export default {
     async getData() {
       await HTTP.get(this.urlApi + this.engineerId)
           .then(response => {
-            this.tableData = response.data;
+            this.$store.commit('setTableDataWorkOrders', response.data)
           })
           .catch(e => {
             console.log("ERRRR" + e);
           })
       // первый по умолчанию
-      this.$store.commit('setSelectWorkOrderTabsRepair', this.tableData[0]);
+      this.$store.commit('setSelectWorkOrderTabsRepair', this.tableDataWorkOrders[0]);
       this.getMessages();
     },
 
     getThisWorkOrder(row) {
       this.$store.commit('clearMessageData', '');
-      this.tableData.forEach(workOrder => {
+      let num = 0;
+      this.tableDataWorkOrders.forEach(workOrder => {
         if (workOrder.id === row.id) {
           this.$store.commit('setSelectWorkOrderTabsRepair', workOrder);
+          this.$store.commit('setNumTableDataWorkOrders', num)
         }
+        num +=1;
       })
+      num = 0;
       this.$store.commit('setId', row.id)
       this.getMessages();
       //console.log(this.selectWorkOrder.chatLog)

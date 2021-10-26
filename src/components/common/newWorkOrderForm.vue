@@ -142,6 +142,7 @@ export default {
       myVisible: this.isVisible,
       activeIndex: '1',
       labelPosition: 'left',
+      url: '/workorder',
     }
   },
 
@@ -162,7 +163,7 @@ export default {
       if (this.validateForm()) {
         const json = JSON.stringify(this.form);
 
-        await HTTP.post('/workorder', json)
+        await HTTP.post(this.url, json)
             .then(function (response) {
               console.log("OK   " + response);
             })

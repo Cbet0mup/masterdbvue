@@ -2,6 +2,8 @@ export default {
     state: () =>({
         selectWorkOrderTabsRepair:{},
         messageData: [],
+        tableDataWorkOrders: [],
+        numTableDataWorkOrders: 0,
     }),
     getters: {
         getSelectWorkOrderTabsRepair(state) {
@@ -10,6 +12,12 @@ export default {
         getMessages(state) {
             return state.messageData;
         },
+        getTableDataWorkOrders(state) {
+            return state.tableDataWorkOrders;
+        },
+        getNumTableDataWorkOrders(state) {
+            return state.numTableDataWorkOrders;
+        }
     },
     mutations: {
         setSelectWorkOrderTabsRepair(state, data) {
@@ -20,6 +28,12 @@ export default {
         },
         clearMessageData(state, data) {
             state.messageData = [];
+        },
+        setTableDataWorkOrders(state, data) {
+            state.tableDataWorkOrders = data;
+        },
+        setNumTableDataWorkOrders(state, data) {
+            state.numTableDataWorkOrders = data;
         }
 
     },
