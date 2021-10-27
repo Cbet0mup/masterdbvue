@@ -46,6 +46,7 @@ export default {
           })
       // первый по умолчанию
       this.$store.commit('setSelectWorkOrderTabsRepair', this.tableDataWorkOrders[0]);
+      this.$store.commit('setId', this.selectWorkOrder.id);      //сразу забиваем id
       this.getMessages();
     },
 
@@ -61,8 +62,9 @@ export default {
       })
       num = 0;
       this.$store.commit('setId', row.id)
+      this.$store.commit('setTroubleDetected', this.selectWorkOrder.troubleDetected)
+      this.$store.commit('setTroubleSolving', this.selectWorkOrder.troubleSolving)
       this.getMessages();
-      //console.log(this.selectWorkOrder.chatLog)
     },
     getMessages(){
       let messArr = this.selectWorkOrder.chatLog.split('*');

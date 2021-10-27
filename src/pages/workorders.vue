@@ -190,6 +190,7 @@
 <script>
 import TabsWorkOrdersRepair from "../components/tables/TabsWorkOrdersRepair.vue";
 import chatWorkOrdersNote from "../components/tables/chatWorkOrdersNote.vue";
+import {HTTP} from "../api/instance";
 
 export default {
   name: "workorders",
@@ -208,17 +209,37 @@ export default {
     return {
       searchInput: '',
       troubleDetected: '',
+      urlApi: '/workorder/engineersaveworkorder',
+      updateWorkOrdersEngineer: {
+        id: '',
+        troubleDetected: '',
+        troubleSolving: ''
+      }
     }
   },
   methods: {
     troubleDetectedSave(data){
         this.$store.commit('setTroubleDetected', data);
     },
+
     troubleSolvingSave(data){
       this.$store.commit('setTroubleSolving', data);
     },
-    updateThisWorkOrder(){
-      console.log("OK   " + this.form.troubleDetected);
+
+    async updateThisWorkOrder(){      ////изменение заказа/наряда (выявленная неисправность и описание работ)
+      this.updateWorkOrdersEngineer.id = this.form.id;
+      this.updateWorkOrdersEngineer.troubleDetected = this.form.troubleDetected;
+      this.updateWorkOrdersEngineer.troubleSolving = this.form.troubleSolving;
+
+      const json = JSON.stringify(this.updateWorkOrdersEngineer);
+
+      await HTTP.post(this.urlApi, json)
+          .then(function (response) {
+            console.log("chat - OK " + response);
+          })
+          .catch(function (error) {
+            console.log("chat save ERRRR" + error);
+          });
     }
   },
   mounted() {
