@@ -175,7 +175,7 @@
                   </el-form>
       </el-col>
 <!--                                                                       chat         -->
-        <el-col :span="7">
+        <el-col :span="8">
           <chat-work-orders-note/>
 
         </el-col>
@@ -298,7 +298,7 @@ export default {
 
 }
 .aside{
-  min-width: 370px;
+  min-width: 400px;
   border: 1px dashed #c1fa76;
   padding: 5px;
 }
