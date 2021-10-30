@@ -4,6 +4,7 @@ export default {
         messageData: [],
         tableDataWorkOrders: [],
         numTableDataWorkOrders: 0,
+        isModify: false,
     }),
     getters: {
         getSelectWorkOrderTabsRepair(state) {
@@ -17,6 +18,9 @@ export default {
         },
         getNumTableDataWorkOrders(state) {
             return state.numTableDataWorkOrders;
+        },
+        getIsModify(state) {
+            return state.isModify;
         }
     },
     mutations: {
@@ -34,6 +38,9 @@ export default {
         },
         setNumTableDataWorkOrders(state, data) {
             state.numTableDataWorkOrders = data;
+        },
+        setIsModify(state, data) {
+            state.isModify = data;
         }
 
     },

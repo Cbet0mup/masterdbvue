@@ -16,7 +16,7 @@
 
                                     <!--     левая боковая панель со списком-->
       <el-aside class="aside">
-        <tabs-work-orders-repair/>
+        <tabs-work-orders-repair @save-data="updateThisWorkOrder"/>
       </el-aside>
 
                               <!--      центральная панель с инфой по заказу-->
@@ -220,10 +220,13 @@ export default {
   methods: {
     troubleDetectedSave(data){
         this.$store.commit('setTroubleDetected', data);
+      this.$store.commit('setIsModify', true);
+
     },
 
     troubleSolvingSave(data){
       this.$store.commit('setTroubleSolving', data);
+      this.$store.commit('setIsModify', true);
     },
 
     async updateThisWorkOrder(){      ////изменение заказа/наряда (выявленная неисправность и описание работ)
@@ -240,6 +243,7 @@ export default {
           .catch(function (error) {
             console.log("chat save ERRRR" + error);
           });
+      this.$store.commit('setIsModify', false);  //модификация проведена
     }
   },
   mounted() {
