@@ -9,6 +9,15 @@
         <el-button class="button-menu" @click="updateThisWorkOrder" type="primary" plain icon="el-icon-document-add">
           Сохранить
         </el-button>
+
+        <el-tooltip
+            class="item"
+            effect="dark"
+            content="Дозвон клиенту"
+            placement="top"
+        >
+          <el-button @click="openCallDialog" class="button-menu" type="info" icon="el-icon-message" circle></el-button>
+        </el-tooltip>
       </el-row>
     </div>
 

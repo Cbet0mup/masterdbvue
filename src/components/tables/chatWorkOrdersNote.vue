@@ -61,14 +61,14 @@ export default {
       let date = new Date().toLocaleString();
       let user = "Current User " + date;
       let msg = this.input;
-      this.input = ''
-      this.$store.commit('pushMessageData', user)
-      this.$store.commit('pushMessageData', msg)
-      this.$store.commit('pushMessageData', '-')
+      this.input = '';
+      this.$store.commit('pushMessageData', user);
+      this.$store.commit('pushMessageData', msg);
+      this.$store.commit('pushMessageData', '-');
 
-      let newChatLogs = user + '*' + msg + '*' + '-' + '*'
+      let newChatLogs = user + '*' + msg + '*' + '-' + '*';
       tableWorkOrders[num].chatLog += newChatLogs;
-      this.$store.commit('setTableDataWorkOrders', tableWorkOrders)
+      this.$store.commit('setTableDataWorkOrders', tableWorkOrders);
 //post
       this.newChatLog.id = this.selectWorkOrder.id;
       this.newChatLog.chatLog = newChatLogs;
