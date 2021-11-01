@@ -100,6 +100,7 @@ export default {
     },
 
     getMessages(){
+      this.$store.commit('clearMessageData', '');
       let messArr = this.selectWorkOrder.chatLog.split('*');
       messArr.forEach(el => this.$store.commit('pushMessageData', el));
     },

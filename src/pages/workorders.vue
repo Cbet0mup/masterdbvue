@@ -6,17 +6,26 @@
                                      <!--    панель управления-->
     <div class="line">
       <el-row>
-        <el-button class="button-menu" @click="updateThisWorkOrder" type="primary" plain icon="el-icon-document-add">
+        <el-button class="button-menu" @click="updateThisWorkOrder" type="success" plain icon="el-icon-document-add">
           Сохранить
         </el-button>
 
         <el-tooltip
             class="item"
             effect="dark"
-            content="Дозвон клиенту"
+            content="Связь с клиентом"
             placement="top"
         >
-          <el-button @click="openCallDialog" class="button-menu" type="info" icon="el-icon-message" circle></el-button>
+          <el-button @click="dialogFormVisible = true" class="button-menu" type="warning" icon="el-icon-phone" circle></el-button>
+        </el-tooltip>
+
+        <el-tooltip
+            class="item"
+            effect="dark"
+            content="Завершить ремонт"
+            placement="top"
+        >
+          <el-button class="button-menu" type="success" icon="el-icon-finished" circle></el-button>
         </el-tooltip>
       </el-row>
     </div>
@@ -185,7 +194,11 @@
       </el-col>
 <!--                                                                       chat         -->
         <el-col :span="8">
-          <chat-work-orders-note/>
+          <chat-work-orders-note
+              :isVisible="dialogFormVisible"
+              @cancel-form="closeForm"
+
+          />
 
         </el-col>
       </el-main>
@@ -216,6 +229,7 @@ export default {
 
   data() {
     return {
+      dialogFormVisible: false,
       searchInput: '',
       troubleDetected: '',
       urlApi: '/workorder/engineersaveworkorder',
@@ -253,10 +267,11 @@ export default {
             console.log("chat save ERRRR" + error);
           });
       this.$store.commit('setIsModify', false);  //модификация проведена
-    }
+    },
+    closeForm(isVisible) {
+      this.dialogFormVisible = isVisible;
+    },
   },
-  mounted() {
-  }
 }
 </script>
 
