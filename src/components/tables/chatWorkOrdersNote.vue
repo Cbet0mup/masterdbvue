@@ -24,6 +24,7 @@
                :before-close="cancel"
                :close-on-click-modal="false"
                :close-on-press-escape="false"
+               :show-close = "false"
                width="30%"
                :center="true"
                class="bg-purple"

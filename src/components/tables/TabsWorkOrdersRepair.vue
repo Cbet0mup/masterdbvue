@@ -49,7 +49,6 @@ export default {
     return {
       engineerId: '3',
       urlApi: '/workorder/findworkorder/allNeedRepair/',
-      urlApiNone: '/workorder/apiform/notes/',
       oldRowId: '',
       dialogVisible: false,
       nextRow: {},

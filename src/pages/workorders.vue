@@ -25,7 +25,7 @@
             content="Завершить ремонт"
             placement="top"
         >
-          <el-button class="button-menu" type="success" icon="el-icon-finished" circle></el-button>
+          <el-button @click="updateThisIsDone"  class="button-menu" type="success" icon="el-icon-finished" circle></el-button>
         </el-tooltip>
       </el-row>
     </div>
@@ -224,7 +224,10 @@ export default {
     },
     form() {
       return this.$store.getters.getForm;
-    }
+    },
+    tableDataWorkOrders() {
+      return this.$store.getters.getTableDataWorkOrders;
+    },
   },
 
   data() {
@@ -233,10 +236,16 @@ export default {
       searchInput: '',
       troubleDetected: '',
       urlApi: '/workorder/engineersaveworkorder',
+      urlIsDone: '/workorder/isDone',
+      thisTableData: [],
       updateWorkOrdersEngineer: {
         id: '',
         troubleDetected: '',
         troubleSolving: ''
+      },
+      isDoneUpdateEntity: {
+        id: '',
+        isDone: ''
       }
     }
   },
@@ -268,8 +277,30 @@ export default {
           });
       this.$store.commit('setIsModify', false);  //модификация проведена
     },
+
     closeForm(isVisible) {
       this.dialogFormVisible = isVisible;
+    },
+
+    async updateThisIsDone() {
+      this.isDoneUpdateEntity.id = this.selectWorkOrder.id;
+      this.isDoneUpdateEntity.isDone = true;                        //выдано
+      this.thisTableData = this.tableDataWorkOrders;
+
+      const json = JSON.stringify(this.isDoneUpdateEntity);
+
+      await HTTP.post(this.urlIsDone, json)
+          .then(function (response) {
+            console.log("isdone - OK " + response);
+          })
+          .catch(function (error) {
+            console.log("chat save ERRRR" + error);
+          });
+      let num = this.tableDataWorkOrders.findIndex(item => {      // номер в массиве заказов, нужен для удаления ненужного
+        return item.id === this.selectWorkOrder.id;
+      })
+      this.thisTableData.splice(num, 1);
+      this.$store.commit('setTableDataWorkOrders', this.thisTableData);
     },
   },
 }
@@ -329,9 +360,5 @@ export default {
   min-width: 400px;
   border: 1px dashed #c1fa76;
   padding: 5px;
-}
-.form-item {
-  margin-left: 10px;
-  margin-right: 10px;
 }
 </style>

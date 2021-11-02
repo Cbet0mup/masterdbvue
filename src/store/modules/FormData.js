@@ -31,10 +31,10 @@ export default {
             chatLog: '',                 //примечания
 
             isAccepted: 'true',             //принят
-            isNeedCall: '',
-            isDone: '',
-            isDoneIsCalled: '',
-            isGivenOut: '',
+            isNeedCall: 'false',
+            isDone: 'false',
+            isDoneIsCalled: 'false',
+            isGivenOut: 'false',
 
 
 

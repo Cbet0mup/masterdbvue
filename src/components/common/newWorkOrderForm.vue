@@ -5,6 +5,7 @@
                :before-close="cancel"
                :close-on-click-modal="false"
                :close-on-press-escape="false"
+               :show-close = "false"
                width="50%"
                :center="true"
                class="bg-purple"
