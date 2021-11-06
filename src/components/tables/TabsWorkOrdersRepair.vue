@@ -27,9 +27,12 @@
 
 <script>
 import {HTTP} from "../../api/instance";
+import { Edit } from '@element-plus/icons';
 
 export default {
+  components: {Edit,},
   name: "TabsWorkOrdersRepair",
+
   mounted() {
     this.getData();
   },
@@ -52,6 +55,7 @@ export default {
       oldRowId: '',
       dialogVisible: false,
       nextRow: {},
+      isNeedCall: '',
     }
   },
   methods: {
@@ -66,6 +70,8 @@ export default {
       // первый по умолчанию
       this.$store.commit('setSelectWorkOrderTabsRepair', this.tableDataWorkOrders[0]);
       this.$store.commit('setId', this.selectWorkOrder.id);      //сразу забиваем id
+      this.isNeedCall = this.selectWorkOrder.isNeedCall;
+      console.log(this.isNeedCall);
       this.getMessages();
     },
 
@@ -90,6 +96,9 @@ export default {
         num +=1;
       })
       num = 0;
+
+      this.isNeedCall = this.selectWorkOrder.isNeedCall;
+      console.log(this.isNeedCall);
 
       this.$store.commit('setId', row.id);
       this.$store.commit('setTroubleDetected', this.selectWorkOrder.troubleDetected);
