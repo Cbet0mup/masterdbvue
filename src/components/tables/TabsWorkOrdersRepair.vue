@@ -17,9 +17,7 @@
     <template #footer>
     <span class="dialog-footer">
       <el-button @click=closeDialog>Нет</el-button>
-      <el-button type="primary" @click=saveData
-      >Разумеется</el-button
-      >
+      <el-button type="primary" @click=saveData>Разумеется</el-button>
     </span>
     </template>
   </el-dialog>
@@ -70,8 +68,6 @@ export default {
       // первый по умолчанию
       this.$store.commit('setSelectWorkOrderTabsRepair', this.tableDataWorkOrders[0]);
       this.$store.commit('setId', this.selectWorkOrder.id);      //сразу забиваем id
-      this.isNeedCall = this.selectWorkOrder.isNeedCall;
-      console.log(this.isNeedCall);
       this.getMessages();
     },
 
@@ -96,9 +92,6 @@ export default {
         num +=1;
       })
       num = 0;
-
-      this.isNeedCall = this.selectWorkOrder.isNeedCall;
-      console.log(this.isNeedCall);
 
       this.$store.commit('setId', row.id);
       this.$store.commit('setTroubleDetected', this.selectWorkOrder.troubleDetected);

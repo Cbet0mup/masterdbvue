@@ -1,11 +1,10 @@
 <template>
-  <div>
     <el-container>
       <el-header class="myHeader">
-        <strong>Приёмка</strong>
-        <receiving-menu/>
+        <a style="text-align: center; margin-top: 10px; margin-bottom: 10px">Журнал - приёмка</a>
       </el-header>
-      <a style="text-align: center; margin-top: 10px">Журнал</a>
+      <receiving-menu/>
+
       <el-main class="myMain">
         <el-row>
           <el-col :span="24">
@@ -26,7 +25,6 @@
         </el-row>
       </el-main>
     </el-container>
-  </div>
 </template>
 
 <script>
@@ -50,6 +48,12 @@ export default {
 }
 
 .myMain {
-  background-color: rgba(208, 224, 193, 0.99);
+  display: inline;
+}
+.grid-content {
+  border-radius: 4px;
+}
+.bg-purple-dark {
+  background: #99a9bf;
 }
 </style>

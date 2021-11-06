@@ -1,7 +1,7 @@
 <template xmlns="http://www.w3.org/1999/html">
   <el-container>
     <el-header class="myHeader">
-      <a style="text-align: center; margin-top: 10px; margin-bottom: 10px">Журнал</a>
+      <a style="text-align: center; margin-top: 10px; margin-bottom: 10px">Обработка заказа</a>
     </el-header>
                                      <!--    панель управления-->
     <div class="line">
@@ -42,6 +42,17 @@
       <el-main class="form">
         <el-col :span="16">
 
+          <el-row class="row-container">
+            <div class="status bg-purple">
+              Статус:
+            </div>
+            <el-tooltip v-if="selectWorkOrder.isNeedCall" content="Связь с клиентом" placement="top">
+              <el-button type="warning" icon="el-icon-phone" circle></el-button>
+            </el-tooltip>
+            <el-tooltip v-else content="Принят в работу" placement="top">
+              <el-button type="success" icon="el-icon-s-tools" circle></el-button>
+            </el-tooltip>
+          </el-row>
         <el-row class="row-container">
 
           <div class="grid-content bg-purple">Наряд-заказ № <strong>{{ selectWorkOrder.id }}</strong></div>
@@ -346,19 +357,21 @@ export default {
 
 .grid-content {
   min-width: 190px;
-  /*text-align: center;*/
   margin: 5px;
   padding: 5px;
   display: block;
   border: 1px dashed #c1fa76;
-
-}
-.row-container {
-
 }
 .aside{
   min-width: 400px;
   border: 1px dashed #c1fa76;
   padding: 5px;
+}
+.status{
+  min-width: 50px;
+  margin: 5px;
+  padding: 5px;
+  display: block;
+  border: 1px dashed #c1fa76;
 }
 </style>
