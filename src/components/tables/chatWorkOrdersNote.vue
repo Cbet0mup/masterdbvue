@@ -19,12 +19,14 @@
       ></el-input>
       <el-button @click.prevent="saveMessage" class="button-chat" type="success" plain>Отправить</el-button>
     </div>
+
+    <!--                    связь с клиентом            -->
     <el-dialog title="Связь с клиентом"
                v-model="isVisible"
                :before-close="cancel"
                :close-on-click-modal="false"
                :close-on-press-escape="false"
-               :show-close = "false"
+               :show-close="false"
                width="30%"
                :center="true"
                class="bg-purple"
@@ -41,9 +43,7 @@
       <template #footer>
     <span class="dialog-footer">
       <el-button @click="cancel">Закрыть</el-button>
-      <el-button type="primary" @click="isNeedCall"
-      >Сохранить</el-button
-      >
+      <el-button type="primary" @click="isNeedCall">Сохранить</el-button>
     </span>
       </template>
     </el-dialog>
@@ -77,6 +77,15 @@ export default {
 
     }
   },
+  mounted() {
+    if (Object.keys(this.selectRowData).length){
+      this.$store.commit('pushMessageData', this.selectRowData.chatLog);
+      this.$store.commit('setSelectWorkOrderTabsRepair', this.selectRowData);
+      this.getMessages();
+    }
+
+  },
+
   computed: {
     selectWorkOrder() {
       return this.$store.getters.getSelectWorkOrderTabsRepair;
@@ -89,6 +98,9 @@ export default {
     },
     numTableDataWorkOrders() {
       return this.$store.getters.getNumTableDataWorkOrders;
+    },
+    selectRowData() {
+      return this.$store.getters.getSelectRow;
     }
   },
   methods: {
@@ -134,7 +146,7 @@ export default {
           });
       this.newChatLog.id = '';
       this.newChatLog.chatLog = '';
-      this.isNeedCallSave = false;
+      this.isNeedCallSave = !this.isNeedCallSave;
     },
     cancel() {
       this.myVisible = false;
@@ -142,7 +154,7 @@ export default {
       this.$emit('cancelForm', this.myVisible)
     },
     isNeedCall() {
-      this.isNeedCallSave = true;
+      this.isNeedCallSave = !this.isNeedCallSave;
       this.saveMessage();
     },
 
@@ -154,7 +166,13 @@ export default {
           .catch(function (error) {
             console.log("chat save ERRRR" + error);
           });
-    }
+    },
+
+    getMessages(){
+      this.$store.commit('clearMessageData', '');
+      let messArr = this.selectWorkOrder.chatLog.split('*');
+      messArr.forEach(el => this.$store.commit('pushMessageData', el));
+    },
   }
 }
 </script>

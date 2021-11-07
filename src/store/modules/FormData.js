@@ -15,16 +15,21 @@ export default {
             complection: '',        //комплектация
 
             modelId: '',              //модель
+            modelName: '',
             serviceId: '',      //услуга платный, гарантийный, повторный
+            serviceName: '',
             engineerId: '',     // мастер
             productId: '',      //тип: телек, кондёр, наушники
             manufacturerId: '', //производитель
+            manufacturerName: '',
 
             trouble: '',          // неисправность
             troubleDetected: '',    //выявленная неисправность
             troubleSolving: '',     //описание работ
 
             priceId: '',           //  прейскурант
+            priceName: '',
+            price: '',
             prepayment: '',           //  предоплата
             finalPrice: '',           /// окончательная стоимость ремонта
             additionalPrice: '',           ///стоимость доп работ и деталей

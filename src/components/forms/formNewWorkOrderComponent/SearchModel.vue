@@ -33,14 +33,23 @@
 </template>
 
 <script>
-import {HTTP} from "../../api/instance.js";
+import {HTTP} from "../../../api/instance.js";
 
 export default {
   name: "SearchModel",
 
   computed: {
+    selectRow() {
+      return this.$store.getters.getSelectRow;
+    },
     form() {
       return this.$store.getters.getForm;
+    }
+  },
+  mounted() {
+    if (Object.keys(this.selectRow).length !== 0) {
+      this.value = this.selectRow.modelName;
+      this.$store.commit('setModelId', this.selectRow.modelId);
     }
   },
 
@@ -83,9 +92,6 @@ export default {
     //полученный массив из БД
 
     async getData() {
-      console.log('searchmodelname: getdata: manufacturerId: ' + this.form.manufacturerId)
-      //alert('Модель не найдена, выберите производителя')
-
       if (!parseInt(this.form.manufacturerId) < 1) {
         await HTTP.get(this.urlApi + this.form.manufacturerId)  //переменная
             .then(response => {

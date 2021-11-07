@@ -18,7 +18,10 @@ export default {
   computed: {
     form() {
       return this.$store.getters.getForm;
-    }
+    },
+    selectRow() {
+      return this.$store.getters.getSelectRow;
+    },
   },
 
   methods: {
@@ -27,6 +30,12 @@ export default {
     },
     clear(){
       this.input = this.form.customerPhone;
+    }
+  },
+  mounted() {
+    if (Object.keys(this.selectRow).length !== 0) {
+      this.input = this.selectRow.customerPhone;
+      this.changeInput();
     }
   }
 }

@@ -1,8 +1,6 @@
 <template>
   <el-select
       v-model.trim="value"
-      filterable
-      remote
       placeholder="Тип изделия"
       :remote-method="remoteMethod"
       :loading="loading"
@@ -31,7 +29,7 @@
 </template>
 
 <script>
-import {HTTP} from "../../api/instance";
+import {HTTP} from "../../../api/instance";
 
 export default {
   name: "SearchProductName",
@@ -39,6 +37,16 @@ export default {
   computed: {
     form() {
       return this.$store.getters.getForm;
+    },
+    selectRow() {
+      return this.$store.getters.getSelectRow;
+    },
+  },
+
+  mounted() {
+    if (Object.keys(this.selectRow).length !== 0) {
+      this.value = this.selectRow.productName;
+      this.$store.commit('setProductId', this.selectRow.productId);
     }
   },
 
@@ -94,8 +102,6 @@ export default {
                             //   сохраняем
     async save() {
       const json = JSON.stringify(this.newItem);
-
-      console.log('searchprodname: save: ' + json)
 
       await HTTP.post(this.urlApi, json)   //переменная
           .then(function (response) {

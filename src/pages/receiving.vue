@@ -29,7 +29,7 @@
 
 <script>
 
-import receivingMenu from "../components/common/receivingMenu.vue";
+import receivingMenu from "../components/menu/receivingMenu.vue";
 import TabsIsNeedCall from "../components/tables/TabsIsNeedCallReceiving.vue";
 import TabsEndRepair from "../components/tables/TabsEndRepairReceiving.vue";
 import TabsNowReceiving from "../components/tables/TabsNowReceiving.vue";
@@ -37,6 +37,9 @@ import TabsNowReceiving from "../components/tables/TabsNowReceiving.vue";
 export default {
   name: "receiving",
   components: {receivingMenu, TabsIsNeedCall, TabsEndRepair, TabsNowReceiving},
+  mounted() {
+    this.$store.commit('setSelectRowDataClear', '');
+  }
 }
 </script>
 

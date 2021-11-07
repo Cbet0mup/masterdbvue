@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import {HTTP} from "../../api/instance";
+import {HTTP} from "../../../api/instance";
 
 export default {
   name: "SearchManufacturer",
@@ -54,9 +54,17 @@ export default {
 
     }
   },
+  computed: {
+    selectRow() {
+      return this.$store.getters.getSelectRow;
+    },
+  },
   mounted() {
     this.getData();
-
+    if (Object.keys(this.selectRow).length !== 0) {
+      this.value = this.selectRow.manufacturerName;
+      this.$store.commit('setManufacturerId', this.selectRow.manufacturerId);
+    }
   },
   methods: {
     //обработка введённых данных относительно полученного массива

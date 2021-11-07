@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {HTTP} from "../../api/instance";
+import {HTTP} from "../../../api/instance";
 
 export default {
   name: "SearchEngineer",
@@ -30,9 +30,18 @@ export default {
       urlApi: '/workorder/apiform/engineer'
     }
   },
+  computed: {
+    selectRow() {
+      return this.$store.getters.getSelectRow;
+    },
+  },
 
 mounted() {
   this.getData();
+  if (Object.keys(this.selectRow).length !== 0) {
+    this.value = this.selectRow.engineerName;
+    this.$store.commit('setEngineerId', this.selectRow.engineerId);
+  }
 },
   methods: {
 

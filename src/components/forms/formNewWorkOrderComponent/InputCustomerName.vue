@@ -20,15 +20,24 @@ export default {
   computed: {
     form() {
       return this.$store.getters.getForm;
-    }
+    },
+    selectRow() {
+      return this.$store.getters.getSelectRow;
+    },
   },
 
   methods: {
-    clear(){
+    clear() {
       this.input = this.form.customerName;
     },
-    changeInput(){
+    changeInput() {
       this.$store.commit('setCustomerName', this.input)
+    }
+  },
+  mounted() {
+    if (Object.keys(this.selectRow).length !== 0) {
+      this.input = this.selectRow.customerName;
+      this.changeInput();
     }
   }
 }

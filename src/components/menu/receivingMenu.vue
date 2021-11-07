@@ -9,14 +9,6 @@
       >
         <el-button class="button-menu" @click="dialogFormVisible = true" type="primary" plain icon="el-icon-cpu">Новый заказ</el-button>
       </el-tooltip>
-      <el-tooltip
-          class="item"
-          effect="dark"
-          content="Связь с клиентом состоялась"
-          placement="top"
-      >
-        <el-button @click="dialogFormVisible = true" class="button-menu" type="warning" icon="el-icon-close-notification" circle></el-button>
-      </el-tooltip>
     </el-row>
   </div>
 
@@ -27,7 +19,7 @@
 </template>
 
 <script>
-import NewWorkOrderForm from "./newWorkOrderForm.vue";
+import NewWorkOrderForm from "../forms/newWorkOrderForm.vue";
 export default {
   name: "receivingMenu",
   components: {NewWorkOrderForm},

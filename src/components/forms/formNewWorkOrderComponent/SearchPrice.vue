@@ -35,7 +35,7 @@
               @input="changeInput"
     ></el-input>
 
-<!--                          новая градация прайса                 -->
+    <!--                          новая градация прайса                 -->
     <el-dialog
         :title="textOpenMbPromptHeader"
         v-model="dialogVisible"
@@ -72,15 +72,29 @@
 </template>
 
 <script>
-import {HTTP} from "../../api/instance";
+import {HTTP} from "../../../api/instance";
 
 export default {
   name: "SearchPrice",
   computed: {
+    selectRow() {
+      return this.$store.getters.getSelectRow;
+    },
     form() {
       return this.$store.getters.getForm;
     }
   },
+
+  mounted() {
+    this.getData();
+    if (Object.keys(this.selectRow).length !== 0) {
+      this.value = this.selectRow.priceName;
+      this.finalPriceItem.price = this.selectRow.price;
+      this.prepayment = this.selectRow.prepayment;
+      this.$store.commit('setPriceId', this.selectRow.priceId);
+    }
+  },
+
   data() {
     return {
       options: [],
@@ -107,7 +121,7 @@ export default {
     }
   },
   methods: {
-    changeInput(){
+    changeInput() {
       this.$store.commit('setPrepayment', this.prepayment);
     },
 
@@ -136,16 +150,13 @@ export default {
 
     getSelect() {
       this.options.forEach(el => {
-        if (el.value === this.value){
+        if (el.value === this.value) {
           this.finalPriceItem = el
         }
       })
 
       this.$store.commit('setPriceId', this.value)       //переменная
       this.$store.commit('setNewPrice', this.finalPriceItem.price)       //переменная
-
-
-      console.log(this.finalPriceItem.price)
     },
 
     submitForm() {

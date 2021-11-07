@@ -17,11 +17,14 @@
 </template>
 
 <script>
-import {HTTP} from "../../api/instance";
+import {HTTP} from "../../../api/instance";
 
 export default {
   name: "SearchServiceOrder",
   computed: {
+    selectRow() {
+      return this.$store.getters.getSelectRow;
+    },
     form() {
       return this.$store.getters.getForm;
     }
@@ -43,6 +46,10 @@ export default {
   },
   mounted() {
     this.getData();
+    if (Object.keys(this.selectRow).length !== 0) {
+      this.value = this.selectRow.serviceName;
+      this.$store.commit('setServiceId', this.selectRow.serviceId);
+    }
   },
   methods: {
 

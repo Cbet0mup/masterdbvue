@@ -1,8 +1,9 @@
 import Main from "../pages/Main.vue";
 import {createRouter, createWebHistory} from "vue-router";
 import receiving from "../pages/receiving.vue";
-import workorders from "../pages/workorders.vue";
+import workorders from "../pages/workordersEngineer.vue";
 import Management from "../pages/Management.vue";
+import receivingRedact from "../pages/receivingRedact.vue";
 const routes = [
     {
     path: '/',
@@ -23,6 +24,11 @@ const routes = [
         path: '/management',
         name: 'Управление',
         component: Management
+    },
+    {
+        path: '/receiving/redact',
+        name: 'Правка заказа',
+        component: receivingRedact
     },
 ]
 
