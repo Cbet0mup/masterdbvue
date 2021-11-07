@@ -30,11 +30,12 @@ export default {
       tableData: [],
       lengthData: 0,
       errors: [],
+      urlApi: '/workorder/findworkorder/isneedcall/true',
     }
   },
   methods: {
     async getData() {
-        await HTTP.get('/workorder/findworkorder/isneedcall/true')
+        await HTTP.get(this.urlApi)
           .then(response => {
             this.tableData = response.data;
           })
@@ -50,6 +51,7 @@ export default {
       let month = data.getMonth() + 1;
       let x = year + '-' + month + '-' + day
       console.log(x.trim())
+      this.$router.push('/management')
     }
   },
   mounted() {

@@ -1,14 +1,11 @@
 <template>
-  <div>
     <el-container>
       <el-header class="myHeader">
         <strong>Главная</strong>
+        <strong>страница на реконструкции</strong>
       </el-header>
-<div class="image">
-  <img src="@/assets/moon.jpg" width="1200" alt="moon">
-</div>
+
     </el-container>
-  </div>
 </template>
 
 <script>

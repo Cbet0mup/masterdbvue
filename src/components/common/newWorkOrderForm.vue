@@ -162,6 +162,7 @@ export default {
 
     async save() {
       if (this.validateForm()) {
+        this.$store.commit('setIsAccepted', 'true')
         const json = JSON.stringify(this.form);
 
         await HTTP.post(this.url, json)
@@ -183,23 +184,39 @@ export default {
 
     clearForm() {
       this.$store.commit('setClearForm', {
+        createdAt: '',      //дата приёмки
+        givenOut: '',       //дата выдачи  клиенту на руки
+        dateOfIssue: '',        //дата выдачи инженером
+
         customerName: '',      //имя заказчика /
         customerPhone: '',      //телефон
-        productId: '',      //тип: телек, кондёр, наушники
-        manufacturerId: '', //производитель
+
         serialNumber: '',     //серийник
         imei: '',             //имей
-        view: '',             // внешний вид
+        look: '',             // внешний вид
         complection: '',        //комплектация
-        trouble: '',          // неисправность
+
         modelId: '',              //модель
         serviceId: '',      //услуга платный, гарантийный, повторный
         engineerId: '',     // мастер
-        priceId: '',           //  стоимосто по прейскуранту
-        finalPrice: '',           // стоимость работ
-        chatLog: '',
-        receiverId: 1,
-        statusId: 1,
+        productId: '',      //тип: телек, кондёр, наушники
+        manufacturerId: '', //производитель
+
+        trouble: '',          // неисправность
+        troubleDetected: '',    //выявленная неисправность
+        troubleSolving: '',     //описание работ
+
+        priceId: '',           //  прейскурант
+        prepayment: '',           //  предоплата
+        finalPrice: '',           /// окончательная стоимость ремонта
+        additionalPrice: '',           ///стоимость доп работ и деталей
+        chatLog: '',                 //примечания
+
+        isAccepted: 'true',             //принят
+        isNeedCall: 'false',
+        isDone: 'false',
+        isDoneIsCalled: 'false',
+        isGivenOut: 'false',
       })
     },
 

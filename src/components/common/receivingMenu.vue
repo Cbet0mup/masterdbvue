@@ -1,7 +1,14 @@
 <template>
   <div class="line">
     <el-row>
-      <el-button class="button-menu" @click="dialogFormVisible = true" type="primary" plain icon="el-icon-cpu">Новый заказ</el-button>
+      <el-tooltip
+          class="item"
+          effect="dark"
+          content="Создать новый заказ"
+          placement="top"
+      >
+        <el-button class="button-menu" @click="dialogFormVisible = true" type="primary" plain icon="el-icon-cpu">Новый заказ</el-button>
+      </el-tooltip>
       <el-tooltip
           class="item"
           effect="dark"

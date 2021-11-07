@@ -51,6 +51,9 @@ export default {
         setCustomerName(state, data) {
             state.form.customerName = data;
         },
+        setIsAccepted(state, data) {
+            state.form.isAccepted = data;
+        },
         setId(state, data){
           state.form.id = data;
         },

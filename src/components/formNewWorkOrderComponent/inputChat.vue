@@ -22,7 +22,7 @@ export default {
       let user = "Current User ";
       let msg = this.input;
 
-      this.$store.commit('setChatLog', '*' + user + date + '*' + msg + + '*' + '-' + '*' )
+      this.$store.commit('setChatLog', '*' + user + date + '*' + msg + '*' + '-' + '*' )
     }
   }
 }

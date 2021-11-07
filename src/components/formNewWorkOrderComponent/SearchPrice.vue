@@ -28,7 +28,14 @@
               size="mini"
     ></el-input>
 
+    <el-input class="input-price"
+              placeholder="Предоплата"
+              v-model.trim="prepayment"
+              size="mini"
+              @input="changeInput"
+    ></el-input>
 
+<!--                          новая градация прайса                 -->
     <el-dialog
         :title="textOpenMbPromptHeader"
         v-model="dialogVisible"
@@ -79,6 +86,7 @@ export default {
       options: [],
       value: '',
       items: [],
+      prepayment: '',
       dialogVisible: false,
       labelPosition: 'left',
       finalPriceItem: {
@@ -99,6 +107,9 @@ export default {
     }
   },
   methods: {
+    changeInput(){
+      this.$store.commit('setPrepayment', this.prepayment);
+    },
 
     //полученный массив из БД
 
@@ -163,8 +174,6 @@ export default {
       this.newItem.productId = this.form.productId;
       const json = JSON.stringify(this.newItem);
 
-      console.log('searchPrice: save: ' + json);
-
       await HTTP.post(this.urlApi, json)   //переменная
           .then(function (response) {
             alert("Данные успешно внесены")
@@ -191,6 +200,6 @@ export default {
 
 .input-price {
   margin-left: 2rem;
-  width: 6rem;
+  width: 9rem;
 }
 </style>

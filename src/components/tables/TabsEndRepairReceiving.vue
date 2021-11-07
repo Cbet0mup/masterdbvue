@@ -30,11 +30,12 @@ export default {
       tableData: [],
       lengthData: 0,
       errors: [],
+      urlApi: '/workorder/findworkorder/isdone/true'
     }
   },
   methods: {
     async getData() {
-      await HTTP.get('/workorder/findworkorder/isdone/true')
+      await HTTP.get(this.urlApi)
           .then(response => {
             this.tableData = response.data;
           })

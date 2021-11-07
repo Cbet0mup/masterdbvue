@@ -2,6 +2,7 @@ import Main from "../pages/Main.vue";
 import {createRouter, createWebHistory} from "vue-router";
 import receiving from "../pages/receiving.vue";
 import workorders from "../pages/workorders.vue";
+import Management from "../pages/Management.vue";
 const routes = [
     {
     path: '/',
@@ -17,6 +18,11 @@ const routes = [
         path: '/workorders',
         name: 'Заказы',
         component: workorders
+    },
+    {
+        path: '/management',
+        name: 'Управление',
+        component: Management
     },
 ]
 
