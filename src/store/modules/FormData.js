@@ -59,6 +59,18 @@ export default {
         setIsAccepted(state, data) {
             state.form.isAccepted = data;
         },
+        setIsNeedCall(state, data) {
+            state.form.isNeedCall = data;
+        },
+        setIsDone(state, data) {
+            state.form.isDone = data;
+        },
+        setIsDoneIsCalled(state, data) {
+            state.form.isDoneIsCalled = data;
+        },
+        setIsGivenOut(state, data) {
+            state.form.isGivenOut = data;
+        },
         setId(state, data){
           state.form.id = data;
         },

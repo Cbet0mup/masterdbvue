@@ -5,7 +5,6 @@
       :remote-method="remoteMethod"
       :loading="loading"
       @change="getSelect"
-      @focus="getData"
 
   >
     <el-option
@@ -44,6 +43,7 @@ export default {
   },
 
   mounted() {
+    this.getData();
     if (Object.keys(this.selectRow).length !== 0) {
       this.value = this.selectRow.productName;
       this.$store.commit('setProductId', this.selectRow.productId);

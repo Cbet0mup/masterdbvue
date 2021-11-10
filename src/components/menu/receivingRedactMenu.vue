@@ -28,7 +28,7 @@ export default {
         id: '',
         isNeedCall: ''
       },
-      url: '/workorder',
+      url: '/workorder/update',
     }
   },
   computed: {
@@ -60,6 +60,12 @@ export default {
     },
 
     async save() {
+      this.$store.commit('setIsAccepted', this.selectRowData.isAccepted);
+      this.$store.commit('setIsNeedCall', this.selectRowData.isNeedCall);
+      this.$store.commit('setIsDone', this.selectRowData.isDone);
+      this.$store.commit('setIsDoneIsCalled', this.selectRowData.isDoneIsCalled);
+      this.$store.commit('setIsGivenOut', this.selectRowData.isGivenOut);
+
       if (this.validateForm()) {
         const json = JSON.stringify(this.form);
 
