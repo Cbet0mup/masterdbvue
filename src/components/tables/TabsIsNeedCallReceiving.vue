@@ -49,6 +49,7 @@ export default {
 
       this.selectRowData = this.tableData.find(item => item.id === row.id);
       this.$store.commit('setSelectRowData', this.selectRowData);
+      this.$store.commit('setId', row.id);
       this.$router.push('/receiving/redact');
     }
   },

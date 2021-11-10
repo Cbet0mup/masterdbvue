@@ -35,6 +35,7 @@
         <el-input
             style="margin-top: 15px"
             type="textarea"
+            autofocus
             placeholder="Введите сообщение"
             v-model="input"
         ></el-input>

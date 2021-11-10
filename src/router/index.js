@@ -13,7 +13,10 @@ const routes = [
     {
         path: '/receiving',
         name: 'Приёмка',
-        component: receiving
+        component: receiving,
+        meta: {
+            reload: true,
+        },
     },
     {
         path: '/workorders',
