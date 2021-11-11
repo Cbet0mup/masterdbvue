@@ -1,6 +1,8 @@
 <template>
   <el-select
-      v-model.trim="value"
+      v-model="value"
+      filterable
+      remote
       placeholder="Тип изделия"
       :remote-method="remoteMethod"
       :loading="loading"

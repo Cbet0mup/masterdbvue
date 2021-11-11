@@ -27,6 +27,9 @@
         >
           <el-button @click="updateThisIsDone"  class="button-menu" type="success" icon="el-icon-finished" circle></el-button>
         </el-tooltip>
+        <div style="margin-left: auto; margin-right: 100px; margin-top: 10px; font-size: larger">
+          <strong>Заказ № {{ form.id }}</strong>
+        </div>
       </el-row>
     </div>
 

@@ -12,6 +12,9 @@
       >
         <el-button @click="saveStatus" class="button-menu" type="warning" icon="el-icon-close-notification" circle></el-button>
       </el-tooltip>
+      <div style="margin-left: auto; margin-right: 100px; margin-top: 10px; font-size: larger">
+        <strong>Заказ № {{ selectRowData.id }}</strong>
+      </div>
     </el-row>
   </div>
 </template>

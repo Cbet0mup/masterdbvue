@@ -10,7 +10,6 @@
           :key="item.value"
           :label="item.label"
           :value="item.value"
-
       >
       </el-option>
     </el-select>
@@ -34,13 +33,12 @@
               size="mini"
               @input="changeInput"
     ></el-input>
-
+    <div style="margin-left: 10px;">Предоплата</div>
     <!--                          новая градация прайса                 -->
     <el-dialog
         :title="textOpenMbPromptHeader"
         v-model="dialogVisible"
         width="40%"
-        :before-close="handleClose"
         :center="true"
         class="bg-purple"
     >
@@ -86,7 +84,6 @@ export default {
   },
 
   mounted() {
-    this.getData();
     if (Object.keys(this.selectRow).length !== 0) {
       this.value = this.selectRow.priceName;
       this.finalPriceItem.price = this.selectRow.price;
@@ -155,7 +152,7 @@ export default {
         }
       })
 
-      this.$store.commit('setPriceId', this.value)       //переменная
+      this.$store.commit('setPriceId', this.value)                         //переменная
       this.$store.commit('setNewPrice', this.finalPriceItem.price)       //переменная
     },
 
