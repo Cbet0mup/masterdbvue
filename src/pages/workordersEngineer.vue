@@ -18,6 +18,14 @@
         >
           <el-button @click="dialogFormVisible = true" class="button-menu" type="warning" icon="el-icon-phone" circle></el-button>
         </el-tooltip>
+        <el-tooltip
+            class="item"
+            effect="dark"
+            content="Статус: ожидает деталь"
+            placement="top"
+        >
+          <el-button @click="updateThisIsWaiting"  class="button-menu" type="primary" icon="el-icon-watch" circle></el-button>
+        </el-tooltip>
 
         <el-tooltip
             class="item"
@@ -25,7 +33,7 @@
             content="Завершить ремонт"
             placement="top"
         >
-          <el-button @click="updateThisIsDone"  class="button-menu" type="success" icon="el-icon-finished" circle></el-button>
+          <el-button @click="updateThisIsDone"  class="button-menu" type="success" icon="el-icon-present" circle></el-button>
         </el-tooltip>
         <div style="margin-left: auto; margin-right: 100px; margin-top: 10px; font-size: larger">
           <strong>Заказ № {{ form.id }}</strong>
@@ -46,16 +54,20 @@
         <el-col :span="16">
 
           <el-row class="row-container">
+                                                    <!--            СТАТУС            -->
             <div class="status bg-purple">
               Статус:
             </div>
+            <el-tooltip v-if="selectWorkOrder.isAccepted" content="Принят в работу" placement="top">
+              <el-button type="success" icon="el-icon-s-tools" circle></el-button>
+            </el-tooltip>
             <el-tooltip v-if="selectWorkOrder.isNeedCall" content="Связь с клиентом" placement="top">
               <el-button type="warning" icon="el-icon-phone" circle></el-button>
             </el-tooltip>
-            <el-tooltip v-else content="Принят в работу" placement="top">
-              <el-button type="success" icon="el-icon-s-tools" circle></el-button>
-            </el-tooltip>
+            <el-tooltip v-if="selectWorkOrder.isWaitingForASpareParts" content="Ожидает деталь" placement="top">
+              <el-button type="primary" icon="el-icon-watch" circle></el-button>            </el-tooltip>
           </el-row>
+
         <el-row class="row-container">
 
           <div class="grid-content bg-purple">Наряд-заказ № <strong>{{ selectWorkOrder.id }}</strong></div>
@@ -251,6 +263,7 @@ export default {
       troubleDetected: '',
       urlApi: '/workorder/engineersaveworkorder',
       urlIsDone: '/workorder/isDone',
+      urlIsWaiting: '/workorder/isWaitingSpareParts',
       thisTableData: [],
       updateWorkOrdersEngineer: {
         id: '',
@@ -260,7 +273,11 @@ export default {
       isDoneUpdateEntity: {
         id: '',
         isDone: ''
-      }
+      },
+      isWaitingEntity: {
+        id: '',
+        isWaitingForASpareParts: ''
+      },
     }
   },
   methods: {
@@ -316,6 +333,27 @@ export default {
       this.thisTableData.splice(num, 1);
       this.$store.commit('setTableDataWorkOrders', this.thisTableData);
     },
+
+    async updateThisIsWaiting() {
+      this.isWaitingEntity.id = this.selectWorkOrder.id;
+      this.isWaitingEntity.isWaitingForASpareParts = true;                        //статус изменён
+      this.thisTableData = this.tableDataWorkOrders;
+
+      const json = JSON.stringify(this.isWaitingEntity);
+
+      await HTTP.post(this.urlIsWaiting, json)
+          .then(function (response) {
+            console.log("iswait - OK " + response);
+          })
+          .catch(function (error) {
+            console.log("iswait save ERRRR" + error);
+          });
+      let num = this.tableDataWorkOrders.findIndex(item => {      // номер в массиве заказов, нужен для правки ненужного
+        return item.id === this.selectWorkOrder.id;
+      })
+      this.thisTableData[num].isWaitingForASpareParts = true;
+      this.$store.commit('setTableDataWorkOrders', this.thisTableData);
+    }
   },
 }
 </script>

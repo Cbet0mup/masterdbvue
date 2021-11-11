@@ -40,6 +40,7 @@ export default {
             isDone: 'false',
             isDoneIsCalled: 'false',
             isGivenOut: 'false',
+            isWaitingForASpareParts: 'false',   // статус: ожидает деталь
 
 
 
