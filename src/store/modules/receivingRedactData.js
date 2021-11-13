@@ -1,11 +1,13 @@
 export default {
     state: () =>({
         selectRowData: {},
+        isDoneData: [],
+        isDoneIsCalledData: [],
     }),
     getters: {
     getSelectRow(state){
         return state.selectRowData;
-    }
+    },
     },
     mutations: {
         setSelectRowData(state, data){

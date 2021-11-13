@@ -353,7 +353,7 @@ export default {
           .catch(function (error) {
             console.log("iswait save ERRRR" + error);
           });
-
+          //правим локальные данные, актуальность
       this.thisTableData[num].isWaitingForASpareParts = this.isWaitingEntity.isWaitingForASpareParts;
       this.$store.commit('setTableDataWorkOrders', this.thisTableData);
     }

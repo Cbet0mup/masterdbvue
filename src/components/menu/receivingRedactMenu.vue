@@ -5,12 +5,33 @@
           Сохранить
         </el-button>
       <el-tooltip
+          v-if="selectRowData.isNeedCall"
           class="item"
           effect="dark"
           content="Связь с клиентом состоялась"
           placement="top"
       >
         <el-button @click="saveStatus" class="button-menu" type="warning" icon="el-icon-close-notification" circle></el-button>
+      </el-tooltip>
+
+      <el-tooltip
+          v-if="selectRowData.isDone"
+          class="item"
+          effect="dark"
+          content="Выдать"
+          placement="top"
+      >
+        <el-button @click="updateGivenOut" class="button-menu" type="success" icon="el-icon-present" circle></el-button>
+      </el-tooltip>
+
+      <el-tooltip
+          v-if="selectRowData.isDone"
+          class="item"
+          effect="dark"
+          content="Вернуть в ремонт"
+          placement="top"
+      >
+        <el-button @click="updateThisIsDone" class="button-menu" type="info" icon="el-icon-refresh-right" circle></el-button>
       </el-tooltip>
       <div style="margin-left: auto; margin-right: 100px; margin-top: 10px; font-size: larger">
         <strong>Заказ № {{ selectRowData.id }}</strong>
@@ -27,11 +48,20 @@ export default {
   data() {
     return{
       urlNeedCall: '/workorder/needCall',
+      urlGivenOut: '/workorder/givenout',
       isNeedCallDto: {
         id: '',
         isNeedCall: ''
       },
+      givenOutDTO: {
+        id: ''
+      },
       url: '/workorder/update',
+      urlIsDone: '/workorder/isDone',
+      isDoneUpdateEntity: {
+        id: '',
+        isDone: ''
+      },
     }
   },
   computed: {
@@ -40,10 +70,25 @@ export default {
     },
     form() {
       return this.$store.getters.getForm;
-    }
+    },
+    tableDataWorkOrders() {
+      return this.$store.getters.getTableDataWorkOrders;
+    },
   },
   methods: {
-    async updateIsNeedCallToServer() {
+    async updateGivenOut() {              //выдаём клиенту
+      this.givenOutDTO.id = this.selectRowData.id;
+
+      await HTTP.post(this.urlGivenOut, JSON.stringify(this.givenOutDTO))
+          .then(function (response) {
+            console.log("given out - OK " + response);
+          })
+          .catch(function (error) {
+            console.log("giv out save ERRRR" + error);
+          });
+    },
+
+    async updateIsNeedCallToServer() {                //статус созвона
       await HTTP.post(this.urlNeedCall, JSON.stringify(this.isNeedCallDto))
           .then(function (response) {
             //console.log("chat - OK " + response);
@@ -90,6 +135,21 @@ export default {
         })
       }
 
+    },
+
+    async updateThisIsDone() {
+      this.isDoneUpdateEntity.id = this.selectRowData.id;
+      this.isDoneUpdateEntity.isDone = false;                        //выдано
+
+      const json = JSON.stringify(this.isDoneUpdateEntity);
+
+      await HTTP.post(this.urlIsDone, json)
+          .then(function (response) {
+            console.log("isdone false - OK " + response);
+          })
+          .catch(function (error) {
+            console.log("isdone false save ERRRR" + error);
+          });
     },
 
     validateForm() {
