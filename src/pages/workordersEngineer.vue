@@ -18,6 +18,7 @@
         >
           <el-button @click="dialogFormVisible = true" class="button-menu" type="warning" icon="el-icon-phone" circle></el-button>
         </el-tooltip>
+
         <el-tooltip
             class="item"
             effect="dark"
@@ -335,8 +336,12 @@ export default {
     },
 
     async updateThisIsWaiting() {
+      let num = this.tableDataWorkOrders.findIndex(item => {      // номер в массиве заказов, нужен для правки ненужного
+        return item.id === this.selectWorkOrder.id;
+      })
+
       this.isWaitingEntity.id = this.selectWorkOrder.id;
-      this.isWaitingEntity.isWaitingForASpareParts = true;                        //статус изменён
+      this.isWaitingEntity.isWaitingForASpareParts = !this.selectWorkOrder.isWaitingForASpareParts;                        //статус изменён
       this.thisTableData = this.tableDataWorkOrders;
 
       const json = JSON.stringify(this.isWaitingEntity);
@@ -348,10 +353,8 @@ export default {
           .catch(function (error) {
             console.log("iswait save ERRRR" + error);
           });
-      let num = this.tableDataWorkOrders.findIndex(item => {      // номер в массиве заказов, нужен для правки ненужного
-        return item.id === this.selectWorkOrder.id;
-      })
-      this.thisTableData[num].isWaitingForASpareParts = true;
+
+      this.thisTableData[num].isWaitingForASpareParts = this.isWaitingEntity.isWaitingForASpareParts;
       this.$store.commit('setTableDataWorkOrders', this.thisTableData);
     }
   },
