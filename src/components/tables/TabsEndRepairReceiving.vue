@@ -1,5 +1,7 @@
 <template>
   <div>
+    <br>
+    <div style="text-align: center; margin-bottom: 10px;"><strong>Готов:</strong></div>
     <el-table
         :data="tableData"
         border style="width: 100%"
@@ -23,7 +25,7 @@
         :data="tableDataIsCalled"
         border style="width: 100%"
         size="small"
-        @row-click="selectRow"
+        @row-click="selectRowCalled"
     >
       <el-table-column prop="id" label="№" width="70" header-align="center"></el-table-column>
       <el-table-column prop="createdAt" label="Дата" header-align="center"></el-table-column>
@@ -40,7 +42,6 @@
 </template>
 
 <script>
-//import api from "api";
 import {HTTP} from "../../api/instance.js";
 
 export default {
@@ -65,7 +66,6 @@ export default {
                 this.tableDataIsCalled.push(data)
               }
             })
-            //this.tableData = response.data;
           })
           .catch(e => {
             this.errors.push(e);
@@ -75,8 +75,12 @@ export default {
     selectRow(row) {                    //выбранная строка, передаём данные в стейт
 
       this.selectRowData = this.tableData.find(item => item.id === row.id);
-      if (Object.keys(this.selectRowData).length) this.selectRowData = this.tableDataIsCalled.find(item => item.id === row.id);
-
+      this.$store.commit('setSelectRowData', this.selectRowData);
+      this.$store.commit('setId', row.id);
+      this.$router.push('/receiving/redact');
+    },
+    selectRowCalled(row) {
+      this.selectRowData = this.tableDataIsCalled.find(item => item.id === row.id);
       this.$store.commit('setSelectRowData', this.selectRowData);
       this.$store.commit('setId', row.id);
       this.$router.push('/receiving/redact');

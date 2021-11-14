@@ -2,12 +2,14 @@
   <el-table
       :data="tableDataWorkOrders"
       size="mini"
+      :row-class-name="tableRowClassName"
       @row-click="getThisWorkOrder"
   >
     <el-table-column prop="id" label="№" width="60" header-align="center"></el-table-column>
     <el-table-column prop="createdAt" label="Дата" header-align="center"></el-table-column>
     <el-table-column prop="productName" label="Изделие" header-align="center"></el-table-column>
   </el-table>
+
   <el-dialog
       title="Внимание!"
       v-model="dialogVisible"
@@ -56,7 +58,20 @@ export default {
       isNeedCall: '',
     }
   },
-  methods: {
+  methods: {                        //colors:   success, information, warning, danger
+    tableRowClassName({ row, rowIndex }) {
+      let statusObj = this.tableDataWorkOrders.find(item => item.id === row.id);
+
+      if (statusObj.isNeedCall === 'true') {
+        console.log(statusObj.id)
+        return 'warning-row'
+      } else if (statusObj.isWaitingForASpareParts === 'true') {
+        console.log(statusObj.id)
+        return 'success-row'
+      }
+      return 'warning-row'
+    },
+
     async getData() {
       await HTTP.get(this.urlApi + this.engineerId)
           .then(response => {
@@ -122,5 +137,10 @@ export default {
 </script>
 
 <style scoped>
-
+.el-table .warning-row {
+  --el-table-tr-background-color: var(--el-color-warning-lighter);
+}
+.el-table .success-row {
+  --el-table-tr-background-color: var(--el-color-success-lighter);
+}
 </style>

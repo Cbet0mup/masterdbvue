@@ -3,7 +3,7 @@
       :data="tableData"
       border style="width: 100%"
       size="small"
-      @row-click="myEvent"
+      @row-click="selectRow"
   >
     <el-table-column prop="id" label="№" width="70" header-align="center"></el-table-column>
     <el-table-column prop="createdAt" label="Дата" header-align="center"></el-table-column>
@@ -49,9 +49,13 @@ mounted() {
           })
       this.lengthData = this.tableData.length;
     },
-    myEvent(row) {
+    selectRow(row) {                    //выбранная строка, передаём данные в стейт
 
-    }
+      this.selectRowData = this.tableData.find(item => item.id === row.id);
+      this.$store.commit('setSelectRowData', this.selectRowData);
+      this.$store.commit('setId', row.id);
+      this.$router.push('/receiving/redact');
+    },
   }
 }
 </script>

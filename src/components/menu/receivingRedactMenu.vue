@@ -18,6 +18,16 @@
           v-if="selectRowData.isDone"
           class="item"
           effect="dark"
+          content="Клиент извещён"
+          placement="top"
+      >
+        <el-button @click="saveStatusIsDoneIsCalled" class="button-menu" type="danger" icon="el-icon-close-notification" circle></el-button>
+      </el-tooltip>
+
+      <el-tooltip
+          v-if="selectRowData.isDone || selectRowData.isDoneIsCalled"
+          class="item"
+          effect="dark"
           content="Выдать"
           placement="top"
       >
@@ -25,7 +35,7 @@
       </el-tooltip>
 
       <el-tooltip
-          v-if="selectRowData.isDone"
+          v-if="selectRowData.isDone || selectRowData.isDoneIsCalled"
           class="item"
           effect="dark"
           content="Вернуть в ремонт"
@@ -53,11 +63,15 @@ export default {
         id: '',
         isNeedCall: ''
       },
+      isDoneIsCalledDTO: {
+        id: ''
+      },
       givenOutDTO: {
         id: ''
       },
       url: '/workorder/update',
       urlIsDone: '/workorder/isDone',
+      urlIsDoneIsCalled: '/workorder/isDoneIsCalled',
       isDoneUpdateEntity: {
         id: '',
         isDone: ''
@@ -88,8 +102,8 @@ export default {
           });
     },
 
-    async updateIsNeedCallToServer() {                //статус созвона
-      await HTTP.post(this.urlNeedCall, JSON.stringify(this.isNeedCallDto))
+    async updateIsNeedCallToServer(url, dto) {                //статус созвона
+      await HTTP.post(url, JSON.stringify(dto))
           .then(function (response) {
             //console.log("chat - OK " + response);
           })
@@ -100,10 +114,19 @@ export default {
     saveStatus(){
       this.isNeedCallDto.id = this.selectRowData.id;
       this.isNeedCallDto.isNeedCall = false;
-      this.updateIsNeedCallToServer();
+      this.updateIsNeedCallToServer(this.urlNeedCall, this.isNeedCallDto);
       this.$message({
         type: 'success',
         message: "Статус: Связь состоялась."
+      })
+    },
+
+    saveStatusIsDoneIsCalled(){
+      this.isDoneIsCalledDTO.id = this.selectRowData.id;
+      this.updateIsNeedCallToServer(this.urlIsDoneIsCalled, this.isDoneIsCalledDTO);
+      this.$message({
+        type: 'success',
+        message: "Статус: Клиент извещён."
       })
     },
 
@@ -139,7 +162,8 @@ export default {
 
     async updateThisIsDone() {
       this.isDoneUpdateEntity.id = this.selectRowData.id;
-      this.isDoneUpdateEntity.isDone = false;                        //выдано
+      this.isDoneUpdateEntity.isDone = false;   //выдано
+
 
       const json = JSON.stringify(this.isDoneUpdateEntity);
 
