@@ -35,7 +35,7 @@
       </el-tooltip>
 
       <el-tooltip
-          v-if="selectRowData.isDone || selectRowData.isDoneIsCalled"
+          v-if="selectRowData.isDone || selectRowData.isDoneIsCalled || selectRowData.isGivenOut"
           class="item"
           effect="dark"
           content="Вернуть в ремонт"
@@ -43,7 +43,10 @@
       >
         <el-button @click="updateThisIsDone" class="button-menu" type="info" icon="el-icon-refresh-right" circle></el-button>
       </el-tooltip>
-      <div style="margin-left: auto; margin-right: 100px; margin-top: 10px; font-size: larger">
+      <div v-if="selectRowData.isGivenOut" style="margin-left: auto; margin-right: 100px; margin-top: 10px; font-size: larger">
+        <strong>Инфо: {{ infoIsGivenOut }}</strong>
+      </div>
+      <div  style="margin-left: auto; margin-right: 100px; margin-top: 10px; font-size: larger">
         <strong>Заказ № {{ selectRowData.id }}</strong>
       </div>
     </el-row>
@@ -76,6 +79,7 @@ export default {
         id: '',
         isDone: ''
       },
+      infoIsGivenOut: 'Заказ выдан клиенту.',
     }
   },
   computed: {
