@@ -4,6 +4,7 @@
                placeholder="Прайс"
                @change="getSelect"
                @focus="getData"
+               @blur="clear"
     >
       <el-option
           v-for="item in options"
@@ -58,7 +59,7 @@
 
       <template #footer>
     <span class="dialog-footer">
-      <el-button @click="dialogVisible = false">Cancel</el-button>
+      <el-button @click="cancel">Cancel</el-button>
       <el-button type="primary"
                  @click="submitForm"
       >Confirm</el-button
@@ -80,7 +81,12 @@ export default {
     },
     form() {
       return this.$store.getters.getForm;
-    }
+    },
+    clear() {
+      this.value = this.form.priceName;
+      this.finalPriceItem.price = this.form.price;
+      this.prepayment = this.form.prepayment;
+    },
   },
 
   mounted() {
@@ -118,6 +124,13 @@ export default {
     }
   },
   methods: {
+    cancel() {
+      this.dialogVisible = false;
+      this.$message({
+        type: 'Error',
+        message: 'Ввод отменён.',
+      })
+    },
     changeInput() {
       this.$store.commit('setPrepayment', this.prepayment);
     },

@@ -19,6 +19,7 @@ export default {
             serviceId: '',      //услуга платный, гарантийный, повторный
             serviceName: '',
             engineerId: '',     // мастер
+            engineerName: '',
             productId: '',      //тип: телек, кондёр, наушники
             manufacturerId: '', //производитель
             manufacturerName: '',
@@ -28,6 +29,7 @@ export default {
             troubleSolving: '',     //описание работ
 
             priceId: '',           //  прейскурант
+            productName: '',
             priceName: '',
             price: '',
             prepayment: '',           //  предоплата

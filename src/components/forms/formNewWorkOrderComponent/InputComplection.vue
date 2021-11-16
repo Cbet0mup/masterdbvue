@@ -17,6 +17,9 @@ export default {
     }
   },
   computed: {
+    clear() {
+      this.input = this.form.complection;
+    },
     form() {
       return this.$store.getters.getForm;
     },
@@ -26,9 +29,6 @@ export default {
   },
 
   methods: {
-    clear() {
-      this.input = this.form.complection;
-    },
     changeInput(){
       this.$store.commit('setComplection', this.input)
     }

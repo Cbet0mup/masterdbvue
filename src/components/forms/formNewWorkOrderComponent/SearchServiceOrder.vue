@@ -2,6 +2,7 @@
   <el-select v-model="value"
              placeholder="Наименование услуги"
              @change="getSelect"
+             @blur="clear"
   >
     <el-option
         v-for="item in options"
@@ -27,7 +28,10 @@ export default {
     },
     form() {
       return this.$store.getters.getForm;
-    }
+    },
+    clear() {
+      this.value = this.form.serviceName;
+    },
   },
   data() {
     return {

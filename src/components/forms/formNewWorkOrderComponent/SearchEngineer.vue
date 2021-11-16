@@ -2,6 +2,7 @@
   <el-select v-model="value"
              placeholder="Инженер"
              @change="getSelect"
+             @focus="clear"
   >
     <el-option
         v-for="item in options"
@@ -33,6 +34,12 @@ export default {
   computed: {
     selectRow() {
       return this.$store.getters.getSelectRow;
+    },
+  form() {
+    return this.$store.getters.getForm;
+  },
+    clear() {
+      this.value = this.form.engineerName;
     },
   },
 

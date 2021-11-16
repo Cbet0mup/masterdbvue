@@ -23,12 +23,12 @@ export default {
     selectRow() {
       return this.$store.getters.getSelectRow;
     },
-  },
-
-  methods: {
     clear() {
       this.input = this.form.imei;
     },
+  },
+
+  methods: {
     changeInput() {
       this.$store.commit('setImei', this.input)
     }

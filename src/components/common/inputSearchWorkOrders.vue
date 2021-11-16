@@ -23,24 +23,39 @@ export default {
 
   methods: {
     async getData() {
-
-
-      await HTTP.get(this.urlApi + this.searchInput)  //переменная
-            .then(response => {
-              this.data = response.data;
-            })
-            .catch(e => {
-              this.errors.push(e);
-            })
+      let reg = /^[0-9]*$/;                                     //проверка на число
+      if (reg.test(this.searchInput)) {
+        await HTTP.get(this.urlApi + this.searchInput)  //переменная
+              .then(response => {
+                this.data = response.data;
+              })
+              .catch(e => {
+                this.errors.push(e);
+              })
+      } else {
+        this.$message({
+          type: 'danger',
+          message: 'Проверьте введённое число',
+        })
+      }
       this.searchInput = '';
       this.openInfo();
     },
-    openInfo() {
+
+    openInfo() {        //формируесм таблицу данных и открываем старницу с инфой
       this.$store.commit('setSelectRowData', this.data);
       this.$store.commit('setClearForm', this.data);
+      this.$store.commit('pushMessageData', this.data.chatLog);
+      this.getMessages();
       this.$store.commit('setId', this.data.id);
       this.$router.push('/receiving/redact');
-    }
+    },
+
+    getMessages(){
+      this.$store.commit('clearMessageData', '');
+      let messArr = this.data.chatLog.split('*');
+      messArr.forEach(el => this.$store.commit('pushMessageData', el));
+    },
   }
 }
 </script>

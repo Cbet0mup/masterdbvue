@@ -3,7 +3,7 @@
       placeholder="ФИО/название"
       v-model="input"
       @focus="clear"
-      @input="changeInput"
+      @change="changeInput"
   ></el-input>
 
 </template>
@@ -18,6 +18,9 @@ export default {
     }
   },
   computed: {
+    clear() {
+      this.input = this.form.customerName;
+    },
     form() {
       return this.$store.getters.getForm;
     },

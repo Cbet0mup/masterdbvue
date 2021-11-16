@@ -7,6 +7,7 @@
       :remote-method="remoteMethod"
       :loading="loading"
       @change="getSelect"
+      @blur="clear"
 
   >
     <el-option
@@ -41,6 +42,9 @@ export default {
     },
     selectRow() {
       return this.$store.getters.getSelectRow;
+    },
+    clear() {
+      this.value = this.form.productName;
     },
   },
 

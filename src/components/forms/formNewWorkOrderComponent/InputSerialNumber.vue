@@ -23,14 +23,14 @@ export default {
     selectRow() {
       return this.$store.getters.getSelectRow;
     },
+    clear(){
+      this.input = this.form.serialNumber;
+    }
   },
 
   methods: {
     changeInput(){
       this.$store.commit('setSerialNumber', this.input)
-    },
-    clear(){
-      this.input = this.form.serialNumber;
     }
   },
   mounted() {

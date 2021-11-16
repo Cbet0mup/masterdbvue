@@ -22,14 +22,14 @@ export default {
     selectRow() {
       return this.$store.getters.getSelectRow;
     },
+    clear(){
+      this.input = this.form.customerPhone;
+    }
   },
 
   methods: {
     changeInput(){
       this.$store.commit('setCustomerPhone', this.input)
-    },
-    clear(){
-      this.input = this.form.customerPhone;
     }
   },
   mounted() {

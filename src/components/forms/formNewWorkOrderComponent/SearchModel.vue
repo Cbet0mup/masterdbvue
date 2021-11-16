@@ -9,6 +9,7 @@
       :remote-method="remoteMethod"
       :loading="loading"
       @change="getSelect"
+      @blur="clear"
 
   >
     <el-option
@@ -44,7 +45,10 @@ export default {
     },
     form() {
       return this.$store.getters.getForm;
-    }
+    },
+    clear() {
+      this.value = this.form.modelName;
+    },
   },
   mounted() {
     if (Object.keys(this.selectRow).length !== 0) {

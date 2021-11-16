@@ -7,6 +7,7 @@
       :remote-method="remoteMethod"
       :loading="loading"
       @change="getSelect"
+      @blur="clear"
 
   >
     <el-option
@@ -34,7 +35,6 @@ import {HTTP} from "../../../api/instance";
 
 export default {
   name: "SearchManufacturer",
-  //emits: ['getManufacturer'],
 
   data() {
     return {
@@ -57,6 +57,9 @@ export default {
   computed: {
     selectRow() {
       return this.$store.getters.getSelectRow;
+    },
+    clear() {
+      this.value = this.selectRow.manufacturerName;
     },
   },
   mounted() {
