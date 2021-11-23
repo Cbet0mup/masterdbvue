@@ -6,3 +6,5 @@ dist-ssr
 .idea
 out
 package-lock.json
+.dockerignore
+Dockerfile

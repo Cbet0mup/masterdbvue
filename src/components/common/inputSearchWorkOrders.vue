@@ -24,7 +24,7 @@ export default {
   methods: {
     async getData() {
       let reg = /^[0-9]*$/;                                     //проверка на число
-      if (reg.test(this.searchInput)) {
+      if (reg.test(this.searchInput.trim()) && this.searchInput !== '') {
         await HTTP.get(this.urlApi + this.searchInput)  //переменная
               .then(response => {
                 this.data = response.data;
