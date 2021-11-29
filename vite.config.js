@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
         allow: ['..']
       },
       //host: true,
-      port: 3000,
+      //port: 3000,
       open: '/'
     },
     build: {

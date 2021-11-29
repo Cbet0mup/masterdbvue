@@ -1,6 +1,6 @@
 import axios from 'axios'
 export const HTTP = axios.create({
-    baseURL: 'http://0.0.0.0:8080',
+    baseURL: 'http://localhost:8080',
     headers: {
         post: {
             'Content-Type': 'application/json'
