@@ -6,8 +6,8 @@ export const HTTP = axios.create({
             'Content-Type': 'application/json'
         },
         accept: 'application/json',
-        mode: 'cors',
-        header: "Access-Control-Allow-Methods: GET, POST, OPTIONS, HEAD"
+        //mode: 'cors',
+        //header: "Access-Control-Allow-Methods: GET, POST, OPTIONS, HEAD"
     },
 
 })
