@@ -7,4 +7,3 @@ dist-ssr
 out
 package-lock.json
 .dockerignore
-Dockerfile
