@@ -1,6 +1,6 @@
 import axios from 'axios'
 export const HTTP = axios.create({
-    baseURL: 'http://62.109.8.21',
+    baseURL: 'http://62.109.8.21/api',
     headers: {
         post: {
             'Content-Type': 'application/json'
