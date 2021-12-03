@@ -1,4 +1,10 @@
 <template>
+  <el-tooltip
+      class="item"
+      effect="dark"
+      content="Наименование услуги"
+      placement="top"
+  >
   <el-select v-model="value"
              placeholder="Наименование услуги"
              @change="getSelect"
@@ -13,8 +19,22 @@
     >
     </el-option>
   </el-select>
-  <el-button @click.prevent="openMessageBox" class="button-add" icon="el-icon-circle-plus" size="mini"
-             circle></el-button>
+  </el-tooltip>
+
+  <el-tooltip
+      class="item"
+      effect="dark"
+      content="Добавить услугу"
+      placement="top"
+  >
+  <el-button @click.prevent="openMessageBox"
+             class="button-add"
+             icon="el-icon-circle-plus-outline"
+             size="mini"
+             circle>
+
+  </el-button>
+  </el-tooltip>
 </template>
 
 <script>

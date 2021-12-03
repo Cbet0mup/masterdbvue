@@ -1,5 +1,4 @@
 <template>
-  <el-alert @close="alertVisible = false" v-if="alertVisible" title="Выберите производителя" type="error"> </el-alert>
   <el-select
       v-model.trim="value"
       @focus="getData"
@@ -28,7 +27,7 @@
       content="Добавить новую модель"
       placement="top"
   >
-    <el-button @click.prevent="openMessageBox" class="button-add" icon="el-icon-circle-plus" size="mini"
+    <el-button @click.prevent="openMessageBox" class="button-add" icon="el-icon-circle-plus-outline" size="mini"
                circle></el-button>
   </el-tooltip>
 </template>
@@ -108,7 +107,10 @@ export default {
               console.log("ERRRR" + e);
             })
       } else {
-        this.alertVisible = true;
+        this.$message({
+          type: 'error',
+          message: "Выберите производителя",
+        })
       }
     },
 

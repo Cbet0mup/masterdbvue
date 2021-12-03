@@ -1,10 +1,12 @@
 <template>
+
   <el-input
       placeholder="Серийный номер"
       v-model="input"
       @focus="clear"
       @change="changeInput"
   ></el-input>
+
 </template>
 
 <script>

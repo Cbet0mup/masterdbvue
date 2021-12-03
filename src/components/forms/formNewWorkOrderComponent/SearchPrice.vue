@@ -1,5 +1,11 @@
 <template>
-  <div class="input-price-form">
+  <el-form-item class="form-item">
+    <el-tooltip
+        class="item"
+        effect="dark"
+        content="прайс"
+        placement="top"
+    >
     <el-select v-model="value"
                placeholder="Прайс"
                @change="getSelect"
@@ -14,28 +20,53 @@
       >
       </el-option>
     </el-select>
+    </el-tooltip>
 
+    <el-tooltip
+        class="item"
+        effect="dark"
+        content="Добавить новый раздел к прайсу"
+        placement="top-start"
+    >
     <el-button @click="dialogVisible = true"
                class="button-add"
-               icon="el-icon-circle-plus"
+               icon="el-icon-circle-plus-outline"
                size="mini"
                circle
     ></el-button>
-
-    <el-input class="input-price"
+    </el-tooltip>
+  </el-form-item>
+  <el-form-item class="form-item">
+    <el-tooltip
+        class="item"
+        effect="dark"
+        content="Стоимость работ"
+        placement="top"
+    >
+  <el-input class="input-price"
               placeholder="Стоимость работ"
               v-model.trim="finalPriceItem.price"
               size="mini"
     ></el-input>
-
+    </el-tooltip>
+  </el-form-item>
+  <el-form-item class="form-item">
+    <el-tooltip
+        class="item"
+        effect="dark"
+        content="Предоплата"
+        placement="top"
+    >
     <el-input class="input-price"
               placeholder="Предоплата"
               v-model.trim="prepayment"
               size="mini"
               @input="changeInput"
     ></el-input>
-    <div style="margin-left: 10px;">Предоплата</div>
-    <!--                          новая градация прайса                 -->
+    </el-tooltip>
+  </el-form-item>
+
+  <!--                          новая градация прайса                 -->
     <el-dialog
         :title="textOpenMbPromptHeader"
         v-model="dialogVisible"
@@ -67,7 +98,8 @@
     </span>
       </template>
     </el-dialog>
-  </div>
+
+
 </template>
 
 <script>
@@ -215,12 +247,12 @@ export default {
   margin-left: 5px;
 }
 
-.input-price-form {
-  display: flex;
-}
-
 .input-price {
-  margin-left: 2rem;
-  width: 9rem;
+
+}
+.form-item {
+  margin-top: 20px;
+
+  margin-left: 20px;
 }
 </style>

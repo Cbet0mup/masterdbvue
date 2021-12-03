@@ -5,18 +5,18 @@
                :before-close="cancel"
                :close-on-click-modal="false"
                :close-on-press-escape="false"
-               :show-close = "false"
+               :show-close="false"
                width="50%"
                :center="true"
                class="bg-purple"
     >
       <el-form :label-position="labelPosition" size="mini">
         <!-- заказчик -->
-        <el-row style="background-color: #6be775">
+        <el-row style="background-color: #99e79e">
           <el-form-item class="form-item">
             <input-customer-name class="input-form"/>
           </el-form-item>
-
+          <!-- телефон -->
           <el-form-item class="form-item">
             <input-customer-phone class="input-form"/>
           </el-form-item>
@@ -24,68 +24,68 @@
         </el-row>
 
         <!-- изделие -->
-        <el-row style="background-color: #4e9d54">
+        <el-row style="background-color: #6b9f6f">
           <el-form-item class="form-item">
             <search-product-name class="input-form"/>
           </el-form-item>
-
+          <!-- производитель -->
           <el-form-item class="form-item">
             <search-manufacturer class="input-form"/>
           </el-form-item>
-
+          <!-- модель -->
           <el-form-item class="form-item">
             <search-model class="input-form"/>
           </el-form-item>
         </el-row>
 
-        <el-row style="background-color: #6be775">
-
+        <el-row style="background-color: #99e79e">
+          <!-- серийник -->
           <el-form-item class="form-item">
             <input-serial-number class="input-form"/>
           </el-form-item>
-
+          <!-- имей -->
 
           <el-form-item class="form-item">
             <input-i-m-e-i class="input-form"/>
           </el-form-item>
         </el-row>
 
-
-        <el-row style="background-color: #4e9d54">
+        <!-- внешний вид -->
+        <el-row style="background-color: #6b9f6f">
           <el-form-item class="form-item">
             <input-view class="input-form"/>
           </el-form-item>
 
-
+          <!-- комплектация -->
           <el-form-item class="form-item">
             <input-complection class="input-form"/>
           </el-form-item>
 
-
+          <!-- неисправность -->
           <el-form-item class="form-item">
             <input-trouble class="input-form"/>
           </el-form-item>
         </el-row>
 
-        <!-- ремонт -->
-        <el-row style="background-color: #6be775">
+        <!-- наименование услуги -->
+        <el-row style="background-color: #99e79e">
           <el-form-item class="form-item">
             <search-service-order class="input-form"/>
           </el-form-item>
-
+          <!-- инженер -->
           <el-form-item class="form-item">
+            <el-tooltip content="Инженер" placement="top">
             <search-engineer class="input-form"/>
+            </el-tooltip>
           </el-form-item>
-
+          <!-- примечания -->
           <el-form-item class="form-item">
             <input-chat class="input-form"/>
           </el-form-item>
         </el-row>
-
-        <el-row style="background-color: #4e9d54">
-          <el-form-item class="form-item">
-            <search-price class="input-form"/>
-          </el-form-item>
+        <!-- прайс -->
+        <el-row style="background-color: #6b9f6f">
+            <search-price/>
         </el-row>
 
       </el-form>
@@ -227,7 +227,6 @@ export default {
         isDoneIsCalled: 'false',
         isGivenOut: 'false',
         isWaitingForASpareParts: 'false',   // статус: ожидает деталь
-
 
 
         receiverId: 1,          //приёмщик

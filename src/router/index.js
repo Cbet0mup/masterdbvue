@@ -1,8 +1,8 @@
-import Main from "../pages/Main.vue";
+import Main from "../pages/main.vue";
 import {createRouter, createWebHistory} from "vue-router";
 import receiving from "../pages/receiving.vue";
 import workorders from "../pages/workordersEngineer.vue";
-import Management from "../pages/Management.vue";
+import Management from "../pages/management.vue";
 import receivingRedact from "../pages/receivingRedact.vue";
 const routes = [
     {

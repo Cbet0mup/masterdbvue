@@ -26,7 +26,9 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  font-family: Helvetica, sans-serif;
+  font-family: "Roboto Thin", sans-serif;
+  font-size: 15px;
+
 }
 
 

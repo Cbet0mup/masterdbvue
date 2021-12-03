@@ -26,7 +26,7 @@
       content="Добавить новый тип изделия"
       placement="top"
   >
-    <el-button @click.prevent="openMessageBox" class="button-add"  icon="el-icon-circle-plus" size="mini" circle ></el-button>
+    <el-button @click.prevent="openMessageBox" class="button-add"  icon="el-icon-circle-plus-outline" size="mini" circle ></el-button>
   </el-tooltip>
 </template>
 

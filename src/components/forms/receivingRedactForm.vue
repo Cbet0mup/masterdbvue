@@ -1,7 +1,7 @@
 <template>
   <el-form :label-position="1" size="mini">
     <!-- заказчик -->
-    <el-row style="background-color: #6be775">
+    <el-row style="background-color: #99e79e">
       <el-form-item class="form-item">
         <div style="text-align: center;">ФИО/Название</div>
         <input-customer-name class="input-form"/>
@@ -15,7 +15,7 @@
     </el-row>
 
     <!-- изделие -->
-    <el-row style="background-color: #4e9d54">
+    <el-row style="background-color: #6b9f6f">
       <el-form-item class="form-item">
         <div style="text-align: center;">Тип</div>
         <search-product-name class="input-form"/>
@@ -32,7 +32,7 @@
       </el-form-item>
     </el-row>
 
-    <el-row style="background-color: #6be775">
+    <el-row style="background-color: #99e79e">
 
       <el-form-item class="form-item">
         <div style="text-align: center;">Серийный номер</div>
@@ -47,7 +47,7 @@
     </el-row>
 
 
-    <el-row style="background-color: #4e9d54">
+    <el-row style="background-color: #6b9f6f">
       <el-form-item class="form-item">
         <div style="text-align: center;">Внешний вид</div>
         <input-view class="input-form"/>
@@ -67,7 +67,7 @@
     </el-row>
 
     <!-- ремонт -->
-    <el-row style="background-color: #6be775">
+    <el-row style="background-color: #99e79e">
       <el-form-item class="form-item">
         <div style="text-align: center;">Тип ремонта</div>
         <search-service-order class="input-form"/>
@@ -79,11 +79,8 @@
       </el-form-item>
     </el-row>
 
-    <el-row style="background-color: #4e9d54">
-      <el-form-item class="form-item">
-        <div>Прайс</div>
+    <el-row style="background-color: #6b9f6f">
         <search-price class="input-form"/>
-      </el-form-item>
     </el-row>
 
   </el-form>
