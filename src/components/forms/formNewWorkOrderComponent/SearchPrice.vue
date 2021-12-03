@@ -115,9 +115,11 @@ export default {
       return this.$store.getters.getForm;
     },
     clear() {
-      this.value = this.form.priceName;
-      this.finalPriceItem.price = this.form.price;
-      this.prepayment = this.form.prepayment;
+      if (this.form.priceName !== '') {
+        this.value = this.form.priceName;
+        this.finalPriceItem.price = this.form.price;
+        this.prepayment = this.form.prepayment;
+      }
     },
   },
 

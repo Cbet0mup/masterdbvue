@@ -1,15 +1,15 @@
 <template>
   <el-container>
     <el-header class="myHeader">
-      <strong>Упраление</strong>
-      <strong>Сдесь тоже скоро будет город сад!</strong>
+      <strong>Почта</strong>
+      <strong>Сдесь тоже...</strong>
     </el-header>
   </el-container>
 </template>
 
 <script>
 export default {
-  name: "Management"
+  name: "delivery"
 }
 </script>
 
@@ -19,5 +19,4 @@ export default {
   text-align: center;
   display: contents;
 }
-
 </style>

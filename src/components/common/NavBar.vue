@@ -12,6 +12,8 @@
     <el-menu-item @click="$router.push('/receiving')"  index="2">Приёмка</el-menu-item>
     <el-menu-item @click="$router.push('/workorders')" index="3">Заказы</el-menu-item>
     <el-menu-item @click="$router.push('/management')" index="4">Управление</el-menu-item>
+    <el-menu-item @click="$router.push('/warehouse')" index="5">Склад</el-menu-item>
+    <el-menu-item @click="$router.push('/delivery')" index="6">Почта</el-menu-item>
     <input-search-work-orders/>
   </el-menu>
 </div>
