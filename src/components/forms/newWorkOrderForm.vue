@@ -205,6 +205,7 @@ export default {
         serviceId: '',      //услуга платный, гарантийный, повторный
         serviceName: '',
         engineerId: '',     // мастер
+        engineerName: '',
         productId: '',      //тип: телек, кондёр, наушники
         manufacturerId: '', //производитель
         manufacturerName: '',
@@ -214,6 +215,7 @@ export default {
         troubleSolving: '',     //описание работ
 
         priceId: '',           //  прейскурант
+        productName: '',
         priceName: '',
         price: '',
         prepayment: '',           //  предоплата
@@ -229,9 +231,12 @@ export default {
         isWaitingForASpareParts: 'false',   // статус: ожидает деталь
 
 
+
         receiverId: 1,          //приёмщик
         statusId: 1,            //статус - принят, выдан итд
-      })
+      });
+      this.$store.commit('setSelectRowDataClear', {});
+      this.$store.commit('setTableDataWorkOrders', []);
     },
 
     validateForm() {

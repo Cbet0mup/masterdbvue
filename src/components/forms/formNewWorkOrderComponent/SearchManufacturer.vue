@@ -1,6 +1,6 @@
 <template>
   <el-select
-      v-model.trim="value"
+      v-model="value"
       filterable
       remote
       placeholder="Производитель"
@@ -58,8 +58,13 @@ export default {
     selectRow() {
       return this.$store.getters.getSelectRow;
     },
+    form() {
+      return this.$store.getters.getForm;
+    },
     clear() {
-      this.value = this.selectRow.manufacturerName;
+      //if (this.form.manufacturerName !== '') {
+        this.value = this.selectRow.manufacturerName;
+     // }
     },
   },
   mounted() {

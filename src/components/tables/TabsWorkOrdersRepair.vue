@@ -50,7 +50,7 @@ export default {
 
   data() {
     return {
-      engineerId: '3',
+      engineerId: '1',
       urlApi: '/workorder/findworkorder/allNeedRepair/',
       oldRowId: '',
       dialogVisible: false,
@@ -75,15 +75,17 @@ export default {
     async getData() {
       await HTTP.get(this.urlApi + this.engineerId)
           .then(response => {
-            this.$store.commit('setTableDataWorkOrders', response.data)
+            this.$store.commit('setTableDataWorkOrders', response.data);
           })
           .catch(e => {
             console.log("ERRRR" + e);
           })
       // первый по умолчанию
-      this.$store.commit('setSelectWorkOrderTabsRepair', this.tableDataWorkOrders[0]);
-      this.$store.commit('setId', this.selectWorkOrder.id);      //сразу забиваем id
-      this.getMessages();
+      if (this.tableDataWorkOrders.length > 0) {
+        this.$store.commit('setSelectWorkOrderTabsRepair', this.tableDataWorkOrders[0]);
+        this.$store.commit('setId', this.selectWorkOrder.id);      //сразу забиваем id
+        this.getMessages();
+      }
     },
 
     getThisWorkOrder(row) {   //проверяем на модификации и отсылаем дальше

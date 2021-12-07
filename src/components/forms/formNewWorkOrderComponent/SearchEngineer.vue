@@ -2,7 +2,7 @@
   <el-select v-model="value"
              placeholder="Инженер"
              @change="getSelect"
-             @focus="clear"
+             @blur="clear"
   >
     <el-option
         v-for="item in options"
@@ -39,7 +39,9 @@ export default {
     return this.$store.getters.getForm;
   },
     clear() {
-      this.value = this.form.engineerName;
+      //if (this.form.engineerName !== '') {
+        this.value = this.form.engineerName;
+      //}
     },
   },
 
@@ -55,6 +57,7 @@ mounted() {
     //полученный массив из БД
 
     async getData() {
+      console.log("get data :   " + this.value)
       await HTTP.get(this.urlApi)  //переменная
           .then(response => {
             this.items = response.data;
@@ -70,6 +73,8 @@ mounted() {
 
     getSelect() {
       this.$store.commit('setEngineerId', this.value)       //переменная
+      console.log("get select :   " + this.value)
+
     },
   },
 

@@ -128,6 +128,9 @@ export default {
         setEngineerId(state, data) {
             state.form.engineerId = data;
         },
+        setEngineerName(state, data) {
+            state.form.engineerName= data;
+        },
         setReceiverId(state, data) {
             state.form.receiverId = data;
         },

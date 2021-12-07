@@ -33,6 +33,7 @@ mounted() {
       tableData: [],
       lengthData: 0,
       errors: [],
+      selectRowData: {},
       urlApi: '/workorder/findworkorder/allNow',
       searchData: ''
 
@@ -48,6 +49,7 @@ mounted() {
             this.errors.push(e);
           })
       this.lengthData = this.tableData.length;
+      this.$store.commit('setTableDataWorkOrders', this.tableData)
     },
     selectRow(row) {                    //выбранная строка, передаём данные в стейт
 
