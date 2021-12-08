@@ -62,9 +62,7 @@ export default {
       return this.$store.getters.getForm;
     },
     clear() {
-      //if (this.form.manufacturerName !== '') {
         this.value = this.selectRow.manufacturerName;
-     // }
     },
   },
   mounted() {
@@ -84,7 +82,7 @@ export default {
           this.options = this.list.filter((item) => {
             return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1
           })
-           console.log('remoteMethod: ' + this.options)
+           //console.log('remoteMethod: ' + this.options)
         }, 200)
       } else {
         this.options = []
@@ -110,7 +108,7 @@ export default {
     async save() {
       const json = JSON.stringify(this.newItem);
 
-      console.log('searchprodname: save: ' + json)
+      //console.log('searchprodname: save: ' + json)
 
       await HTTP.post(this.url, json)
           .then(function (response) {
@@ -125,7 +123,7 @@ export default {
     //выбранный элемент улетает в родительский компонент формы
     getSelect() {
       this.$store.commit('setManufacturerId', this.value)
-      console.log('searchmanname: getselect  ' + this.value)
+     // console.log('searchmanname: getselect  ' + this.value)
     },
     //  открываем message box
     openMessageBox() {
@@ -136,7 +134,7 @@ export default {
           .then(({value}) => {
             if (value !== null){
               this.newItem.manufacturer = value;
-               console.log('searchprodname: openMB: ' + value)
+               //console.log('searchprodname: openMB: ' + value)
               this.save();
               this.$message({
                 type: 'success',

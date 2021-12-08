@@ -140,10 +140,10 @@ export default {
 
       await HTTP.post(this.urlApi, JSON.stringify(this.newChatLog))
           .then(function (response) {
-            console.log("chat - OK " + response);
+            //console.log("chat - OK " + response);
           })
           .catch(function (error) {
-            console.log("chat save ERRRR" + error);
+            //console.log("chat save ERRRR" + error);
           });
       this.newChatLog.id = '';
       this.newChatLog.chatLog = '';
@@ -162,10 +162,16 @@ export default {
     async updateIsNeedCallToServer() {
       await HTTP.post(this.urlNeedCall, JSON.stringify(this.isNeedCallDto))
           .then(function (response) {
-            console.log("chat - OK " + response);
+            this.$message({
+              type: 'info',
+              message: 'статус обновлён',
+            })
           })
           .catch(function (error) {
-            console.log("chat save ERRRR" + error);
+            this.$message({
+              type: 'Error',
+              message: 'Произошла ошибка на сервере, статус не обновлён',
+            })
           });
     },
 

@@ -101,7 +101,7 @@ export default {
             })
           })
           .catch(e => {
-            this.errors.push(e);
+            console.error('err search_product_name' + e);
           })
     },
 
@@ -111,10 +111,10 @@ export default {
 
       await HTTP.post(this.urlApi, json)   //переменная
           .then(function (response) {
-            console.log("OK   " + response);
+            //console.log("OK   " + response);
           })
           .catch(function (error) {
-            console.log("ERRRR" + error);
+            console.error("ERRRR search_product_name " + error);
           })
       await this.getData()
     },

@@ -185,8 +185,8 @@ export default {
             })
       } else {
         this.$message({
-          type: 'error',
-          message: "Ошибка: тип изделия не выбран!",
+          type: 'info',
+          message: 'Ничего не найдено...',
         })
       }
     },

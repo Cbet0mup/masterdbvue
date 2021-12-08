@@ -26,12 +26,15 @@ export default {
       let reg = /^[0-9]*$/;                                     //проверка на число
       if (reg.test(this.searchInput.trim()) && this.searchInput !== '') {
         await HTTP.get(this.urlApi + this.searchInput)  //переменная
-              .then(response => {
-                this.data = response.data;
+            .then(response => {
+              this.data = response.data;
+            })
+            .catch(e => {
+              this.$message({
+                type: 'info',
+                message: 'Странно, но ничего не найдено...',
               })
-              .catch(e => {
-                this.errors.push(e);
-              })
+            })
       } else {
         this.$message({
           type: 'danger',
@@ -51,7 +54,7 @@ export default {
       this.$router.push('/receiving/redact');
     },
 
-    getMessages(){
+    getMessages() {
       this.$store.commit('clearMessageData', '');
       let messArr = this.data.chatLog.split('*');
       messArr.forEach(el => this.$store.commit('pushMessageData', el));

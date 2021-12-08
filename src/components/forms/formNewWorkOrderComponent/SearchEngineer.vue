@@ -39,9 +39,7 @@ export default {
     return this.$store.getters.getForm;
   },
     clear() {
-      //if (this.form.engineerName !== '') {
         this.value = this.form.engineerName;
-      //}
     },
   },
 
@@ -57,7 +55,7 @@ mounted() {
     //полученный массив из БД
 
     async getData() {
-      console.log("get data :   " + this.value)
+      //console.log("get data :   " + this.value)
       await HTTP.get(this.urlApi)  //переменная
           .then(response => {
             this.items = response.data;
@@ -73,7 +71,7 @@ mounted() {
 
     getSelect() {
       this.$store.commit('setEngineerId', this.value)       //переменная
-      console.log("get select :   " + this.value)
+      //console.log("get select :   " + this.value)
 
     },
   },
