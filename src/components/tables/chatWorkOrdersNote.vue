@@ -106,48 +106,57 @@ export default {
   },
   methods: {
     async saveMessage() {
-      let tableWorkOrders = this.tableDataWorkOrders;
-      let num = this.numTableDataWorkOrders;
-      let user = '';
-
-      let date = new Date().toLocaleString();
       let msg = this.input;
-
-      if (this.isNeedCallSave) {
-        user = "Связь с клиентом: " + date;
-
-        this.isNeedCallDto.id = this.selectWorkOrder.id;
-        this.isNeedCallDto.isNeedCall = true;
-        await this.updateIsNeedCallToServer();
-
-        tableWorkOrders[num].isNeedCall = true;
-        this.selectWorkOrder.isNeedCall = true;
-        this.cancel();
-
+      if (msg === '') {
+        this.$message({
+          type: 'info',
+          message: 'Введите сообщение',
+        })
       } else {
-        user = "Current User " + date;
-      }
-      this.$store.commit('pushMessageData', user);
-      this.$store.commit('pushMessageData', msg);
-      this.$store.commit('pushMessageData', '-');
-      this.input = '';
-      let newChatLogs = user + '*' + msg + '*' + '-' + '*';
-      tableWorkOrders[num].chatLog += newChatLogs;
-      this.$store.commit('setTableDataWorkOrders', tableWorkOrders);
-//post
-      this.newChatLog.id = this.selectWorkOrder.id;
-      this.newChatLog.chatLog = newChatLogs;
+        let tableWorkOrders = this.tableDataWorkOrders;
+        let num = this.numTableDataWorkOrders;
+        let user = '';
 
-      await HTTP.post(this.urlApi, JSON.stringify(this.newChatLog))
-          .then(function (response) {
-            //console.log("chat - OK " + response);
-          })
-          .catch(function (error) {
-            //console.log("chat save ERRRR" + error);
-          });
-      this.newChatLog.id = '';
-      this.newChatLog.chatLog = '';
-      this.isNeedCallSave = !this.isNeedCallSave;
+        let date = new Date().toLocaleString();
+
+
+        if (this.isNeedCallSave) {
+          user = "Связь с клиентом: " + date;                     //имя пользователя
+
+          this.isNeedCallDto.id = this.selectWorkOrder.id;
+          this.isNeedCallDto.isNeedCall = true;
+          await this.updateIsNeedCallToServer();
+
+          tableWorkOrders[num].isNeedCall = true;
+          this.selectWorkOrder.isNeedCall = true;
+          this.$store.commit('setTableDataWorkOrders', tableWorkOrders);  //обновляем данные в таблице мастера
+          this.cancel();
+
+        } else {
+          user = "Current User " + date;                      //имя пользовател
+        }
+        this.$store.commit('pushMessageData', user);
+        this.$store.commit('pushMessageData', msg);
+        this.$store.commit('pushMessageData', '-');
+        this.input = '';
+        let newChatLogs = user + '*' + msg + '*' + '-' + '*';
+        tableWorkOrders[num].chatLog += newChatLogs;
+        this.$store.commit('setTableDataWorkOrders', tableWorkOrders);
+//post
+        this.newChatLog.id = this.selectWorkOrder.id;
+        this.newChatLog.chatLog = newChatLogs;
+
+        await HTTP.post(this.urlApi, JSON.stringify(this.newChatLog))
+            .then(function (response) {
+              console.log("chat - OK " + response);
+            })
+            .catch(function (error) {
+              console.log("chat save ERRRR" + error);
+            });
+        this.newChatLog.id = '';
+        this.newChatLog.chatLog = '';
+        this.isNeedCallSave = !this.isNeedCallSave;
+      }
     },
     cancel() {
       this.myVisible = false;
@@ -162,16 +171,10 @@ export default {
     async updateIsNeedCallToServer() {
       await HTTP.post(this.urlNeedCall, JSON.stringify(this.isNeedCallDto))
           .then(function (response) {
-            this.$message({
-              type: 'info',
-              message: 'статус обновлён',
-            })
+            console.info('response update  ' + response.data)
           })
           .catch(function (error) {
-            this.$message({
-              type: 'Error',
-              message: 'Произошла ошибка на сервере, статус не обновлён',
-            })
+            console.error('err  ' + error)
           });
     },
 

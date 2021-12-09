@@ -100,7 +100,7 @@ export default {
 
       await HTTP.post(this.urlApi, json)   //переменная
           .then(function (response) {
-            console.log("OK   " + response);
+            //console.log("OK   " + response);
           })
           .catch(function (error) {
             console.log("ERRRR" + error);
@@ -111,8 +111,6 @@ export default {
     //выбранный элемент улетает в родительский компонент формы
     getSelect() {
       this.$store.commit('setServiceId', this.value)        //переменная
-      console.log("get select :   " + this.value)
-
     },
     //  открываем message box
     openMessageBox() {
@@ -131,8 +129,8 @@ export default {
               this.serviceType = '';                            ///переменная
             } else {
               this.$message({
-                type: 'success',
-                message: this.textOpenMbPromptMessageErr + value,
+                type: 'error',
+                message: this.textOpenMbPromptMessageErr,
               })
             }
 

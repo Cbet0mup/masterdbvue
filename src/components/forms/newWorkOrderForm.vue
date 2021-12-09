@@ -165,17 +165,25 @@ export default {
 
     async save() {
       if (this.validateForm()) {
-        this.$store.commit('setIsAccepted', 'true')
-        const json = JSON.stringify(this.form);
+        if (!isNaN(this.form.prepayment)){                  //проверка поля предоплаты
+          this.$store.commit('setIsAccepted', 'true')
+          const json = JSON.stringify(this.form);
 
-        await HTTP.post(this.url, json)
-            .then(function (response) {
-              console.log("OK   " + response);
-            })
-            .catch(function (error) {
-              console.log("ERRRR" + error);
-            });
-        this.cancel()
+          await HTTP.post(this.url, json)
+              .then(function (response) {
+                console.log("OK   " + response);
+              })
+              .catch(function (error) {
+                console.log("ERRRR" + error);
+              });
+          this.cancel()
+        } else {
+          this.$message({
+            type: 'error',
+            message: "В поле предоплаты ошибка",
+          })
+        }
+
       } else {
         this.$message({
           type: 'error',

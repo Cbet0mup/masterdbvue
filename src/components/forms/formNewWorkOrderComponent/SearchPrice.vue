@@ -154,7 +154,7 @@ export default {
       textOpenMbPromptInfo: 'Например: Телевизор - 55" жидкокристаллический',
       textOpenMbPromptHeader: 'Добавить градацию и базовую стоимость ремонта',
       textOpenMbPromptMessageSuccess: 'Данные внесены. ',
-      textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.',
+      textOpenMbPromptMessageErr: 'Заполните поля формы.',
     }
   },
   methods: {
@@ -166,7 +166,7 @@ export default {
       })
     },
     changeInput() {
-      this.$store.commit('setPrepayment', this.prepayment);
+        this.$store.commit('setPrepayment', this.prepayment);
     },
 
     //полученный массив из БД
@@ -185,7 +185,7 @@ export default {
             })
       } else {
         this.$message({
-          type: 'info',
+          type: 'error',
           message: 'Ничего не найдено...',
         })
       }
@@ -204,22 +204,30 @@ export default {
     },
 
     submitForm() {
-      if (this.form.productId !== '') {
-        if (this.newItem.priceName !== '') {
-          this.save();
-          this.newItem.price = '';
-          this.newItem.priceName = '';
-          this.newItem.productId = '';
-          this.dialogVisible = false
+      if (this.form.productId !== '') {                                       //проверка производителя
+        if (this.newItem.priceName !== '' && this.newItem.price !== '') {         //проверка полей
+          if (!isNaN(this.newItem.price)){                                  //проверка на число в поле цена
+            this.save();
+            this.newItem.price = '';
+            this.newItem.priceName = '';
+            this.newItem.productId = '';
+            this.dialogVisible = false
+          } else {
+            this.$message({
+              type: 'error',
+              message: 'Цена должна быть числом',
+            })
+          }
+
         } else {
           this.$message({
-            type: 'success',
+            type: 'error',
             message: this.textOpenMbPromptMessageErr,
           })
         }
       } else {
         this.$message({
-          type: 'success',
+          type: 'error',
           message: "Ошибка: тип изделия не выбран!",
         })
       }

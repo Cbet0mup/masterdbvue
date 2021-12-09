@@ -49,7 +49,7 @@ export default {
       textOpenMbPromptInfo: 'Samsung, Huawei, и.т.д',
       textOpenMbPromptHeader: 'Добавить производителя',
       textOpenMbPromptMessageSuccess: 'Вы внесли нового производителя: ',
-      textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.',
+      textOpenMbPromptMessageErr: 'Заполните поле названия производителя.',
       url: '/workorder/apiform/manufacturer'
 
     }
@@ -134,7 +134,6 @@ export default {
           .then(({value}) => {
             if (value !== null){
               this.newItem.manufacturer = value;
-               //console.log('searchprodname: openMB: ' + value)
               this.save();
               this.$message({
                 type: 'success',
@@ -143,8 +142,8 @@ export default {
               this.manufacturer = '';
             } else {
               this.$message({
-                type: 'success',
-                message: this.textOpenMbPromptMessageErr + value,
+                type: 'error',
+                message: this.textOpenMbPromptMessageErr,
               })
             }
 

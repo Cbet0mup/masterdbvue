@@ -69,7 +69,7 @@ export default {
       textOpenMbPromptInfo: 'Телевизор, утюг, и.т.д',
       textOpenMbPromptHeader: 'Добавить тип',
       textOpenMbPromptMessageSuccess: 'Вы внесли новый тип устройства: ',
-      textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.',
+      textOpenMbPromptMessageErr: 'Введите новый тип изделия.',
       urlApi: '/workorder/apiform/productname'
     }
   },
@@ -142,8 +142,8 @@ export default {
               this.productName = '';                            ///переменная
             } else {
               this.$message({
-                type: 'success',
-                message: this.textOpenMbPromptMessageErr + value,
+                type: 'error',
+                message: this.textOpenMbPromptMessageErr,
               })
             }
 

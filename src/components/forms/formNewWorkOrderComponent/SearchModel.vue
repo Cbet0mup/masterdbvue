@@ -71,7 +71,7 @@ export default {
       textOpenMbPromptInfo: 'SM-A305, EOS 1D,...и.т.п.',
       textOpenMbPromptHeader: 'Добавить модель',
       textOpenMbPromptMessageSuccess: 'Вы внесли новую модель: ',
-      textOpenMbPromptMessageErr: 'Пустое поле, попробуйте ещё раз.',
+      textOpenMbPromptMessageErr: 'Пустое поле, либо не выбран производитель',
       urlApi: '/workorder/apiform/modelname/'
     }
   },
@@ -116,25 +116,24 @@ export default {
 
     //   сохраняем
     async save() {
-      this.newItem.manufacturerId = this.form.manufacturerId;
-      const json = JSON.stringify(this.newItem);
+        this.newItem.manufacturerId = this.form.manufacturerId;
+        const json = JSON.stringify(this.newItem);
 
-      console.log('searchmodelname: save: ' + json);
+        await HTTP.post(this.urlApi, json)   //переменная
+            .then(function (response) {
+              //console.log("OK   " + response);
+            })
+            .catch(function (error) {
+              console.log("ERRRR" + error);
+            })
+        await this.getData()
 
-      await HTTP.post(this.urlApi, json)   //переменная
-          .then(function (response) {
-            console.log("OK   " + response);
-          })
-          .catch(function (error) {
-            console.log("ERRRR" + error);
-          })
-      await this.getData()
     },
 
     //выбранный элемент улетает в родительский компонент формы
     getSelect() {
       this.$store.commit('setModelId', this.value)
-      console.log('searchmodelname: getselect  ' + this.form.modelId);
+      //console.log('searchmodelname: getselect  ' + this.form.modelId);
     },
     //  открываем message box
     openMessageBox() {
@@ -143,18 +142,18 @@ export default {
         cancelButtonText: 'Отмена',
       })
           .then(({value}) => {
-            if (value !== null) {
+            if (value !== null && this.form.manufacturerId !== '') {
               this.newItem.modelName = value;       ///переменная
               this.save();
               this.$message({
                 type: 'success',
                 message: this.textOpenMbPromptMessageSuccess
               })
-              this.modelName = '';
+              this.newItem.modelName = '';
             } else {
               this.$message({
-                type: 'success',
-                message: this.textOpenMbPromptMessageErr + value,
+                type: 'error',
+                message: this.textOpenMbPromptMessageErr,
               })
             }
 
