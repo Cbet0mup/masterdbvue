@@ -6,6 +6,7 @@ export const HTTP = axios.create({
        post: {
             'Content-Type': 'application/json'
         },
+        'Access-Control-Allow-Origin': 'http://xn--80aaabrq9ba6exc.xn--h1ahn.xn--p1acf/api',
         accept: 'application/json',
         mode: 'cors',
         //header: "Access-Control-Allow-Methods: GET, POST, OPTIONS, HEAD",
