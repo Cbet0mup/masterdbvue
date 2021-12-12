@@ -3,5 +3,5 @@
 ---
 CRM система для управления сервисным центром по ремонту электроники.
 ---
-ЯП - javascript
-Framework - Vue.js
+- ЯП - javascript
+- Framework - Vue.js
