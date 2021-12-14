@@ -6,6 +6,7 @@ import Management from "../pages/management.vue";
 import receivingRedact from "../pages/receivingRedact.vue";
 import warehouse from "../pages/warehouse.vue";
 import delivery from "../pages/delivery.vue";
+import guid from "../pages/guide.vue";
 const routes = [
     {
     path: '/',
@@ -44,6 +45,11 @@ const routes = [
         path: '/warehouse',
         name: 'Склад',
         component: warehouse
+    },
+    {
+        path: '/guide',
+        name: 'Инструкция',
+        component: guid
     },
 ]
 
