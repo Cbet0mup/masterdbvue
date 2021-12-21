@@ -24,10 +24,11 @@ import inputSearchWorkOrders from "./common/inputSearchWorkOrders.vue";
 import inputChat from "./forms/formNewWorkOrderComponent/inputChat.vue";
 import receivingRedactMenu from "./menu/receivingRedactMenu.vue";
 import receivingRedactForm from "./forms/receivingRedactForm.vue";
+import managementStaffMenu from "./menu/managementStaffMenu.vue";
 
 export default [
     tabsEndRepair, NewWorkOrderForm, tabsIsNeedCall, receivingMenu, SearchProductName, SearchModel, SearchManufacturer,
     InputCustomerName,InputCustomerPhone, InputSerialNumber, InputIMEI, InputView, InputComplection, InputTrouble,
     SearchServiceOrder, SearchEngineer, SearchPrice, NavBar, TabsNowReceiving, workorders, TabsWorkOrdersRepair, chatWorkOrdersNote,
-    inputSearchWorkOrders, inputChat, receivingRedactMenu, receivingRedactForm,
+    inputSearchWorkOrders, inputChat, receivingRedactMenu, receivingRedactForm, managementStaffMenu
 ]

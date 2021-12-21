@@ -29,10 +29,10 @@
 
 <script>
 
-import receivingMenu from "../components/menu/receivingMenu.vue";
-import TabsIsNeedCall from "../components/tables/TabsIsNeedCallReceiving.vue";
-import TabsEndRepair from "../components/tables/TabsEndRepairReceiving.vue";
-import TabsNowReceiving from "../components/tables/TabsNowReceiving.vue";
+import receivingMenu from "../../components/menu/receivingMenu.vue";
+import TabsIsNeedCall from "../../components/tables/TabsIsNeedCallReceiving.vue";
+import TabsEndRepair from "../../components/tables/TabsEndRepairReceiving.vue";
+import TabsNowReceiving from "../../components/tables/TabsNowReceiving.vue";
 
 export default {
   name: "receiving",

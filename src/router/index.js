@@ -1,9 +1,9 @@
 import Main from "../pages/main.vue";
 import {createRouter, createWebHistory} from "vue-router";
-import receiving from "../pages/receiving.vue";
+import receiving from "../pages/receiving/receiving.vue";
 import workorders from "../pages/workordersEngineer.vue";
-import Management from "../pages/management.vue";
-import receivingRedact from "../pages/receivingRedact.vue";
+import managementStaff from "../pages/managment/managementStaff.vue";
+import receivingRedact from "../pages/receiving/receivingRedact.vue";
 import warehouse from "../pages/warehouse.vue";
 import delivery from "../pages/delivery.vue";
 import guid from "../pages/guide.vue";
@@ -27,9 +27,9 @@ const routes = [
         component: workorders
     },
     {
-        path: '/management',
-        name: 'Управление',
-        component: Management
+        path: '/management/staff',
+        name: 'Управление - кадры',
+        component: managementStaff
     },
     {
         path: '/receiving/redact',

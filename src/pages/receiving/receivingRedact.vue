@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import ReceivingRedactMenu from "../components/menu/receivingRedactMenu.vue";
-import ReceivingRedactForm from "../components/forms/receivingRedactForm.vue";
-import ChatWorkOrdersNote from "../components/tables/chatWorkOrdersNote.vue";
+import ReceivingRedactMenu from "../../components/menu/receivingRedactMenu.vue";
+import ReceivingRedactForm from "../../components/forms/receivingRedactForm.vue";
+import ChatWorkOrdersNote from "../../components/tables/chatWorkOrdersNote.vue";
 
 export default {
   name: "receivingRedact",
