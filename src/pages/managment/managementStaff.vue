@@ -5,7 +5,7 @@
     </el-header>
     <management-staff-menu/>
     <el-main class="myMain">
-
+тьрим
     </el-main>
   </el-container>
 </template>

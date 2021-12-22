@@ -4,10 +4,10 @@
       <el-tooltip
           class="item"
           effect="dark"
-          content="Создать новый заказ"
+          content="что-то сделать"
           placement="top"
       >
-        <el-button class="button-menu" @click="dialogFormVisible = true" type="primary" plain icon="el-icon-cpu">Новый заказ</el-button>
+        <el-button class="button-menu" @click="dialogFormVisible = true" type="primary" plain icon="el-icon-cpu">убить всех человеков</el-button>
       </el-tooltip>
     </el-row>
   </div>
