@@ -5,16 +5,17 @@
     </el-header>
     <management-staff-menu/>
     <el-main class="myMain">
-тьрим
+       <tabs-managment-staff-all/>
     </el-main>
   </el-container>
 </template>
 
 <script>
 import managementStaffMenu from "../../components/menu/managementStaffMenu.vue";
+import TabsManagmentStaffAll from "../../components/tables/TabsManagmentStaffAll.vue";
 export default {
   name: "managementStaff",
-  components: {managementStaffMenu}
+  components: {TabsManagmentStaffAll, managementStaffMenu}
 }
 </script>
 
